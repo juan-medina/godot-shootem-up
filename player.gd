@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed = 650
 
+
 func _physics_process(delta: float) -> void:
 	var x_axis = Input.get_axis("left", "right")
 	var y_axis = Input.get_axis("up", "down")
@@ -50,7 +51,7 @@ func calculate_anim(direction, delta):
 		exhaust_anim.play("low")
 
 
-const clamp_max = Vector2(1920, 1080)
+@onready var clamp_max = get_viewport_rect().size
 
 
 func clamp_position():
