@@ -33,7 +33,6 @@ var current_frame: float = idle_frame
 var desired_frame: float = idle_frame
 
 @onready var ship_anim = $Ship
-@onready var exhaust_anim = $exhaust
 
 
 func calculate_anim(delta: float) -> void:
@@ -57,6 +56,10 @@ func clamp_position() -> void:
 	position = position.clamp(half_size, clamp_max - half_size)
 
 
+var previous_exhaust: String = "low"
+@onready var exhaust_anim = $exhaust
+
+
 func _on_direction_changed(direction: Vector2) -> void:
 	if direction.y > 0:
 		desired_frame = up_frame
@@ -65,7 +68,12 @@ func _on_direction_changed(direction: Vector2) -> void:
 	else:
 		desired_frame = idle_frame
 
+	var exhaust: String = "low"
+
 	if direction.x > 0 || direction.y != 0:
-		exhaust_anim.play("high")
-	else:
-		exhaust_anim.play("low")
+		exhaust = "high"
+
+	if previous_exhaust != exhaust:
+		exhaust_anim.play(exhaust)
+		previous_exhaust = exhaust
+
