@@ -1,6 +1,6 @@
 class_name Player extends CharacterBody2D
 
-@export var speed = 650
+@export var speed: int = 650
 
 signal direction_changed(direction: Vector2)
 var previous_direction: Vector2 = Vector2.ZERO
@@ -10,11 +10,11 @@ func _process(delta: float) -> void:
 	calculate_anim(delta)
 
 
-func _physics_process(delta: float) -> void:
-	var x_axis = Input.get_axis("left", "right")
-	var y_axis = Input.get_axis("up", "down")
+func _physics_process(_delta: float) -> void:
+	var x_axis: float = Input.get_axis("left", "right")
+	var y_axis: float = Input.get_axis("up", "down")
 
-	var direction = Vector2(x_axis, y_axis)
+	var direction: Vector2 = Vector2(x_axis, y_axis)
 	velocity = direction * speed
 
 	if direction != previous_direction:
@@ -25,19 +25,19 @@ func _physics_process(delta: float) -> void:
 	clamp_position()
 
 
-const idle_frame = 0
-const up_frame = 6
-const down_frame = 6
+const idle_frame: int = 0
+const up_frame: int = 6
+const down_frame: int = 6
 
-var current_frame = idle_frame
-var desired_frame = idle_frame
+var current_frame: float = idle_frame
+var desired_frame: float = idle_frame
 
 @onready var ship_anim = $Ship
 @onready var exhaust_anim = $exhaust
 
 
-func calculate_anim(delta) -> void:
-	var frame_dir = desired_frame - current_frame
+func calculate_anim(delta: float) -> void:
+	var frame_dir: float = desired_frame - current_frame
 
 	if frame_dir != 0:
 		frame_dir = frame_dir / abs(frame_dir)
@@ -47,7 +47,7 @@ func calculate_anim(delta) -> void:
 	ship_anim.frame = roundi(current_frame)
 
 
-@onready var clamp_max = get_viewport_rect().size
+@onready var clamp_max: Vector2 = get_viewport_rect().size
 
 
 func clamp_position() -> void:

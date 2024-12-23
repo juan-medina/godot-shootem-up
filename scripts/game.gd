@@ -1,11 +1,12 @@
 class_name Game extends Node2D
 
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 	elif Input.is_action_just_pressed("toggle_fullscreen"):
-		var currrent_mode: int = DisplayServer.window_get_mode()
-		if currrent_mode == DisplayServer.WINDOW_MODE_WINDOWED:
+		var current_mode: int = DisplayServer.window_get_mode()
+		if current_mode == DisplayServer.WINDOW_MODE_WINDOWED:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
@@ -14,7 +15,8 @@ func _process(delta: float) -> void:
 
 
 @onready var bg = $BG
-@export var scroll_speed : int = 300
+@export var scroll_speed: int = 300
 
-func move_background(delta):
+
+func move_background(delta) -> void:
 	bg.scroll_offset.x -= scroll_speed * delta
