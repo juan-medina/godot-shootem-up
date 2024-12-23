@@ -1,4 +1,4 @@
-extends Node2D
+class_name Game extends Node2D
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -18,4 +18,3 @@ func _process(delta: float) -> void:
 
 func move_background(delta):
 	bg.scroll_offset.x -= scroll_speed * delta
-

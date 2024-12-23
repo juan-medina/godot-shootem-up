@@ -1,6 +1,13 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @export var speed = 650
+
+signal direction_changed(direction: Vector2)
+var previous_direction: Vector2 = Vector2.ZERO
+
+
+func _process(delta: float) -> void:
+	calculate_anim(delta)
 
 
 func _physics_process(delta: float) -> void:
@@ -10,10 +17,11 @@ func _physics_process(delta: float) -> void:
 	var direction = Vector2(x_axis, y_axis)
 	velocity = direction * speed
 
-	calculate_anim(direction, delta)
+	if direction != previous_direction:
+		direction_changed.emit(direction)
+		previous_direction = direction
 
 	move_and_slide()
-
 	clamp_position()
 
 
@@ -28,14 +36,7 @@ var desired_frame = idle_frame
 @onready var exhaust_anim = $exhaust
 
 
-func calculate_anim(direction, delta):
-	if direction.y > 0:
-		desired_frame = up_frame
-	elif direction.y < 0:
-		desired_frame = down_frame
-	else:
-		desired_frame = idle_frame
-
+func calculate_anim(delta) -> void:
 	var frame_dir = desired_frame - current_frame
 
 	if frame_dir != 0:
@@ -45,18 +46,26 @@ func calculate_anim(direction, delta):
 
 	ship_anim.frame = roundi(current_frame)
 
-	if direction.x > 0 || direction.y != 0:
-		exhaust_anim.play("high")
-	else:
-		exhaust_anim.play("low")
-
 
 @onready var clamp_max = get_viewport_rect().size
 
 
-func clamp_position():
+func clamp_position() -> void:
 	var current_animation: String = ship_anim.animation
-	if current_animation != "":
-		var sprite_texture = ship_anim.sprite_frames.get_frame_texture(current_animation, ship_anim.frame)
-		var half_size = sprite_texture.get_size() / 2 * ship_anim.scale
-		position = position.clamp(half_size, clamp_max - half_size)
+	var sprite_texture = ship_anim.sprite_frames.get_frame_texture(current_animation, ship_anim.frame)
+	var half_size = sprite_texture.get_size() / 2 * ship_anim.scale
+	position = position.clamp(half_size, clamp_max - half_size)
+
+
+func _on_direction_changed(direction: Vector2) -> void:
+	if direction.y > 0:
+		desired_frame = up_frame
+	elif direction.y < 0:
+		desired_frame = down_frame
+	else:
+		desired_frame = idle_frame
+
+	if direction.x > 0 || direction.y != 0:
+		exhaust_anim.play("high")
+	else:
+		exhaust_anim.play("low")
