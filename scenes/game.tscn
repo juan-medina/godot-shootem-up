@@ -52,7 +52,7 @@ motion_scale = Vector2(2, 0)
 motion_mirroring = Vector2(1900, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/Sky Clouds"]
-modulate = Color(1, 1, 1, 0.780392)
+modulate = Color(1, 1, 1, 0.921569)
 texture_repeat = 3
 texture = ExtResource("6_oyx2l")
 centered = false
@@ -75,7 +75,7 @@ motion_scale = Vector2(4, 0)
 motion_mirroring = Vector2(1900, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/Cloud Single"]
-modulate = Color(1, 1, 1, 0.780392)
+modulate = Color(1, 1, 1, 0.921569)
 texture = ExtResource("7_4w7go")
 centered = false
 region_rect = Rect2(0, 762, 1899, 238)
@@ -86,7 +86,7 @@ motion_scale = Vector2(5, 0)
 motion_mirroring = Vector2(1900, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/Cloud Front"]
-modulate = Color(1, 1, 1, 0.780392)
+modulate = Color(1, 1, 1, 0.921569)
 texture = ExtResource("7_oaghh")
 centered = false
 region_rect = Rect2(0, 762, 1899, 238)
@@ -97,7 +97,7 @@ motion_scale = Vector2(6, 0)
 motion_mirroring = Vector2(1900, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/Cloud Botton"]
-modulate = Color(1, 1, 1, 0.780392)
+modulate = Color(1, 1, 1, 0.921569)
 texture = ExtResource("7_v8jd1")
 centered = false
 region_rect = Rect2(0, 762, 1899, 238)
