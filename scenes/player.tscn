@@ -126,5 +126,3 @@ frame_progress = 0.603281
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 0.5)
 shape = SubResource("RectangleShape2D_wgap5")
-
-[connection signal="direction_changed" from="." to="." method="_on_direction_changed"]

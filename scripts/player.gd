@@ -2,7 +2,6 @@ class_name Player extends CharacterBody2D
 
 @export var speed: int = 650
 
-signal direction_changed(direction: Vector2)
 var previous_direction: Vector2 = Vector2.ZERO
 
 
@@ -18,7 +17,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = direction * speed
 
 	if direction != previous_direction:
-		direction_changed.emit(direction)
+		direction_changed(direction)
 		previous_direction = direction
 
 	move_and_slide()
@@ -60,7 +59,7 @@ var previous_exhaust: String = "low"
 @onready var exhaust_anim = $exhaust
 
 
-func _on_direction_changed(direction: Vector2) -> void:
+func direction_changed(direction: Vector2) -> void:
 	if direction.y > 0:
 		desired_frame = up_frame
 	elif direction.y < 0:

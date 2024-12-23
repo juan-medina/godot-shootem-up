@@ -1,106 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://brp3t3tcb7lc0"]
+[gd_scene load_steps=4 format=3 uid="uid://brp3t3tcb7lc0"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_amopr"]
 [ext_resource type="PackedScene" uid="uid://dv34skp6agxhm" path="res://scenes/player.tscn" id="2_2siu0"]
-[ext_resource type="Texture2D" uid="uid://dqxkmtt48yuyg" path="res://resources/bg/Sky_sky.png" id="3_80nh2"]
-[ext_resource type="Texture2D" uid="uid://pl4ji3x674ix" path="res://resources/bg/sky_moon.png" id="3_567nq"]
-[ext_resource type="Texture2D" uid="uid://d07x10rq22hd7" path="res://resources/bg/Sky_back_mountain.png" id="3_oxjcn"]
-[ext_resource type="Texture2D" uid="uid://clrht2vm84hmc" path="res://resources/bg/sky_front_mountain.png" id="4_k5i0h"]
-[ext_resource type="Texture2D" uid="uid://cq1novsevbvuq" path="res://resources/bg/sky_clouds.png" id="6_oyx2l"]
-[ext_resource type="Texture2D" uid="uid://b61haqh245f41" path="res://resources/bg/Sky_cloud_single.png" id="7_4w7go"]
-[ext_resource type="Texture2D" uid="uid://y2pgeub6dq8" path="res://resources/bg/Sky_front_cloud.png" id="7_oaghh"]
-[ext_resource type="Texture2D" uid="uid://6b386jpf3rpn" path="res://resources/bg/sky_cloud_floor.png" id="7_v8jd1"]
+[ext_resource type="PackedScene" uid="uid://be6ewehio5siv" path="res://scenes/bg.tscn" id="2_jp2yc"]
 
 [node name="Game" type="Node2D"]
-position = Vector2(3, 18)
 script = ExtResource("1_amopr")
 
-[node name="BG" type="ParallaxBackground" parent="."]
-
-[node name="Sky" type="ParallaxLayer" parent="BG"]
-motion_scale = Vector2(0, 0)
-motion_mirroring = Vector2(1900, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="BG/Sky"]
-texture_repeat = 3
-texture = ExtResource("3_80nh2")
-centered = false
-region_rect = Rect2(0, 0, 1920, 989.583)
-
-[node name="Moon" type="ParallaxLayer" parent="BG"]
-motion_scale = Vector2(0.35, 0)
-motion_mirroring = Vector2(3800, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="BG/Moon"]
-texture_repeat = 3
-texture = ExtResource("3_567nq")
-centered = false
-region_rect = Rect2(0, 0, 1920, 989.583)
-
-[node name="Mountain back" type="ParallaxLayer" parent="BG"]
-motion_scale = Vector2(1, 0)
-motion_mirroring = Vector2(1900, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="BG/Mountain back"]
-texture_repeat = 3
-texture = ExtResource("3_oxjcn")
-centered = false
-region_rect = Rect2(0, 0, 1920, 989.583)
-
-[node name="Sky Clouds" type="ParallaxLayer" parent="BG"]
-motion_scale = Vector2(2, 0)
-motion_mirroring = Vector2(1900, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="BG/Sky Clouds"]
-modulate = Color(1, 1, 1, 0.921569)
-texture_repeat = 3
-texture = ExtResource("6_oyx2l")
-centered = false
-region_rect = Rect2(0, 0, 1920, 989.583)
-
-[node name="Mountain front" type="ParallaxLayer" parent="BG"]
-position = Vector2(0, 100)
-motion_scale = Vector2(3, 0)
-motion_mirroring = Vector2(1900, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="BG/Mountain front"]
-texture_repeat = 3
-texture = ExtResource("4_k5i0h")
-centered = false
-region_rect = Rect2(0, 0, 1920, 989.583)
-
-[node name="Cloud Single" type="ParallaxLayer" parent="BG"]
-position = Vector2(0, 100)
-motion_scale = Vector2(4, 0)
-motion_mirroring = Vector2(1900, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="BG/Cloud Single"]
-modulate = Color(1, 1, 1, 0.921569)
-texture = ExtResource("7_4w7go")
-centered = false
-region_rect = Rect2(0, 762, 1899, 238)
-
-[node name="Cloud Front" type="ParallaxLayer" parent="BG"]
-position = Vector2(0, 100)
-motion_scale = Vector2(5, 0)
-motion_mirroring = Vector2(1900, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="BG/Cloud Front"]
-modulate = Color(1, 1, 1, 0.921569)
-texture = ExtResource("7_oaghh")
-centered = false
-region_rect = Rect2(0, 762, 1899, 238)
-
-[node name="Cloud Botton" type="ParallaxLayer" parent="BG"]
-position = Vector2(0, 100)
-motion_scale = Vector2(6, 0)
-motion_mirroring = Vector2(1900, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="BG/Cloud Botton"]
-modulate = Color(1, 1, 1, 0.921569)
-texture = ExtResource("7_v8jd1")
-centered = false
-region_rect = Rect2(0, 762, 1899, 238)
+[node name="BG" parent="." instance=ExtResource("2_jp2yc")]
 
 [node name="Player" parent="." instance=ExtResource("2_2siu0")]
-position = Vector2(108, 497)
+position = Vector2(100, 551)
