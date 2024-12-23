@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pl4ji3x674ix"
-path="res://.godot/imported/sky_moon.png-1dae8c189efe24c319d8b85d0fffbe33.ctex"
+uid="uid://del273v50asjg"
+path="res://.godot/imported/glacial_mountains.png-ad0db7e0671a4d14c2bf5bd51fa0df58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/bg/sky_moon.png"
-dest_files=["res://.godot/imported/sky_moon.png-1dae8c189efe24c319d8b85d0fffbe33.ctex"]
+source_file="res://resources/Glacial-mountains-parallax-background_vnitti_v3/glacial_mountains.png"
+dest_files=["res://.godot/imported/glacial_mountains.png-ad0db7e0671a4d14c2bf5bd51fa0df58.ctex"]
 
 [params]
 

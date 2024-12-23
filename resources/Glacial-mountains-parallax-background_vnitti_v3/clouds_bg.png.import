@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y2pgeub6dq8"
-path="res://.godot/imported/Sky_front_cloud.png-445a18742244b3c27c73138c76e78611.ctex"
+uid="uid://bxyeqr1salh2o"
+path="res://.godot/imported/clouds_bg.png-db5e50798baf140b993a4cd231b937fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/bg/Sky_front_cloud.png"
-dest_files=["res://.godot/imported/Sky_front_cloud.png-445a18742244b3c27c73138c76e78611.ctex"]
+source_file="res://resources/Glacial-mountains-parallax-background_vnitti_v3/clouds_bg.png"
+dest_files=["res://.godot/imported/clouds_bg.png-db5e50798baf140b993a4cd231b937fb.ctex"]
 
 [params]
 

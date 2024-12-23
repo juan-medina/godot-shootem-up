@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d07x10rq22hd7"
-path="res://.godot/imported/Sky_back_mountain.png-73ec02d2cb3c2639a71566887016f88f.ctex"
+uid="uid://djhdvdrokghmu"
+path="res://.godot/imported/cloud_lonely.png-f2bf76aeba3c9e8c8f204efb121a45d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/bg/Sky_back_mountain.png"
-dest_files=["res://.godot/imported/Sky_back_mountain.png-73ec02d2cb3c2639a71566887016f88f.ctex"]
+source_file="res://resources/Glacial-mountains-parallax-background_vnitti_v3/cloud_lonely.png"
+dest_files=["res://.godot/imported/cloud_lonely.png-f2bf76aeba3c9e8c8f204efb121a45d9.ctex"]
 
 [params]
 
