@@ -1,128 +1,69 @@
-[gd_scene load_steps=19 format=3 uid="uid://dv34skp6agxhm"]
+[gd_scene load_steps=13 format=3 uid="uid://dv34skp6agxhm"]
 
-[ext_resource type="Texture2D" uid="uid://cd8wwduao42j7" path="res://resources/sprites/sprite_player_spaceship_up_down.png" id="1_ln7eq"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qr6qb"]
-[ext_resource type="Texture2D" uid="uid://caqghn5ur7w1u" path="res://resources/sprites/sprite_player_spaceship_exhaust_high.png" id="2_u6khs"]
-[ext_resource type="Texture2D" uid="uid://ddi8ade53avrw" path="res://resources/sprites/sprite_player_spaceship_exhaust_low.png" id="3_dco54"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3uavc"]
-atlas = ExtResource("2_u6khs")
-region = Rect2(0, 0, 64, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ah21c"]
-atlas = ExtResource("2_u6khs")
-region = Rect2(64, 0, 64, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w35ep"]
-atlas = ExtResource("3_dco54")
-region = Rect2(0, 0, 64, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qsamc"]
-atlas = ExtResource("3_dco54")
-region = Rect2(64, 0, 64, 32)
+[ext_resource type="Texture2D" uid="uid://da4d8xtq0spig" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/normal/exhaust1.png" id="2_58hbh"]
+[ext_resource type="Texture2D" uid="uid://c7g1fpmqd7035" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/normal/exhaust2.png" id="3_sbyp7"]
+[ext_resource type="Texture2D" uid="uid://vfo6hnixoiyh" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Ship3.png" id="4_t853r"]
+[ext_resource type="Texture2D" uid="uid://cbb4ynexqq44x" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/normal/exhaust3.png" id="4_wg8po"]
+[ext_resource type="Texture2D" uid="uid://caufmj8lbl6a" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/normal/exhaust4.png" id="5_g015p"]
+[ext_resource type="Texture2D" uid="uid://b483mt4yoibd1" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/turbo/exhaust1.png" id="6_le4o6"]
+[ext_resource type="Texture2D" uid="uid://dsw74o6fa6bt8" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/turbo/exhaust2.png" id="7_bq56t"]
+[ext_resource type="Texture2D" uid="uid://0e8urk8oaksb" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/turbo/exhaust3.png" id="8_e8ft4"]
+[ext_resource type="Texture2D" uid="uid://pg1urlkr2ru4" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/turbo/exhaust4.png" id="9_2fsdf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uni5j"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3uavc")
+"texture": ExtResource("2_58hbh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ah21c")
+"texture": ExtResource("3_sbyp7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wg8po")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_g015p")
 }],
 "loop": true,
-"name": &"high",
+"name": &"normal",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w35ep")
+"texture": ExtResource("6_le4o6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qsamc")
+"texture": ExtResource("7_bq56t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_e8ft4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2fsdf")
 }],
 "loop": true,
-"name": &"low",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ipt0w"]
-atlas = ExtResource("1_ln7eq")
-region = Rect2(2100, 0, 350, 150)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_30uw0"]
-atlas = ExtResource("1_ln7eq")
-region = Rect2(1750, 0, 350, 150)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t04s6"]
-atlas = ExtResource("1_ln7eq")
-region = Rect2(1400, 0, 350, 150)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y2phi"]
-atlas = ExtResource("1_ln7eq")
-region = Rect2(1050, 0, 350, 150)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_byssd"]
-atlas = ExtResource("1_ln7eq")
-region = Rect2(700, 0, 350, 150)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h6v43"]
-atlas = ExtResource("1_ln7eq")
-region = Rect2(350, 0, 350, 150)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g0fwa"]
-atlas = ExtResource("1_ln7eq")
-region = Rect2(0, 0, 350, 150)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_frwhe"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ipt0w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_30uw0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t04s6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y2phi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_byssd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h6v43")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g0fwa")
-}],
-"loop": true,
-"name": &"set",
+"name": &"turbo",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wgap5"]
-size = Vector2(122, 23)
+size = Vector2(79, 35)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_qr6qb")
 
-[node name="exhaust" type="AnimatedSprite2D" parent="."]
-position = Vector2(-88, 1)
+[node name="Exhaust" type="AnimatedSprite2D" parent="."]
+position = Vector2(-55, 0)
 sprite_frames = SubResource("SpriteFrames_uni5j")
-animation = &"low"
+animation = &"normal"
 
-[node name="Ship" type="AnimatedSprite2D" parent="."]
-position = Vector2(0.5, 0)
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_frwhe")
-animation = &"set"
-frame_progress = 0.603281
+[node name="Ship" type="Sprite2D" parent="."]
+texture = ExtResource("4_t853r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 0.5)
+position = Vector2(-1.5, -1.5)
 shape = SubResource("RectangleShape2D_wgap5")
