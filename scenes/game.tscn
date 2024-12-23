@@ -18,7 +18,7 @@ script = ExtResource("1_amopr")
 [node name="BG" type="ParallaxBackground" parent="."]
 
 [node name="Sky" type="ParallaxLayer" parent="BG"]
-motion_scale = Vector2(1, 0)
+motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(1900, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="BG/Sky"]
