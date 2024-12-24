@@ -4,9 +4,10 @@
 [ext_resource type="Script" path="res://scenes/enemies/basic_enemy.gd" id="1_f8n86"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_134ph"]
-size = Vector2(59, 28)
+size = Vector2(59.3333, 28)
 
 [node name="BasicEnemy" type="Area2D"]
+scale = Vector2(1.5, 1.5)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_f8n86")
@@ -17,7 +18,7 @@ texture = ExtResource("1_528og")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -1)
+position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_134ph")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
