@@ -25,6 +25,11 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	move_logic()
+	shot_logic()
+
+
+func move_logic() -> void:
 	var x_axis: float = Input.get_axis("left", "right")
 	var y_axis: float = Input.get_axis("up", "down")
 
@@ -35,18 +40,9 @@ func _physics_process(_delta: float) -> void:
 		direction_changed(direction)
 		previous_direction = direction
 
-	move_and_slide()
-	position = position.clamp(half_size, limit)
-
-
-	if Input.is_action_pressed("fire") && !shot_on_cd:
-		shot_on_cd = true
-		shot_sound.play()
-		var shot = shot_scene.instantiate()
-		shot.init(global_position, shot_point)
-		get_parent().add_child(shot)
-		await get_tree().create_timer(fire_rate).timeout
-		shot_on_cd = false
+	if direction != Vector2.ZERO:
+		move_and_slide()
+		position = position.clamp(half_size, limit)
 
 
 func direction_changed(direction: Vector2) -> void:
@@ -58,3 +54,17 @@ func direction_changed(direction: Vector2) -> void:
 	if previous_exhaust != exhaust:
 		exhaust_anim.play(exhaust)
 		previous_exhaust = exhaust
+
+func shot_logic() -> void:
+	if Input.is_action_pressed("fire") && !shot_on_cd:
+		shot_on_cd = true
+		shot()
+		await get_tree().create_timer(fire_rate).timeout
+		shot_on_cd = false
+
+
+func shot() -> void:
+	shot_sound.play()
+	var shot_instance: PlayerShot = shot_scene.instantiate()
+	shot_instance.init(shot_point)
+	get_parent().add_child(shot_instance)
