@@ -33,15 +33,14 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	clamp_position()
 
-	if Input.is_action_pressed("fire"):
-		if shot_on_cd == false:
-			shot_on_cd = true
-			shot_sound.play()
-			var shot = shot_scene.instantiate()
-			shot.init(global_position, shot_point)
-			get_parent().add_child(shot)
-			await get_tree().create_timer(fire_rate).timeout
-			shot_on_cd = false
+	if Input.is_action_pressed("fire") && !shot_on_cd:
+		shot_on_cd = true
+		shot_sound.play()
+		var shot = shot_scene.instantiate()
+		shot.init(global_position, shot_point)
+		get_parent().add_child(shot)
+		await get_tree().create_timer(fire_rate).timeout
+		shot_on_cd = false
 
 
 @onready var ship_sprite = $Ship
