@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dv34skp6agxhm"]
+[gd_scene load_steps=12 format=3 uid="uid://dv34skp6agxhm"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qr6qb"]
 [ext_resource type="Texture2D" uid="uid://da4d8xtq0spig" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/normal/exhaust1.png" id="2_58hbh"]
@@ -48,11 +48,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgap5"]
-size = Vector2(79, 35)
-
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 4
+collision_mask = 12
 motion_mode = 1
 script = ExtResource("1_qr6qb")
 
@@ -64,9 +61,8 @@ animation = &"normal"
 [node name="Ship" type="Sprite2D" parent="."]
 texture = ExtResource("4_t853r")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, -1.5)
-shape = SubResource("RectangleShape2D_wgap5")
-
 [node name="ShotPoint" type="Marker2D" parent="."]
 position = Vector2(73, 6)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-16, -18, -15, -14, -18, -11.2, -21.5, -12.9, -27.4, -13.5, -32.5, -13.5, -32.5, -7.8, -36, -5, -39, -5, -39, 4, -35, 4, -34, 12, -27.2, 12.5, -22.4, 12.5, -18.3, 8.5, -15.6, 10.5, -19, 16, 16, 16, 21, 11, 28, 11, 28, 15, 26, 19, 32, 19, 34.7, 13.5, 37.5, 13.5, 37.5, -1.7, 24.5, -11.8, 15.3, -16.5, 6.4, -16.5, 2, -13, -6, -13)
