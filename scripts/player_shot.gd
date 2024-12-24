@@ -25,3 +25,7 @@ func _process(delta: float) -> void:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	direction = Vector2(1, 0)
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()

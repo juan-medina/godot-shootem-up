@@ -39,4 +39,8 @@ sprite_frames = SubResource("SpriteFrames_jpf38")
 position = Vector2(10, 1.5)
 shape = SubResource("RectangleShape2D_0hyc0")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-42, 0)
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
