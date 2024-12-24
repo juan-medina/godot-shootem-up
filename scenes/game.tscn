@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_amopr"]
 [ext_resource type="PackedScene" uid="uid://dv34skp6agxhm" path="res://scenes/player.tscn" id="2_2siu0"]
-[ext_resource type="PackedScene" uid="uid://be6ewehio5siv" path="res://scenes/bg.tscn" id="2_jp2yc"]
+[ext_resource type="PackedScene" uid="uid://be6ewehio5siv" path="res://scenes/background.tscn" id="2_jp2yc"]
 [ext_resource type="AudioStream" uid="uid://dhkdhvs3htbj" path="res://resources/three-red-hearts-loops/Three Red Hearts - Out of Time.ogg" id="4_jq41t"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_amopr")
 
-[node name="BG" parent="." instance=ExtResource("2_jp2yc")]
+[node name="Background" parent="." instance=ExtResource("2_jp2yc")]
 
 [node name="Player" parent="." instance=ExtResource("2_2siu0")]
 position = Vector2(100, 551)
