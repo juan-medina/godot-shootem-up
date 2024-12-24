@@ -8,7 +8,7 @@ class_name Player extends CharacterBody2D
 @onready var exhaust_anim = $Exhaust
 @onready var shot_point = $ShotPoint
 @onready var shot_sound = $ShotSound
-
+@onready var shot_scene = preload("res://scenes/player_shot.tscn")
 
 var previous_direction: Vector2 = Vector2.ZERO
 var previous_exhaust: String = "normal"
@@ -37,7 +37,7 @@ func _physics_process(_delta: float) -> void:
 		if shot_on_cd == false:
 			shot_on_cd = true
 			shot_sound.play()
-			var shot = preload("res://scenes/player_shot.tscn").instantiate()
+			var shot = shot_scene.instantiate()
 			shot.init(global_position, shot_point)
 			get_parent().add_child(shot)
 			await get_tree().create_timer(fire_rate).timeout
