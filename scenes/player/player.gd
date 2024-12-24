@@ -8,7 +8,7 @@ class_name Player extends CharacterBody2D
 @onready var exhaust_anim = $Exhaust
 @onready var shot_point = $ShotPoint
 @onready var shot_sound = $ShotSound
-@onready var shot_scene = preload("res://scenes/player_shot.tscn")
+@onready var shot_scene = preload("res://scenes/player/shot/player_shot.tscn")
 
 @onready var half_size: Vector2 = $Ship.region_rect.size / 2
 @onready var clamp_max: Vector2 = get_viewport_rect().size
