@@ -1,10 +1,11 @@
 class_name Player extends CharacterBody2D
 
-@export var speed: int = 650
+@export var speed: int = 300
 
 var previous_direction: Vector2 = Vector2.ZERO
 var previous_exhaust: String = "normal"
 @onready var exhaust_anim = $Exhaust
+@onready var shot_point = $ShotPoint
 
 func _ready() -> void:
 	exhaust_anim.play(previous_exhaust)
@@ -22,6 +23,11 @@ func _physics_process(_delta: float) -> void:
 
 	move_and_slide()
 	clamp_position()
+
+	if Input.is_action_just_pressed("fire"):
+		var shot = preload("res://scenes/player_shot.tscn").instantiate()
+		shot.init(global_position, shot_point)
+		get_parent().add_child(shot)
 
 
 @onready var ship_sprite = $Ship

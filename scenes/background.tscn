@@ -16,6 +16,7 @@ script = ExtResource("1_3y2qg")
 metadata/_edit_vertical_guides_ = [2194.0]
 
 [node name="Sky" type="ParallaxLayer" parent="."]
+modulate = Color(0.4, 0.4, 0.4, 1)
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(384, 0)
 
@@ -26,6 +27,7 @@ centered = false
 region_rect = Rect2(0, 0, 1920, 989.583)
 
 [node name="Cloud Bg" type="ParallaxLayer" parent="."]
+modulate = Color(0.4, 0.4, 0.4, 1)
 position = Vector2(0, 60)
 motion_scale = Vector2(0.5, 0)
 motion_mirroring = Vector2(384, 0)
@@ -44,6 +46,7 @@ centered = false
 region_rect = Rect2(0, 0, 1152, 648)
 
 [node name="Single Cloud" type="ParallaxLayer" parent="."]
+modulate = Color(0.4, 0.4, 0.4, 1)
 position = Vector2(0, 95)
 motion_scale = Vector2(1, 0)
 motion_mirroring = Vector2(768, 0)
@@ -62,6 +65,7 @@ centered = false
 region_rect = Rect2(0, 0, 1152, 648)
 
 [node name="Mountais" type="ParallaxLayer" parent="."]
+modulate = Color(0.4, 0.4, 0.4, 1)
 position = Vector2(0, 100)
 motion_scale = Vector2(1.5, 0)
 motion_mirroring = Vector2(384, 0)
@@ -80,6 +84,7 @@ centered = false
 region_rect = Rect2(0, 0, 1152, 648)
 
 [node name="Cloud Floor 3" type="ParallaxLayer" parent="."]
+modulate = Color(0.4, 0.4, 0.4, 1)
 position = Vector2(0, 120)
 motion_scale = Vector2(2, 0)
 motion_mirroring = Vector2(384, 0)
@@ -98,7 +103,8 @@ centered = false
 region_rect = Rect2(0, 0, 1152, 648)
 
 [node name="Cloud Floor 2" type="ParallaxLayer" parent="."]
-position = Vector2(0, 130)
+modulate = Color(0.4, 0.4, 0.4, 1)
+position = Vector2(0, 140)
 motion_scale = Vector2(2.5, 0)
 motion_mirroring = Vector2(384, 0)
 
@@ -116,6 +122,7 @@ centered = false
 region_rect = Rect2(0, 0, 1152, 648)
 
 [node name="Cloud Floor 1" type="ParallaxLayer" parent="."]
+modulate = Color(0.4, 0.4, 0.4, 1)
 position = Vector2(0, 145)
 motion_scale = Vector2(3, 0)
 motion_mirroring = Vector2(384, 0)

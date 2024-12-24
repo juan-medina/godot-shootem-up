@@ -67,3 +67,6 @@ texture = ExtResource("4_t853r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, -1.5)
 shape = SubResource("RectangleShape2D_wgap5")
+
+[node name="ShotPoint" type="Marker2D" parent="."]
+position = Vector2(73, 6)
