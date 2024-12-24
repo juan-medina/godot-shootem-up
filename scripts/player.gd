@@ -10,6 +10,7 @@ class_name Player extends CharacterBody2D
 @onready var shot_sound = $ShotSound
 @onready var shot_scene = preload("res://scenes/player_shot.tscn")
 
+
 var previous_direction: Vector2 = Vector2.ZERO
 var previous_exhaust: String = "normal"
 var shot_on_cd: bool = false

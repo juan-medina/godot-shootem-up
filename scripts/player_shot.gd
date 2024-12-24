@@ -1,13 +1,18 @@
 class_name PlayerShot extends Area2D
 
+
 @export var speed: int = 600
-var direction: Vector2 = Vector2.ZERO
+
+
 @onready var anim = $AnimatedSprite2D
-var ref: Node2D = null
 
 
-func init(new_position: Vector2, new_ref: Node2D) -> void:
-	ref = new_ref
+var direction: Vector2 = Vector2.ZERO
+var firing_from: Node2D = null
+
+
+func init(new_position: Vector2, from: Node2D) -> void:
+	firing_from = from
 	global_position = new_position
 
 
@@ -17,8 +22,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if direction == Vector2.ZERO:
-		global_position.y = ref.global_position.y
-		global_position.x = ref.global_position.x
+		global_position.y = firing_from.global_position.y
+		global_position.x = firing_from.global_position.x
 	else:
 		global_position += direction * speed * delta
 
