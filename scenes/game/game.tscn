@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://brp3t3tcb7lc0"]
+[gd_scene load_steps=6 format=3 uid="uid://brp3t3tcb7lc0"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_kn14q"]
 [ext_resource type="PackedScene" uid="uid://be6ewehio5siv" path="res://scenes/background/background.tscn" id="2_wai1s"]
 [ext_resource type="PackedScene" uid="uid://dv34skp6agxhm" path="res://scenes/player/player.tscn" id="3_t1g8v"]
+[ext_resource type="PackedScene" uid="uid://dqejknaljhhmi" path="res://scenes/enemies/basic_enemy.tscn" id="4_22g7e"]
 [ext_resource type="AudioStream" uid="uid://dhkdhvs3htbj" path="res://resources/three-red-hearts-loops/Three Red Hearts - Out of Time.ogg" id="4_ueojc"]
 
 [node name="Game" type="Node2D"]
@@ -19,3 +20,6 @@ fire_rate = null
 stream = ExtResource("4_ueojc")
 autoplay = true
 parameters/looping = true
+
+[node name="BasicEnemy" parent="." instance=ExtResource("4_22g7e")]
+position = Vector2(1043, 569)

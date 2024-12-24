@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqejknaljhhmi"]
+
+[ext_resource type="Texture2D" uid="uid://bn066wgf7l8iy" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship1/Ship1.png" id="1_528og"]
+[ext_resource type="Script" path="res://scenes/enemies/basic_enemy.gd" id="1_f8n86"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_134ph"]
+size = Vector2(59, 28)
+
+[node name="BasicEnemy" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_f8n86")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("1_528og")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_134ph")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
