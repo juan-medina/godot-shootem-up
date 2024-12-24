@@ -10,6 +10,10 @@ class_name Player extends CharacterBody2D
 @onready var shot_sound = $ShotSound
 @onready var shot_scene = preload("res://scenes/player_shot.tscn")
 
+@onready var half_size: Vector2 = $Ship.region_rect.size / 2
+@onready var clamp_max: Vector2 = get_viewport_rect().size
+@onready var limit: Vector2 = clamp_max - half_size
+
 
 var previous_direction: Vector2 = Vector2.ZERO
 var previous_exhaust: String = "normal"
@@ -32,7 +36,8 @@ func _physics_process(_delta: float) -> void:
 		previous_direction = direction
 
 	move_and_slide()
-	clamp_position()
+	position = position.clamp(half_size, limit)
+
 
 	if Input.is_action_pressed("fire") && !shot_on_cd:
 		shot_on_cd = true
@@ -42,15 +47,6 @@ func _physics_process(_delta: float) -> void:
 		get_parent().add_child(shot)
 		await get_tree().create_timer(fire_rate).timeout
 		shot_on_cd = false
-
-
-@onready var ship_sprite = $Ship
-@onready var clamp_max: Vector2 = get_viewport_rect().size
-
-
-func clamp_position() -> void:
-	var half_size = ship_sprite.texture.get_size() / 2
-	position = position.clamp(half_size, clamp_max - half_size)
 
 
 func direction_changed(direction: Vector2) -> void:

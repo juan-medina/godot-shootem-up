@@ -61,6 +61,8 @@ animation = &"normal"
 
 [node name="Ship" type="Sprite2D" parent="."]
 texture = ExtResource("4_t853r")
+region_enabled = true
+region_rect = Rect2(21, 44, 86, 39)
 
 [node name="ShotPoint" type="Marker2D" parent="."]
 position = Vector2(73, 6)
