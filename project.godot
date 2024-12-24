@@ -22,10 +22,6 @@ window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg")
-
 [input]
 
 up={
