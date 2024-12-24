@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://w8cqndgtpavy" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/clouds_mg_2.png" id="7_5c45p"]
 [ext_resource type="Texture2D" uid="uid://cs8twxadve0kt" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/clouds_mg_1.png" id="8_xqh0f"]
 
-[node name="BG" type="ParallaxBackground"]
+[node name="Background" type="ParallaxBackground"]
 scale = Vector2(3, 3)
 transform = Transform2D(3, 0, 0, 3, 0, 0)
 script = ExtResource("1_3y2qg")
