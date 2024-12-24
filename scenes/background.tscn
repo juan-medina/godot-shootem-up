@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://be6ewehio5siv"]
 
-[ext_resource type="Script" path="res://scripts/bg.gd" id="1_3y2qg"]
+[ext_resource type="Script" path="res://scripts/background.gd" id="1_3y2qg"]
 [ext_resource type="Texture2D" uid="uid://pw7gtk8b625i" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/sky.png" id="2_ol8cr"]
 [ext_resource type="Texture2D" uid="uid://bxyeqr1salh2o" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/clouds_bg.png" id="3_shas4"]
 [ext_resource type="Texture2D" uid="uid://djhdvdrokghmu" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/cloud_lonely.png" id="4_ikt5t"]
