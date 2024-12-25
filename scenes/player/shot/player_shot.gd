@@ -2,6 +2,7 @@ class_name PlayerShot extends Area2D
 
 
 @export var speed: Vector2 = Vector2(700, 0)
+@export var damage: int = 1
 
 
 @onready var shot_explosion: AnimatedSprite2D = $ShotExplosion
