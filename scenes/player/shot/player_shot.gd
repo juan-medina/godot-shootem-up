@@ -4,9 +4,10 @@ class_name PlayerShot extends Area2D
 @export var speed: Vector2 = Vector2(700, 0)
 
 
-@onready var shot_explosion = $ShotExplosion
-@onready var collision_shape = $CollisionShape2D
-@onready var sprite = $Sprite2D
+@onready var shot_explosion: AnimatedSprite2D = $ShotExplosion
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var shot_hit: AudioStreamPlayer2D = $ShotHit
 
 
 var direction: Vector2 = Vector2(1, 0)
@@ -30,6 +31,7 @@ func destroy() -> void:
 	sprite.visible = false
 	shot_explosion.visible = true
 	shot_explosion.play()
+	shot_hit.play()
 
 
 func _on_shot_explosion_animation_finished() -> void:
