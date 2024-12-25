@@ -44,7 +44,7 @@ jobs:
         id: build
         uses: felix-schindler/build-godot-action@v2.0.0
         with:
-          name: example
+          name: shoot_em_up
           preset: ${{ matrix.platform }}
           debugMode: "false"
       - name: debug
@@ -53,7 +53,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/${{ steps.build.outputs.build }}
-          asset_name: "${{ github.event.repository.name }}-${{ github.event.release.name }}-${{ matrix.platform }}.zip"
+          file: shoot_em_up.exe
+          asset_name: "build/shoot_em_up.exe"
           tag: ${{ github.ref }}
           overwrite: true
