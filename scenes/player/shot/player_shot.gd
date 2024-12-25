@@ -1,7 +1,7 @@
 class_name PlayerShot extends Area2D
 
 
-@export var speed: Vector2 = Vector2(600, 0)
+@export var speed: Vector2 = Vector2(900, 0)
 
 
 @onready var anim = $AnimatedSprite2D

@@ -13,8 +13,6 @@ script = ExtResource("1_kn14q")
 
 [node name="Player" parent="." instance=ExtResource("3_t1g8v")]
 position = Vector2(100, 551)
-speed = null
-fire_rate = null
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ueojc")
