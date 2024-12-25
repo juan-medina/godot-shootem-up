@@ -25,8 +25,8 @@ config/windows_native_icon="res://resources/icon/juan_medina.ico"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/window_width_override=1920
-window/size/window_height_override=1080
+window/size/window_width_override=1728
+window/size/window_height_override=972
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 
