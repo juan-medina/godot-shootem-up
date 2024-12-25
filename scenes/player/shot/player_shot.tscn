@@ -30,7 +30,6 @@ animations = [{
 size = Vector2(18, 15)
 
 [node name="PlayerShot" type="Area2D"]
-scale = Vector2(1.5, 1.5)
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_pgl2n")

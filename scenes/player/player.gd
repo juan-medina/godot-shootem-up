@@ -1,8 +1,8 @@
 class_name Player extends CharacterBody2D
 
 
-@export var speed: Vector2 = Vector2(600, 600)
-@export var fire_rate: float = 0.15
+@export var speed: Vector2 = Vector2(400, 400)
+@export var fire_rate: float = 0.25
 
 
 @onready var exhaust_anim = $Exhaust
