@@ -3,7 +3,7 @@ class_name Player extends CharacterBody2D
 
 @export var speed: float = 400
 @export var fire_rate: float = 0.20
-@export var max_life: int = 10
+@export var max_life: int = 3
 
 
 @onready var ship = $Ship
@@ -12,6 +12,7 @@ class_name Player extends CharacterBody2D
 @onready var shot_sound: AudioStreamPlayer2D = $ShotSound
 @onready var shot_out_effect: AnimatedSprite2D = $ShotOutEffect
 @onready var ship_explosion: AnimatedSprite2D = $ShipExplosion
+@onready var collision: CollisionPolygon2D = $Collision
 @onready var shot_scene: PackedScene = preload("res://scenes/player/shot/player_shot.tscn")
 @onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")
 
@@ -23,6 +24,7 @@ var previous_direction: Vector2 = Vector2.ZERO
 var previous_exhaust: String = "normal"
 var shot_on_cd: bool = false
 var current_life: int = max_life
+var dead: bool = false
 
 
 func _ready() -> void:
@@ -30,8 +32,9 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	move_logic()
-	shot_logic()
+	if !dead:
+		move_logic()
+		shot_logic()
 
 
 func move_logic() -> void:
@@ -88,6 +91,8 @@ func damaged(amount: int) -> void:
 	current_life -= amount
 
 	if current_life <= 0:
+		dead = true
+		collision.set_deferred("disabled", true)
 		ship.visible = false
 		exhaust_anim.visible = false
 		ship_explosion.visible = true

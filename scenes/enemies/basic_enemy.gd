@@ -7,9 +7,9 @@ class_name BasicEnemy extends Area2D
 @onready var explosion_sound: AudioStreamPlayer2D = $ExplosionSound
 
 
-@export var max_life: int = 2
+@export var max_life: int = 1
 @export var damage: int = 1
-
+@export var speed: float = 250
 
 var life: int = max_life
 
@@ -64,3 +64,11 @@ func add_hit_effect() -> void:
 
 func _on_remove_material_timer_timeout() -> void:
 	self.material = null
+
+
+func _physics_process(delta: float) -> void:
+	position += Vector2.LEFT * speed * delta
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()
