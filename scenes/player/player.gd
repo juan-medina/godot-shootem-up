@@ -1,7 +1,7 @@
 class_name Player extends CharacterBody2D
 
 
-@export var speed: Vector2 = Vector2(400, 400)
+@export var speed: float = 400
 @export var fire_rate: float = 0.20
 @export var max_life: int = 10
 
