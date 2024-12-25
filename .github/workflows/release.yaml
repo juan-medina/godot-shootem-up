@@ -47,9 +47,7 @@ jobs:
           name: example
           preset: ${{ matrix.platform }}
           debugMode: "false"
-			- name: check files build
-				run: |
-					find .
+					package: true
       - name: Add zip to the release
         uses: svenstaro/upload-release-action@v2
         with:
