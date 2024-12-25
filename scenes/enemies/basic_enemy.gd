@@ -10,6 +10,9 @@ class_name BasicEnemy extends Area2D
 @export var max_life: int = 1
 @export var damage: int = 1
 @export var speed: float = 250
+@export var points: int = 150
+
+signal destroyed(points: int)
 
 var life: int = max_life
 
@@ -36,6 +39,7 @@ func damaged(amount: int) -> void:
 		ship_explosion.visible = true
 		ship_explosion.play()
 		explosion_sound.play()
+		destroyed.emit(points)
 		await ship_explosion.animation_finished
 		queue_free()
 

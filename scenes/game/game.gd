@@ -5,7 +5,7 @@ class_name Game extends Node2D
 
 @onready var enemies_spawn_timer: Timer = $EnemiesSpawn
 @onready var enemy: PackedScene = preload("res://scenes/enemies/basic_enemy.tscn")
-
+@onready var ui: UI = $CanvasLayer/UI
 
 func _ready() -> void:
 	enemies_spawn_timer.start(spawn_default_timer)
@@ -30,7 +30,9 @@ func _on_enemies_spawn_timeout() -> void:
 	var y_range = (max_viewport.y / 2) * 0.7
 	var spawn_position: Vector2 = Vector2(max_viewport.x + 50, max_viewport.y / 2 + randf_range(-y_range, y_range))
 	enemy_instance.global_position = spawn_position
+	enemy_instance.destroyed.connect(_on_enemy_died.bind())
 	add_child(enemy_instance)
-
-
 	enemies_spawn_timer.start(spawn_default_timer + randf_range(0, 0.5))
+
+func _on_enemy_died(points: int) -> void:
+	ui.points += points
