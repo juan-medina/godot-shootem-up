@@ -15,9 +15,8 @@ class_name Player extends CharacterBody2D
 @onready var shot_scene: PackedScene = preload("res://scenes/player/shot/player_shot.tscn")
 @onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")
 
+
 @onready var half_size: Vector2 = ship.region_rect.size * scale / 2
-@onready var clamp_max: Vector2 = get_viewport_rect().size
-@onready var limit: Vector2 = clamp_max - half_size
 
 
 var previous_direction: Vector2 = Vector2.ZERO
@@ -48,7 +47,9 @@ func move_logic() -> void:
 
 	if direction != Vector2.ZERO:
 		move_and_slide()
-		position = position.clamp(half_size, limit)
+	var clamp_max: Vector2 = get_viewport_rect().size
+	var limit: Vector2 = clamp_max - half_size
+	position = position.clamp(half_size, limit)
 
 
 func direction_changed(direction: Vector2) -> void:
