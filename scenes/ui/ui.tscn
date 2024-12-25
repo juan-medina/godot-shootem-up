@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://beg1iuhl8ave5"]
+[gd_scene load_steps=6 format=3 uid="uid://beg1iuhl8ave5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_a3gfh"]
 [ext_resource type="FontFile" uid="uid://byqkqg20ffjvu" path="res://resources/fonts/PixeloidMono-d94EV.ttf" id="1_cd55t"]
+[ext_resource type="FontFile" uid="uid://b23xsy4yg66i6" path="res://resources/fonts/PixeloidSans-mLxMm.ttf" id="3_a4mbi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2de44"]
 font = ExtResource("1_cd55t")
 font_size = 32
+
+[sub_resource type="Theme" id="Theme_ettfd"]
+default_font = ExtResource("3_a4mbi")
+default_font_size = 16
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -29,3 +34,56 @@ text = "0"
 label_settings = SubResource("LabelSettings_2de44")
 horizontal_alignment = 2
 justification_flags = 162
+
+[node name="Version" type="HBoxContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = SubResource("Theme_ettfd")
+
+[node name="V" type="Label" parent="Version"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+text = "v"
+vertical_alignment = 2
+
+[node name="Major" type="Label" parent="Version"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "0"
+vertical_alignment = 2
+
+[node name="d1" type="Label" parent="Version"]
+layout_mode = 2
+text = "."
+
+[node name="Minor" type="Label" parent="Version"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+text = "0"
+
+[node name="d2" type="Label" parent="Version"]
+layout_mode = 2
+text = "."
+
+[node name="Patch" type="Label" parent="Version"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.498039, 0, 1)
+text = "0"
+
+[node name="d3" type="Label" parent="Version"]
+layout_mode = 2
+text = "."
+
+[node name="Build" type="Label" parent="Version"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "0"
