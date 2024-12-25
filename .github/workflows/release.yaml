@@ -40,12 +40,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           lfs: true
-      - name: Download rcedit
-        run: |
-        wget https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-x64.zip
-				unzip rcedit-x64.zip -d rcedit
-        shell: bash
-        run: echo "PATH=${GITHUB_WORKSPACE}/rcedit:$PATH" >> $GITHUB_ENV
+
       - name: Build
         id: build
         uses: felix-schindler/build-godot-action@v2.0.0
@@ -53,6 +48,7 @@ jobs:
           name: shoot_em_up
           preset: ${{ matrix.platform }}
           debugMode: "false"
+
       - name: Add zip to the release
         uses: svenstaro/upload-release-action@v2
         with:
