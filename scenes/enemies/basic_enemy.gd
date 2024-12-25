@@ -7,7 +7,10 @@ class_name BasicEnemy extends Area2D
 @onready var explosion_sound: AudioStreamPlayer2D = $ExplosionSound
 
 
-@export var max_life : int = 2
+@export var max_life: int = 2
+@export var damage: int = 1
+
+
 var life: int = max_life
 
 func _ready() -> void:
@@ -16,13 +19,14 @@ func _ready() -> void:
 func _on_area_entered(object: Area2D) -> void:
 	if object is PlayerShot:
 		object.destroy()
-		damage(object.damage)
+		damaged(object.damage)
 
-func _on_body_entered(body:Node2D) -> void:
+func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		damage(max_life)
+		damaged(max_life)
+		body.damaged(damage)
 
-func damage(amount: int) -> void:
+func damaged(amount: int) -> void:
 	life -= amount
 	add_hit_effect()
 	if life <= 0:
@@ -32,6 +36,8 @@ func damage(amount: int) -> void:
 		ship_explosion.visible = true
 		ship_explosion.play()
 		explosion_sound.play()
+		await ship_explosion.animation_finished
+		queue_free()
 
 
 @export var hit_duration: float = 1.0
@@ -58,8 +64,3 @@ func add_hit_effect() -> void:
 
 func _on_remove_material_timer_timeout() -> void:
 	self.material = null
-
-
-func _on_ship_explosion_animation_finished() -> void:
-	queue_free()
-

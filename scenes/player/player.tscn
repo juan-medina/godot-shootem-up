@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dv34skp6agxhm"]
+[gd_scene load_steps=29 format=3 uid="uid://dv34skp6agxhm"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_qr6qb"]
 [ext_resource type="Texture2D" uid="uid://da4d8xtq0spig" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/normal/exhaust1.png" id="2_58hbh"]
@@ -14,6 +14,17 @@
 [ext_resource type="Texture2D" uid="uid://ci8a0i5x20c8d" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_1.png" id="12_83sqk"]
 [ext_resource type="Texture2D" uid="uid://qwgd1oxof03p" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_2.png" id="13_ojadk"]
 [ext_resource type="Texture2D" uid="uid://cj03bm0r1ojcq" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_3.png" id="14_n8cqf"]
+[ext_resource type="Texture2D" uid="uid://cn372l18cxfb" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_1.png" id="15_3gtkm"]
+[ext_resource type="Texture2D" uid="uid://dxhswjoy7myvy" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_2.png" id="16_is13f"]
+[ext_resource type="Texture2D" uid="uid://bkrhmt6booja1" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_3.png" id="17_3r3cc"]
+[ext_resource type="Texture2D" uid="uid://lu67myprnl4l" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_4.png" id="18_jq7f5"]
+[ext_resource type="Texture2D" uid="uid://cb015fnl2wom6" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_5.png" id="19_isawn"]
+[ext_resource type="Texture2D" uid="uid://dfq7kieti72gs" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_6.png" id="20_x3u5v"]
+[ext_resource type="Texture2D" uid="uid://bwb6h7s7642xp" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_7.png" id="21_3h25j"]
+[ext_resource type="Texture2D" uid="uid://deg30cf4ohfog" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_8.png" id="22_ccx22"]
+[ext_resource type="Texture2D" uid="uid://5fc771b3vyui" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_9.png" id="23_mc4cs"]
+[ext_resource type="Texture2D" uid="uid://c2qdky15ohxeg" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_10.png" id="24_3dt42"]
+[ext_resource type="Texture2D" uid="uid://b05pmf606day7" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_11.png" id="25_xfbml"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uni5j"]
 animations = [{
@@ -69,6 +80,50 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_d1jhe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_3gtkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_is13f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_3r3cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_jq7f5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_isawn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_x3u5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_3h25j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ccx22")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_mc4cs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_3dt42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_xfbml")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 12
 motion_mode = 1
@@ -80,6 +135,7 @@ sprite_frames = SubResource("SpriteFrames_uni5j")
 animation = &"normal"
 
 [node name="Ship" type="Sprite2D" parent="."]
+use_parent_material = true
 texture = ExtResource("4_t853r")
 region_enabled = true
 region_rect = Rect2(21, 44, 86, 39)
@@ -97,5 +153,9 @@ stream = ExtResource("11_34fei")
 visible = false
 position = Vector2(71, 6)
 sprite_frames = SubResource("SpriteFrames_lnpvr")
+
+[node name="ShipExplosion" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_d1jhe")
 
 [connection signal="animation_finished" from="ShotOutEffect" to="." method="_on_shot_out_effect_animation_finished"]

@@ -115,4 +115,3 @@ stream = ExtResource("14_l4mo1")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="animation_finished" from="ShipExplosion" to="." method="_on_ship_explosion_animation_finished"]
