@@ -3,7 +3,7 @@ class_name BasicEnemy extends Area2D
 func _on_area_entered(object: Area2D) -> void:
 	if object is PlayerShot:
 		add_hit_effect()
-		object.queue_free()
+		object.destroy()
 
 
 @export var hit_duration: float = 1.0

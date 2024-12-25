@@ -1,10 +1,34 @@
-[gd_scene load_steps=4 format=3 uid="uid://c38wnspfppg2o"]
+[gd_scene load_steps=9 format=3 uid="uid://c38wnspfppg2o"]
 
 [ext_resource type="Script" path="res://scenes/player/shot/player_shot.gd" id="1_pgl2n"]
+[ext_resource type="Texture2D" uid="uid://cmgootxhdqj2h" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_exp1.png" id="3_kmfon"]
+[ext_resource type="Texture2D" uid="uid://c0tevf60q3fvr" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_exp2.png" id="4_8g7fy"]
 [ext_resource type="Texture2D" uid="uid://y3mxrwdj1o6y" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_asset.png" id="4_ogy3a"]
+[ext_resource type="Texture2D" uid="uid://bgvyerpkn5se6" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_exp3.png" id="5_1dob7"]
+[ext_resource type="Texture2D" uid="uid://lvstxny5pjdv" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_exp4.png" id="6_dr2s6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hyc0"]
 size = Vector2(18, 16.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f68ni"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kmfon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8g7fy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1dob7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_dr2s6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
 
 [node name="PlayerShot" type="Area2D"]
 collision_layer = 2
@@ -23,4 +47,10 @@ shape = SubResource("RectangleShape2D_0hyc0")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-42, 0)
 
+[node name="ShotExplosion" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-11, 0)
+sprite_frames = SubResource("SpriteFrames_f68ni")
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="animation_finished" from="ShotExplosion" to="." method="_on_shot_explosion_animation_finished"]
