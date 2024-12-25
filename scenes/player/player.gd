@@ -2,12 +2,13 @@ class_name Player extends CharacterBody2D
 
 
 @export var speed: Vector2 = Vector2(400, 400)
-@export var fire_rate: float = 0.25
+@export var fire_rate: float = 0.20
 
 
 @onready var exhaust_anim = $Exhaust
 @onready var shot_point = $ShotPoint
 @onready var shot_sound = $ShotSound
+@onready var shot_out_effect = $ShotOutEffect
 @onready var shot_scene = preload("res://scenes/player/shot/player_shot.tscn")
 
 @onready var half_size: Vector2 = $Ship.region_rect.size * scale / 2
@@ -64,7 +65,13 @@ func shot_logic() -> void:
 
 
 func shot() -> void:
+	shot_out_effect.visible = true
+	shot_out_effect.play()
 	shot_sound.play()
 	var shot_instance: PlayerShot = shot_scene.instantiate()
 	shot_instance.init(shot_point)
 	get_parent().add_child(shot_instance)
+
+
+func _on_shot_out_effect_animation_finished() -> void:
+	shot_out_effect.visible = false

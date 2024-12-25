@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dv34skp6agxhm"]
+[gd_scene load_steps=17 format=3 uid="uid://dv34skp6agxhm"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_qr6qb"]
 [ext_resource type="Texture2D" uid="uid://da4d8xtq0spig" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/normal/exhaust1.png" id="2_58hbh"]
@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://0e8urk8oaksb" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/turbo/exhaust3.png" id="8_e8ft4"]
 [ext_resource type="Texture2D" uid="uid://pg1urlkr2ru4" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship3/Exhaust/turbo/exhaust4.png" id="9_2fsdf"]
 [ext_resource type="AudioStream" uid="uid://cjng2ueyt1igr" path="res://resources/freesound/268168__shaun105__laser.wav" id="11_34fei"]
+[ext_resource type="Texture2D" uid="uid://ci8a0i5x20c8d" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_1.png" id="12_83sqk"]
+[ext_resource type="Texture2D" uid="uid://qwgd1oxof03p" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_2.png" id="13_ojadk"]
+[ext_resource type="Texture2D" uid="uid://cj03bm0r1ojcq" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_3.png" id="14_n8cqf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uni5j"]
 animations = [{
@@ -49,6 +52,23 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_lnpvr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ojadk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_83sqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_n8cqf")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 12
 motion_mode = 1
@@ -65,10 +85,17 @@ region_enabled = true
 region_rect = Rect2(21, 44, 86, 39)
 
 [node name="ShotPoint" type="Marker2D" parent="."]
-position = Vector2(73, 6)
+position = Vector2(46, 7)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="Collision" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-16, -18, -15, -14, -18, -11.2, -21.5, -12.9, -27.4, -13.5, -32.5, -13.5, -32.5, -7.8, -36, -5, -39, -5, -39, 4, -35, 4, -34, 12, -27.2, 12.5, -22.4, 12.5, -18.3, 8.5, -15.6, 10.5, -19, 16, 16, 16, 21, 11, 28, 11, 28, 15, 26, 19, 32, 19, 34.7, 13.5, 37.5, 13.5, 37.5, -1.7, 24.5, -11.8, 15.3, -16.5, 6.4, -16.5, 2, -13, -6, -13)
 
 [node name="ShotSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_34fei")
+
+[node name="ShotOutEffect" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(71, 6)
+sprite_frames = SubResource("SpriteFrames_lnpvr")
+
+[connection signal="animation_finished" from="ShotOutEffect" to="." method="_on_shot_out_effect_animation_finished"]
