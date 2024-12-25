@@ -48,7 +48,7 @@ jobs:
           preset: ${{ matrix.platform }}
           debugMode: "false"
       - name: debug
-        run: find .
+        run: find ${{ github.workspace }}
       - name: Add zip to the release
         uses: svenstaro/upload-release-action@v2
         with:
