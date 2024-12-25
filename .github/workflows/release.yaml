@@ -28,17 +28,24 @@ jobs:
           preset: ${{ matrix.platform }}
           debugMode: "false"
 
+      - name: Condition to check for Windows
+        if: matrix.platform == 'windows'
+        run: echo "Windows build detected"
+
       - name: Install Wine
+        if: matrix.platform == 'windows'
         run: |
           sudo dpkg --add-architecture i386
           sudo apt update
           sudo apt install -y wine32
 
       - name: Download rcedit
+        if: matrix.platform == 'windows'
         run: |
           wget https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x86.exe
 
       - name: Modify Executable with rcedit
+        if: matrix.platform == 'windows'
         run: |
           wine rcedit-x86 build/shoot_em_up.exe \
               --set-icon resources/icon/juan_medina.ico \
@@ -49,16 +56,26 @@ jobs:
               --set-version-string "CompanyName" "Juan Medina" \
               --set-version-string "LegalCopyright" "(c) 2024 Juan Medina"
 
-      - name: Re-zip modified build artifact
+      - name: Zip build artifact
         run: |
           cd build
-          zip -r shoot_em_up.zip shoot_em_up.exe shoot_em_up.pck
+          zip -r ../shoot_em_up.zip *
+          md5sum ../shoot_em_up.zip > ../shoot_em_up.zip.md5
 
       - name: Add zip to the release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/shoot_em_up.zip
+          file: shoot_em_up.zip
           asset_name: "shoot_em_up-${{ github.event.release.name }}-${{ matrix.platform }}.zip"
+          tag: ${{ github.ref }}
+          overwrite: true
+
+      - name: Add zip md5 to the release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: shoot_em_up.zip.md5
+          asset_name: "shoot_em_up-${{ github.event.release.name }}-${{ matrix.platform }}.zip.md5"
           tag: ${{ github.ref }}
           overwrite: true
