@@ -1,6 +1,7 @@
 class_name BasicEnemy extends Area2D
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var exhaust: AnimatedSprite2D = $Exhaust
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var ship_explosion: AnimatedSprite2D = $ShipExplosion
 @onready var explosion_sound: AudioStreamPlayer2D = $ExplosionSound
@@ -9,6 +10,8 @@ class_name BasicEnemy extends Area2D
 @export var max_life : int = 2
 var life: int = max_life
 
+func _ready() -> void:
+	exhaust.play()
 
 func _on_area_entered(object: Area2D) -> void:
 	if object is PlayerShot:
@@ -24,6 +27,7 @@ func damage(amount: int) -> void:
 	add_hit_effect()
 	if life <= 0:
 		sprite.visible = false
+		exhaust.visible = false
 		collision_shape.set_deferred("disabled", true)
 		ship_explosion.visible = true
 		ship_explosion.play()
