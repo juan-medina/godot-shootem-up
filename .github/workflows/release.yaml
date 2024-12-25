@@ -36,11 +36,11 @@ jobs:
 
       - name: Download rcedit
         run: |
-          wget https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe
+          wget https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x86.exe
 
       - name: Modify Executable with rcedit
         run: |
-          wine rcedit-x64 build/shoot_em_up.exe \
+          wine rcedit-x86 build/shoot_em_up.exe \
               --set-icon resources/icon/juan_medina.ico \
               --set-file-version "${{ github.event.release.name }}" \
               --set-product-version "${{ github.event.release.name }}" \
