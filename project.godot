@@ -17,7 +17,6 @@ config/description="This is just an example of creating a Shoot 'em up in Godot 
 config/version="0.1.0.0"
 run/main_scene="res://scenes/game/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-boot_splash/image="res://resources/icon/juan_medina.png"
 config/icon="res://resources/icon/juan_medina.png"
 config/windows_native_icon="res://resources/icon/juan_medina.ico"
 
