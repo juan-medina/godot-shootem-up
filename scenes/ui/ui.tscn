@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://beg1iuhl8ave5"]
+[gd_scene load_steps=8 format=3 uid="uid://beg1iuhl8ave5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_a3gfh"]
 [ext_resource type="FontFile" uid="uid://byqkqg20ffjvu" path="res://resources/fonts/PixeloidMono-d94EV.ttf" id="1_cd55t"]
 [ext_resource type="FontFile" uid="uid://b23xsy4yg66i6" path="res://resources/fonts/PixeloidSans-mLxMm.ttf" id="3_a4mbi"]
+[ext_resource type="Texture2D" uid="uid://bs6a8ma1gwkis" path="res://resources/shield/shield_bar.png" id="4_0qrsm"]
+[ext_resource type="Texture2D" uid="uid://bqvgn1ys2uume" path="res://resources/shield/shield.png" id="5_oaivt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2de44"]
 font = ExtResource("1_cd55t")
-font_size = 32
+font_size = 26
 
 [sub_resource type="Theme" id="Theme_ettfd"]
 default_font = ExtResource("3_a4mbi")
@@ -87,3 +89,26 @@ text = "."
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "0"
+
+[node name="ShieldBar" type="Node2D" parent="."]
+position = Vector2(5, 5)
+scale = Vector2(1.5, 1.5)
+
+[node name="BG" type="Sprite2D" parent="ShieldBar"]
+texture = ExtResource("4_0qrsm")
+centered = false
+
+[node name="Shield1" type="Sprite2D" parent="ShieldBar"]
+position = Vector2(2, 2)
+texture = ExtResource("5_oaivt")
+centered = false
+
+[node name="Shield2" type="Sprite2D" parent="ShieldBar"]
+position = Vector2(34, 2)
+texture = ExtResource("5_oaivt")
+centered = false
+
+[node name="Shield3" type="Sprite2D" parent="ShieldBar"]
+position = Vector2(66, 2)
+texture = ExtResource("5_oaivt")
+centered = false

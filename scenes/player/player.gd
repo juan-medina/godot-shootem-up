@@ -3,7 +3,8 @@ class_name Player extends CharacterBody2D
 
 @export var speed: float = 400
 @export var fire_rate: float = 0.20
-@export var max_life: int = 3
+@export var max_shield: int = 3
+@export var hit_duration: float = 1.0
 
 
 @onready var ship = $Ship
@@ -20,10 +21,13 @@ class_name Player extends CharacterBody2D
 @onready var half_size: Vector2 = ship.region_rect.size * scale / 2
 
 
+signal shields_changed(current_shields: int)
+
+
 var previous_direction: Vector2 = Vector2.ZERO
 var previous_exhaust: String = "normal"
 var shot_on_cd: bool = false
-var current_life: int = max_life
+var current_shields: int = max_shield
 var dead: bool = false
 
 
@@ -88,9 +92,10 @@ func _on_shot_out_effect_animation_finished() -> void:
 
 func damaged(amount: int) -> void:
 	add_hit_effect()
-	current_life -= amount
+	current_shields -= amount
+	shields_changed.emit(current_shields)
 
-	if current_life <= 0:
+	if current_shields <= 0:
 		dead = true
 		collision.set_deferred("disabled", true)
 		ship.visible = false
@@ -100,23 +105,8 @@ func damaged(amount: int) -> void:
 		await ship_explosion.animation_finished
 		queue_free()
 
-@export var hit_duration: float = 1.0
-
-var remove_material_timer: Timer = null
-
 
 func add_hit_effect() -> void:
-	if remove_material_timer == null:
-		remove_material_timer = Timer.new()
-		remove_material_timer.one_shot = true
-		remove_material_timer.timeout.connect(_on_remove_material_timer_timeout.bind())
-		add_child(remove_material_timer)
-
-	if remove_material_timer.is_stopped():
-		self.material = hit_material
-	else:
-		remove_material_timer.stop()
-	remove_material_timer.start(hit_duration)
-
-func _on_remove_material_timer_timeout() -> void:
+	self.material = hit_material
+	await get_tree().create_timer(hit_duration).timeout
 	self.material = null

@@ -27,4 +27,5 @@ follow_viewport_enabled = true
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("5_rjl8s")]
 
+[connection signal="shields_changed" from="Player" to="." method="_on_player_shields_changed"]
 [connection signal="timeout" from="EnemiesSpawn" to="." method="_on_enemies_spawn_timeout"]

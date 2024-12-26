@@ -5,16 +5,21 @@ class_name BasicEnemy extends Area2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var ship_explosion: AnimatedSprite2D = $ShipExplosion
 @onready var explosion_sound: AudioStreamPlayer2D = $ExplosionSound
+@onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")
 
 
 @export var max_life: int = 1
 @export var damage: int = 1
 @export var speed: float = 250
 @export var points: int = 150
+@export var hit_duration: float = 1.0
+
 
 signal destroyed(points: int)
 
+
 var life: int = max_life
+
 
 func _ready() -> void:
 	exhaust.play()
@@ -44,29 +49,9 @@ func damaged(amount: int) -> void:
 		queue_free()
 
 
-@export var hit_duration: float = 1.0
-
-
-@onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")
-
-
-var remove_material_timer: Timer = null
-
-
 func add_hit_effect() -> void:
-	if remove_material_timer == null:
-		remove_material_timer = Timer.new()
-		remove_material_timer.one_shot = true
-		remove_material_timer.timeout.connect(_on_remove_material_timer_timeout.bind())
-		add_child(remove_material_timer)
-
-	if remove_material_timer.is_stopped():
-		self.material = hit_material
-	else:
-		remove_material_timer.stop()
-	remove_material_timer.start(hit_duration)
-
-func _on_remove_material_timer_timeout() -> void:
+	self.material = hit_material
+	await get_tree().create_timer(hit_duration).timeout
 	self.material = null
 
 

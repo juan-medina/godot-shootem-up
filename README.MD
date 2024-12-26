@@ -5,14 +5,12 @@ This is just an example of creating a Shoot 'em up in Godot 4.
 ## Resources
 
 - Game music: [Abstraction - Music Loop Bundle](https://tallbeard.itch.io/music-loop-bundle) by [Abstraction](https://abstractionmusic.com).
-- Background: [Glacial Mountains: Parallax Background](https://vnitti.itch.io/glacial-mountains-parallax-background) by [vnitti
-](https://vnitti.itch.io/).
+- Background: [Glacial Mountains: Parallax Background](https://vnitti.itch.io/glacial-mountains-parallax-background) by [vnitti](https://vnitti.itch.io/).
 - Spaceships: [Free Enemy Spaceship 2D Sprites Pixel Art](https://free-game-assets.itch.io/free-enemy-spaceship-2d-sprites-pixel-art) by [Craftpix](https://craftpix.net/)
+- Shield Bar: [UI BARS](https://guilemus.itch.io/ui-bars) by [guilemus](https://guilemus.itch.io/).
 - Player shot fire sound: [laser.wav](https://freesound.org/people/Shaun105/sounds/268168) by [Shaun105](https://freesound.org/people/Shaun105/).
-- Player short hit sound: [Hit/Hurt](https://freesound.org/people/Prof.Mudkip/sounds/398957/) by [Prof.Mudkip
-](https://freesound.org/people/Prof.Mudkip/).
-- Ship explosion sound: [8-Bit explosion](https://freesound.org/people/Prof.Mudkip/sounds/386862/) by [Prof.Mudkip
-](https://freesound.org/people/Prof.Mudkip/).
+- Player shot hit sound: [Hit/Hurt](https://freesound.org/people/Prof.Mudkip/sounds/398957/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
+- Ship explosion sound: [8-Bit explosion](https://freesound.org/people/Prof.Mudkip/sounds/386862/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
 
 ## CI
 
@@ -24,7 +22,7 @@ To trigger a new release using this powershell [script](create-release.ps1).
 .\create-release.ps1
 ```
 
-This will read the version from the [project.godot](project.godot) file.
+This will read the version from the [project.godot](project.godot) file, requires [Github CLI](https://cli.github.com/).
 
 ## LICENSE
 ```

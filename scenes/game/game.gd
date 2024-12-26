@@ -36,3 +36,7 @@ func _on_enemies_spawn_timeout() -> void:
 
 func _on_enemy_died(points: int) -> void:
 	ui.points += points
+
+
+func _on_player_shields_changed(current_shields: int) -> void:
+	ui.shields = current_shields
