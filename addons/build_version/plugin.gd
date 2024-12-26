@@ -1,8 +1,7 @@
 @tool extends EditorPlugin
 
 const _TOOL_MENU_ITEM_NAME: String = "Build Version: Increase And Launch Main Scene (CTRL+F5)"
-const PLUGIN_PATH: String = "plugins/build_version/increase_and_launch_main_scene"
-var shortcut_res: Shortcut = preload("res://addons/build_version/default_shortcut.tres")
+var shortcut: Shortcut = preload("res://addons/build_version/default_shortcut.tres")
 
 
 func _enter_tree() -> void:
@@ -15,7 +14,7 @@ func _exit_tree() -> void:
 
 func _shortcut_input(event: InputEvent) -> void:
 	if not Engine.is_editor_hint() or not event.is_pressed() or event.is_echo(): return
-	if shortcut_res.matches_event(event):
+	if shortcut.matches_event(event):
 		_increase_build_and_launch()
 
 
