@@ -26,7 +26,7 @@ This will trigger a github [action](.github/workflows/release.yaml) that creates
 
 Additionally this project includes an Godot [addon](addons/build_version/) that will launch the main scene and increase the build number.
 
-You can use this either via the tool menu or the shortcut CTR+F5.
+You can use this either via the tool menu or the shortcut CTRL+F5.
 
 ## LICENSE
 ```
