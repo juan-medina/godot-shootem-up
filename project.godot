@@ -14,7 +14,7 @@ config/name="Shoot'em up "
 config/description="This is just an example of creating a Shoot 'em up in Godot 4.
 
 "
-config/version="0.2.0.448"
+config/version="0.2.0.476"
 run/main_scene="res://scenes/game/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://resources/icon/juan_medina.png"
@@ -28,6 +28,10 @@ window/size/window_width_override=1728
 window/size/window_height_override=972
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/build_version/plugin.cfg")
 
 [input]
 

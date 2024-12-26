@@ -14,16 +14,19 @@ This is just an example of creating a Shoot 'em up in Godot 4.
 - Font: [Pixeloid](https://www.fontspace.com/pixeloid-font-f69232) by [GGBotNet](https://www.fontspace.com/ggbotnet)
 
 ## CI
-
-I use the action https://github.com/felix-schindler/build-godot-action
-
-To trigger a new release using this powershell [script](create-release.ps1).
+To trigger a new release I use this powershell [script](create-release.ps1).
 
 ```powershell
 .\create-release.ps1
 ```
 
-This will read the version from the [project.godot](project.godot) file, requires [Github CLI](https://cli.github.com/).
+This will read the version from the [project.godot](project.godot) file, requires [Github CLI](https://cli.github.com/), and the push a new release to github matching that version.
+
+This will trigger a github [action](.github/workflows/release.yaml) that creates a new release package per platform.
+
+Additionally this project includes an Godot [addon](addons/build_version/) that will launch the main scene and increase the build number.
+
+You can use this either via the tool menu or the shortcut CTR+F5.
 
 ## LICENSE
 ```
