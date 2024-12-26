@@ -9,6 +9,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_2de44"]
 font = ExtResource("1_cd55t")
 font_size = 26
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_ettfd"]
 default_font = ExtResource("3_a4mbi")
@@ -54,22 +55,26 @@ theme = SubResource("Theme_ettfd")
 [node name="V" type="Label" parent="Version"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "v"
 vertical_alignment = 2
 
 [node name="Major" type="Label" parent="Version"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "0"
 vertical_alignment = 2
 
 [node name="d1" type="Label" parent="Version"]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "."
 
 [node name="Minor" type="Label" parent="Version"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="d2" type="Label" parent="Version"]
@@ -79,6 +84,7 @@ text = "."
 [node name="Patch" type="Label" parent="Version"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.498039, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="d3" type="Label" parent="Version"]
@@ -88,6 +94,7 @@ text = "."
 [node name="Build" type="Label" parent="Version"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="ShieldBar" type="Node2D" parent="."]
