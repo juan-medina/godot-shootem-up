@@ -1,10 +1,8 @@
-﻿# Shoot 'em up
+﻿# Godot Shoot 'em up
 [![License: MIT](https://img.shields.io/badge/License-MIT-478CBF.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Conduct](https://img.shields.io/badge/Conduct-Covenat%202.0-478CBF.svg?style=for-the-badge)](https://www.contributor-covenant.org/version/2/0/code_of_conduct/)
 [![Made with Godot](https://img.shields.io/badge/GODOT-4.3-478CBF?style=for-the-badge&logo=godot%20engine&logoColor=white)](https://godotengine.org)
 [![GitHub Release](https://img.shields.io/github/v/release/juan-medina/godot-shootem-up.svg?style=for-the-badge&color=478CBF&label=Last%20version)](https://github.com/juan-medina/godot-shootem-up/releases/latest)
-
-
 
 This is just an example of creating a Shoot 'em up in Godot 4.3.
 
