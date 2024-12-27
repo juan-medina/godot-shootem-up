@@ -4,7 +4,7 @@
 [![Made with Godot](https://img.shields.io/badge/GODOT-4.3-478CBF?style=for-the-badge&logo=godot%20engine&logoColor=white)](https://godotengine.org)
 [![GitHub Release](https://img.shields.io/github/v/release/juan-medina/godot-shootem-up.svg?style=for-the-badge&color=478CBF&label=Last%20game%20release)](https://github.com/juan-medina/godot-shootem-up/releases/latest)
 
-This is just an example of creating a Shoot 'em up in Godot 4.3.
+This is just an example of creating a Shoot 'em up in Godot.
 
 You can download the latest release [here](https://github.com/juan-medina/godot-shootem-up/releases/latest).
 
@@ -28,13 +28,13 @@ To trigger a new release I use this powershell [script](create-release.ps1).
 .\create-release.ps1
 ```
 
-This will read the version from the [project.godot](project.godot) file, requires [Github CLI](https://cli.github.com/), and then push a new release to github matching that version.
+This will read the game version from the [project.godot](project.godot) file, requires [Github CLI](https://cli.github.com/), and then push a new release to github.
 
-This will trigger a github [action](.github/workflows/release.yaml) that will add to the release a zip package with the builded game.
+This will trigger a github [action](.github/workflows/release.yaml) that will add to the release a zip package with the game.
 
 Additionally this project includes an Godot [addon](addons/build_version/) that will launch the main scene and increase the build number.
 
-You can use this either via the tool menu or the shortcut CTRL+F5.
+You can use this either via the tool menu: ***Build Version: Increase And Launch Main Scene*** or the shortcut ***CTRL+F5***.
 
 ## LICENSE
 ```
