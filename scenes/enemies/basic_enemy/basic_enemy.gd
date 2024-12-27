@@ -6,6 +6,7 @@ class_name BasicEnemy extends Area2D
 @onready var ship_explosion: AnimatedSprite2D = $ShipExplosion
 @onready var explosion_sound: AudioStreamPlayer2D = $ExplosionSound
 @onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")
+@onready var points_label: Label = $Points
 
 
 @export var max_life: int = 1
@@ -22,12 +23,15 @@ var life: int = max_life
 var direction: Vector2 = Vector2.LEFT
 var player: Player = null
 var on_screen: bool = false
+var initial_speed: float = speed
 
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	exhaust.play("normal")
 	life = max_life
+	points_label.text = str(points)
+	initial_speed = speed
 
 
 func _on_area_entered(object: Area2D) -> void:
@@ -48,6 +52,7 @@ func damaged(amount: int) -> void:
 	if life <= 0:
 		sprite.visible = false
 		exhaust.visible = false
+		points_label.visible = true
 		collision_shape.set_deferred("disabled", true)
 		ship_explosion.visible = true
 		ship_explosion.play()
@@ -64,7 +69,7 @@ func add_hit_effect() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	position += direction * speed * delta
+	position += direction * (speed if sprite.visible else initial_speed) * delta
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
@@ -74,13 +79,11 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	on_screen = true
 
+
 var turbo: bool = false:
 	set(value):
 		turbo = value
-		if turbo:
-			exhaust.play("turbo")
-		else:
-			exhaust.play("normal")
+		exhaust.play("turbo" if turbo else "normal")
 
 
 func is_player_on_line_of_sight() -> bool:

@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 		state = kamikaze_state.KAMIKAZE
 		turbo = true
 
-	if state == kamikaze_state.KAMIKAZE: speed += acceleration
+	if state == kamikaze_state.KAMIKAZE:speed += acceleration
 
 	super._physics_process(delta)
 
