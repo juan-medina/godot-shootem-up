@@ -19,17 +19,24 @@ signal destroyed(points: int)
 
 
 var life: int = max_life
+var direction: Vector2 = Vector2.LEFT
+var player: Player = null
+var on_screen: bool = false
 
 
 func _ready() -> void:
-	exhaust.play()
+	player = get_tree().get_first_node_in_group("player")
+	exhaust.play("normal")
+
 
 func _on_area_entered(object: Area2D) -> void:
+	if not on_screen: return
 	if object is PlayerShot:
 		object.destroy()
 		damaged(object.damage)
 
 func _on_body_entered(body: Node2D) -> void:
+	if not on_screen: return
 	if body is Player:
 		damaged(max_life)
 		body.damaged(damage)
@@ -56,8 +63,26 @@ func add_hit_effect() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	position += Vector2.LEFT * speed * delta
+	position += direction * speed * delta
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	on_screen = true
+
+var turbo: bool = false:
+	set(value):
+		turbo = value
+		if turbo:
+			exhaust.play("turbo")
+		else:
+			exhaust.play("normal")
+
+
+func is_player_on_line_of_sight() -> bool:
+	if not is_instance_valid(player): return false
+	var diff_y = player.global_position.y - global_position.y
+	return abs(diff_y) < sprite.texture.get_height()

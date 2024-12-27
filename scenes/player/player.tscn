@@ -124,7 +124,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 12
 motion_mode = 1
 script = ExtResource("1_qr6qb")

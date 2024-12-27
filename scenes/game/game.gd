@@ -4,7 +4,7 @@ class_name Game extends Node2D
 
 
 @onready var enemies_spawn_timer: Timer = $EnemiesSpawn
-@onready var enemy: PackedScene = preload("res://scenes/enemies/basic_enemy.tscn")
+@onready var enemy: PackedScene = preload("res://scenes/enemies/kamikaze/kamikaze.tscn")
 @onready var ui: UI = $CanvasLayer/UI
 
 func _ready() -> void:
