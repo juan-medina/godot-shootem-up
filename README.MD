@@ -10,7 +10,7 @@ This is just an example of creating a Shoot 'em up in Godot 4.3.
 
 You can download the latest release [here](https://github.com/juan-medina/godot-shootem-up/releases/latest).
 
-If you need to open a bug or enhancement please do it [here](https://github.com/juan-medina/godot-shootem-up/issues/new).
+If you need to open a bug or enhancement please do it [here](https://github.com/juan-medina/godot-shootem-up/issues/new/choose).
 
 ## Resources
 
