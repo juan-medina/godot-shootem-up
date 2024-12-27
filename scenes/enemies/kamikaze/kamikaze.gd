@@ -12,6 +12,7 @@ enum kamikaze_state {
 
 var state: kamikaze_state = kamikaze_state.IDLE
 
+
 func _ready() -> void:
 	super._ready()
 

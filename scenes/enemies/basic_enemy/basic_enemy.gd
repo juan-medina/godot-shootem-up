@@ -85,5 +85,9 @@ var turbo: bool = false:
 
 func is_player_on_line_of_sight() -> bool:
 	if not is_instance_valid(player): return false
-	var diff_y = player.global_position.y - global_position.y
-	return abs(diff_y) < sprite.texture.get_height()
+	var player_half_height: float = player.ship.texture.get_height() / 2.0
+
+	var player_top_y: float = player.global_position.y - player_half_height
+	var player_bottom_y: float = player.global_position.y + player_half_height
+
+	return (global_position.y >= player_top_y) and (global_position.y <= player_bottom_y)
