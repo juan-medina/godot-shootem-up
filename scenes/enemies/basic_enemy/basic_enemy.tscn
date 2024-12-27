@@ -111,6 +111,7 @@ animations = [{
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_4pt7b")
+max_life = 2
 
 [node name="Exhaust" type="AnimatedSprite2D" parent="."]
 position = Vector2(46, 0)

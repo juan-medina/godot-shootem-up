@@ -4,7 +4,8 @@ class_name Game extends Node2D
 
 
 @onready var enemies_spawn_timer: Timer = $EnemiesSpawn
-@onready var enemy: PackedScene = preload("res://scenes/enemies/kamikaze/kamikaze.tscn")
+@onready var enemy1: PackedScene = preload("res://scenes/enemies/basic_enemy/basic_enemy.tscn")
+@onready var enemy2: PackedScene = preload("res://scenes/enemies/kamikaze/kamikaze.tscn")
 @onready var ui: UI = $CanvasLayer/UI
 
 func _ready() -> void:
@@ -24,8 +25,8 @@ func _process(_delta: float) -> void:
 
 
 func _on_enemies_spawn_timeout() -> void:
+	var enemy_instance = enemy1.instantiate() if randf() < 0.7 else enemy2.instantiate()
 
-	var enemy_instance: BasicEnemy = enemy.instantiate()
 	var max_viewport: Vector2 = get_viewport_rect().size
 	var y_range = (max_viewport.y / 2) * 0.7
 	var spawn_position: Vector2 = Vector2(max_viewport.x + 50, max_viewport.y / 2 + randf_range(-y_range, y_range))

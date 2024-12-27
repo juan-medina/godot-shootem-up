@@ -1,15 +1,15 @@
 [gd_scene load_steps=26 format=3 uid="uid://bd2x2osm3t6k0"]
 
 [ext_resource type="Script" path="res://scenes/enemies/kamikaze/kamikaze.gd" id="1_sbdep"]
-[ext_resource type="Texture2D" uid="uid://dvfkbqkw5yctl" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship1/Exhaust/normal/exhaust1.png" id="2_gf32e"]
-[ext_resource type="Texture2D" uid="uid://byk2wjqa1qe5j" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship1/Exhaust/normal/exhaust2.png" id="3_i8cc6"]
-[ext_resource type="Texture2D" uid="uid://cm42mqf6gqup" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship1/Exhaust/normal/exhaust3.png" id="4_b0pgs"]
-[ext_resource type="Texture2D" uid="uid://ciacxuodji7sr" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship1/Exhaust/normal/exhaust4.png" id="5_5p2dx"]
-[ext_resource type="Texture2D" uid="uid://cdji6206ab2n6" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship1/Exhaust/turbo/exhaust1.png" id="6_kba02"]
-[ext_resource type="Texture2D" uid="uid://bbjbst3e0wfsg" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship1/Exhaust/turbo/exhaust2.png" id="7_rw760"]
-[ext_resource type="Texture2D" uid="uid://cd71rubdhfcc4" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship1/Exhaust/turbo/exhaust3.png" id="8_xbvfc"]
-[ext_resource type="Texture2D" uid="uid://dbeedrq45iewd" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship1/Exhaust/turbo/exhaust4.png" id="9_32bgi"]
-[ext_resource type="Texture2D" uid="uid://bn066wgf7l8iy" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship1/Ship1.png" id="10_sdcoo"]
+[ext_resource type="Texture2D" uid="uid://ca0j6gnjj235f" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship2/Exhaust/normal/exhaust1.png" id="2_tnoaa"]
+[ext_resource type="Texture2D" uid="uid://c01mebp8cuhwb" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship2/Exhaust/normal/exhaust2.png" id="3_4gd3o"]
+[ext_resource type="Texture2D" uid="uid://b8dvpo0u6ya3t" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship2/Exhaust/normal/exhaust3.png" id="4_q6ri1"]
+[ext_resource type="Texture2D" uid="uid://dbetprvs1nf76" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship2/Exhaust/normal/exhaust4.png" id="5_gjtsp"]
+[ext_resource type="Texture2D" uid="uid://dwjch8oiljjkv" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship2/Exhaust/turbo/exhaust1.png" id="6_iyxp6"]
+[ext_resource type="Texture2D" uid="uid://4dvb00ppir4n" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship2/Exhaust/turbo/exhaust2.png" id="7_vhjt5"]
+[ext_resource type="Texture2D" uid="uid://4srkal0lmqtf" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship2/Exhaust/turbo/exhaust3.png" id="8_nokv4"]
+[ext_resource type="Texture2D" uid="uid://cuc2d4gb4gn0" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship2/Exhaust/turbo/exhaust4.png" id="9_cmgtj"]
+[ext_resource type="Texture2D" uid="uid://ckxnjv8lhesc7" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Ship2/Ship2.png" id="10_oexgl"]
 [ext_resource type="Texture2D" uid="uid://cn372l18cxfb" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_1.png" id="11_75mo6"]
 [ext_resource type="Texture2D" uid="uid://dxhswjoy7myvy" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_2.png" id="12_dwths"]
 [ext_resource type="Texture2D" uid="uid://bkrhmt6booja1" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Explosion1/Explosion1_3.png" id="13_pggiw"]
@@ -27,16 +27,16 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_gf32e")
+"texture": ExtResource("2_tnoaa")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_i8cc6")
+"texture": ExtResource("3_4gd3o")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_b0pgs")
+"texture": ExtResource("4_q6ri1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_5p2dx")
+"texture": ExtResource("5_gjtsp")
 }],
 "loop": true,
 "name": &"normal",
@@ -44,16 +44,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_kba02")
+"texture": ExtResource("6_iyxp6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_rw760")
+"texture": ExtResource("7_vhjt5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_xbvfc")
+"texture": ExtResource("8_nokv4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_32bgi")
+"texture": ExtResource("9_cmgtj")
 }],
 "loop": true,
 "name": &"turbo",
@@ -61,7 +61,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mbodd"]
-size = Vector2(59.3333, 28)
+size = Vector2(74, 33)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b4nwj"]
 animations = [{
@@ -111,20 +111,21 @@ animations = [{
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_sbdep")
+points = 250
 
 [node name="Exhaust" type="AnimatedSprite2D" parent="."]
 position = Vector2(46, 0)
 sprite_frames = SubResource("SpriteFrames_80gq2")
-animation = &"normal"
+animation = &"turbo"
 flip_h = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 use_parent_material = true
-texture = ExtResource("10_sdcoo")
+texture = ExtResource("10_oexgl")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
+position = Vector2(3, -0.5)
 shape = SubResource("RectangleShape2D_mbodd")
 
 [node name="ShipExplosion" type="AnimatedSprite2D" parent="."]

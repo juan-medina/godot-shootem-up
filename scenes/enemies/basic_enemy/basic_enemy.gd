@@ -27,6 +27,7 @@ var on_screen: bool = false
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	exhaust.play("normal")
+	life = max_life
 
 
 func _on_area_entered(object: Area2D) -> void:

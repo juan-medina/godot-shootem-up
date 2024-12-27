@@ -1,6 +1,6 @@
 class_name Kamikaze extends BasicEnemy
 
-@export var acceleration: float = 20
+@export var acceleration: float = 15
 
 
 enum kamikaze_state {
