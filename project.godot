@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Shoot'em up "
+config/name="Shoot'em up"
 config/description="This is just an example of creating a Shoot 'em up in Godot 4.
 
 "
