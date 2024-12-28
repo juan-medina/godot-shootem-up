@@ -24,6 +24,9 @@ extends Control
 ##
 ## In-game UI
 
+signal game_over_ok
+signal game_over_cancel
+
 const _VERSION_KEY: String = "application/config/version"
 
 @export var shield_depleted_duration: float = 0.25
@@ -42,6 +45,8 @@ var shields: int = 0:
 var shields_sprites: Array[Sprite2D] = [$ShieldBar/Shield1, $ShieldBar/Shield2, $ShieldBar/Shield3]
 @onready
 var version_labels: Array[Label] = [$Version/Major, $Version/Minor, $Version/Patch, $Version/Build]
+@onready var game_over_panel: Panel = $GameOver
+@onready var game_over_ok_button: Button = $GameOver/OK
 @onready var points_label: Label = $Points
 @onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")
 
@@ -59,3 +64,16 @@ func _deplete_shield(shield: Sprite2D) -> void:
 	await get_tree().create_timer(shield_depleted_duration).timeout
 	shield.material = null
 	shield.visible = false
+
+
+func game_over() -> void:
+	game_over_panel.visible = true
+	game_over_ok_button.grab_focus()
+
+
+func _on_game_over_ok() -> void:
+	game_over_ok.emit()
+
+
+func _on_game_over_cancel() -> void:
+	game_over_cancel.emit()

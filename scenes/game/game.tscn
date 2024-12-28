@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://brp3t3tcb7lc0"]
+[gd_scene load_steps=7 format=3 uid="uid://brp3t3tcb7lc0"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_kn14q"]
 [ext_resource type="PackedScene" uid="uid://be6ewehio5siv" path="res://scenes/background/background.tscn" id="2_wai1s"]
 [ext_resource type="PackedScene" uid="uid://dv34skp6agxhm" path="res://scenes/player/player.tscn" id="3_t1g8v"]
 [ext_resource type="AudioStream" uid="uid://dhkdhvs3htbj" path="res://resources/three-red-hearts-loops/Three Red Hearts - Out of Time.ogg" id="4_ueojc"]
 [ext_resource type="PackedScene" uid="uid://beg1iuhl8ave5" path="res://scenes/ui/ui.tscn" id="5_rjl8s"]
+[ext_resource type="AudioStream" uid="uid://clixxw3rgap1u" path="res://resources/freesound/442127__euphrosyyn__8-bit-game-over.wav" id="6_fm1b2"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_kn14q")
@@ -27,5 +28,10 @@ follow_viewport_enabled = true
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("5_rjl8s")]
 
+[node name="GameOver" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_fm1b2")
+
 [connection signal="shields_changed" from="Player" to="." method="_on_player_shields_changed"]
 [connection signal="timeout" from="EnemiesSpawn" to="." method="_on_enemies_spawn_timeout"]
+[connection signal="game_over_cancel" from="CanvasLayer/UI" to="." method="_on_ui_game_over_cancel"]
+[connection signal="game_over_ok" from="CanvasLayer/UI" to="." method="_on_ui_game_over_ok"]

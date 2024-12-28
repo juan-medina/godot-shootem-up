@@ -19,6 +19,8 @@ If you need to open a bug or enhancement please do it [here](https://github.com/
 - Player shot fire sound: [laser.wav](https://freesound.org/people/Shaun105/sounds/268168) by [Shaun105](https://freesound.org/people/Shaun105/).
 - Player shot hit sound: [Hit/Hurt](https://freesound.org/people/Prof.Mudkip/sounds/398957/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
 - Ship explosion sound: [8-Bit explosion](https://freesound.org/people/Prof.Mudkip/sounds/386862/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
+- Game Over sound: [8-bit Game Over](https://freesound.org/people/Euphrosyyn/sounds/442127/) by [Euphrosyyn](https://freesound.org/people/Euphrosyyn/).
+- Button press sound: [8-bit 2022 Poke Bright Select Button BBM](https://freesound.org/people/NovaSoundTechnology/sounds/653049/) by [NovaSoundTechnology](https://freesound.org/people/NovaSoundTechnology/).
 - Font: [Pixeloid](https://www.fontspace.com/pixeloid-font-f69232) by [GGBotNet](https://www.fontspace.com/ggbotnet)
 
 ## CI

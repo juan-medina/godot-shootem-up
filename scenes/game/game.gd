@@ -26,6 +26,8 @@ extends Node2D
 
 @onready var enemies_spawn_timer: Timer = $EnemiesSpawn
 @onready var ui: UI = $CanvasLayer/UI
+@onready var music: AudioStreamPlayer2D = $Music
+@onready var game_over_sound: AudioStreamPlayer2D = $GameOver
 @onready var enemy1: PackedScene = preload("res://scenes/enemies/basic_enemy/basic_enemy.tscn")
 @onready var enemy2: PackedScene = preload("res://scenes/enemies/kamikaze/kamikaze.tscn")
 
@@ -67,3 +69,18 @@ func _on_enemy_died(points: int) -> void:
 
 func _on_player_shields_changed(current_shields: int) -> void:
 	ui.shields = current_shields
+
+	if current_shields == 0:
+		await get_tree().create_timer(1).timeout
+		music.stop()
+		game_over_sound.play()
+		ui.game_over()
+
+
+func _on_ui_game_over_ok() -> void:
+	var reload:int = get_tree().reload_current_scene()
+	if not reload == OK:
+		assert(false, "Failed to reload scene")
+
+func _on_ui_game_over_cancel() -> void:
+	get_tree().quit()

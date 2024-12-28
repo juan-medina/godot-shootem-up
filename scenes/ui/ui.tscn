@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://beg1iuhl8ave5"]
+[gd_scene load_steps=9 format=3 uid="uid://beg1iuhl8ave5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_a3gfh"]
 [ext_resource type="FontFile" uid="uid://byqkqg20ffjvu" path="res://resources/fonts/PixeloidMono-d94EV.ttf" id="1_cd55t"]
 [ext_resource type="FontFile" uid="uid://b23xsy4yg66i6" path="res://resources/fonts/PixeloidSans-mLxMm.ttf" id="3_a4mbi"]
 [ext_resource type="Texture2D" uid="uid://bs6a8ma1gwkis" path="res://resources/shield/shield_bar.png" id="4_0qrsm"]
 [ext_resource type="Texture2D" uid="uid://bqvgn1ys2uume" path="res://resources/shield/shield.png" id="5_oaivt"]
+[ext_resource type="PackedScene" uid="uid://dmb0xakcacd5c" path="res://scenes/ui/game_over/game_over.tscn" id="6_rsuai"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2de44"]
 font = ExtResource("1_cd55t")
@@ -119,3 +120,10 @@ centered = false
 position = Vector2(66, 2)
 texture = ExtResource("5_oaivt")
 centered = false
+
+[node name="GameOver" parent="." instance=ExtResource("6_rsuai")]
+visible = false
+layout_mode = 1
+
+[connection signal="cancel" from="GameOver" to="." method="_on_game_over_cancel"]
+[connection signal="ok" from="GameOver" to="." method="_on_game_over_ok"]
