@@ -1,0 +1,61 @@
+# Copyright (c) 2024 Juan Medina
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
+@tool
+class_name BuildVersionIncreasePlugin
+extends EditorPlugin
+## Increase the build version and launch the main scene
+##
+## This plugin adds a tool menu item to the editor, and a shortcut, that will
+## increase the build number and launch the main scene.
+
+const _TOOL_MENU_ITEM_NAME: String = "Build Version: Increase And Launch Main Scene (CTRL+F5)"
+const _VERSION_KEY: String = "application/config/version"
+
+var _shortcut: Shortcut = preload("res://addons/build_version_increase/default_shortcut.tres")
+
+
+func _enter_tree() -> void:
+	add_tool_menu_item(_TOOL_MENU_ITEM_NAME, _increase_build_and_launch)
+
+
+func _exit_tree() -> void:
+	remove_tool_menu_item(_TOOL_MENU_ITEM_NAME)
+
+
+func _shortcut_input(event: InputEvent) -> void:
+	if not Engine.is_editor_hint() or not event.is_pressed() or event.is_echo():
+		return
+
+	if _shortcut.matches_event(event):
+		_increase_build_and_launch()
+
+
+func _increase_build_and_launch() -> void:
+	if Engine.is_editor_hint():
+		var version_string: String = ProjectSettings.get_setting(_VERSION_KEY)
+		var version: PackedStringArray = version_string.split(".")
+
+		version[3] = str(int(version[3]) + 1)
+
+		ProjectSettings.set_setting(_VERSION_KEY, ".".join(version))
+		ProjectSettings.save()
+
+		EditorInterface.play_main_scene()
