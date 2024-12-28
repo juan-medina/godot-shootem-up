@@ -18,48 +18,28 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-class_name GameOver
-extends Panel
+extends CanvasLayer
 
-signal ok
-signal cancel
+signal out_ended
+signal in_ended
 
-var accept_clicks: bool = true
-
-@onready var click_sound: AudioStreamPlayer2D = $ClickSound
+@onready var color_rect: ColorRect = $ColorRect
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
-func _on_ok_pressed() -> void:
-	_handle_click(ok)
+func _ready() -> void:
+	color_rect.visible = false
 
 
-func _on_cancel_pressed() -> void:
-	_handle_click(cancel)
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "fade_out":
+		out_ended.emit()
+		animation_player.play("fade_in")
+	elif anim_name == "fade_in":
+		color_rect.visible = false
+		in_ended.emit()
 
 
-func _handle_click(button_signal: Signal) -> void:
-	if not accept_clicks:
-		return
-	accept_clicks = false
-	click_sound.play()
-	await click_sound.finished
-	button_signal.emit()
-	hide()
-
-
-func _on_ok_focus_exited() -> void:
-	_handle_change_focus()
-
-
-func _on_cancel_focus_exited() -> void:
-	_handle_change_focus()
-
-
-func _handle_change_focus() -> void:
-	if visible:
-		click_sound.play()
-
-
-func _on_visibility_changed() -> void:
-	if visible:
-		accept_clicks = true
+func play() -> void:
+	color_rect.visible = true
+	animation_player.play("fade_out")

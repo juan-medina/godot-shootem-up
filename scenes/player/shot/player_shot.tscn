@@ -55,6 +55,5 @@ sprite_frames = SubResource("SpriteFrames_f68ni")
 
 [node name="ShotHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_kpi8j")
-volume_db = -7.5
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

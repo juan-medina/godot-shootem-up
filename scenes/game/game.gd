@@ -78,9 +78,12 @@ func _on_player_shields_changed(current_shields: int) -> void:
 
 
 func _on_ui_game_over_ok() -> void:
-	var reload:int = get_tree().reload_current_scene()
+	FadeOutIn.play()
+	await FadeOutIn.out_ended
+	var reload: int = get_tree().reload_current_scene()
 	if not reload == OK:
 		assert(false, "Failed to reload scene")
+
 
 func _on_ui_game_over_cancel() -> void:
 	get_tree().quit()
