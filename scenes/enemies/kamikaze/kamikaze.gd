@@ -24,28 +24,37 @@ extends BasicEnemy
 ##
 ## This enemy will charge to the player when in line of sight
 
+## The state of the kamikaze
 enum KamikazeState {
 	IDLE,
 	SEARCHING_FOR_PLAYER,
 	KAMIKAZE,
 }
 
-@export var acceleration: float = 15
+@export var acceleration: float = 15  ## Acceleration when kamikaze state
 
-var _state: KamikazeState = KamikazeState.IDLE
+var _state: KamikazeState = KamikazeState.IDLE  ## The kamikaze state, idle by default
 
 
+## Called every physics iteration, delta is the elapsed time since the previous call, this is a constant value (FPS independent)
 func _physics_process(delta: float) -> void:
+	# if the player is in line of sight, change state to kamikaze and activate turbo
 	if _state == KamikazeState.SEARCHING_FOR_PLAYER and super._is_player_on_line_of_sight():
 		_state = KamikazeState.KAMIKAZE
 		turbo = true
 
+	# if we are in kamikaze state, accelerate, we do not do and elif because if the player is on line of sight
+	# we are already in the kamikaze state and we want to accelerate immediately
 	if _state == KamikazeState.KAMIKAZE:
 		speed += acceleration
 
+	# the basic enemy will calculate the movement
 	super._physics_process(delta)
 
 
+## Called when the enemy enters the screen
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	# we are now searching for the player
 	_state = KamikazeState.SEARCHING_FOR_PLAYER
+	# the basic enemy will need to be called so still handle entering the screen
 	super._on_visible_on_screen_notifier_2d_screen_entered()
