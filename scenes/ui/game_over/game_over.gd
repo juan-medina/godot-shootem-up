@@ -20,46 +20,66 @@
 
 class_name GameOver
 extends Panel
+## Game over UI
+##
+## This is the UI that appears when the player died
 
-signal ok
-signal cancel
+signal ok  ## Signal when the player clicks ok
+signal cancel  ## Signal when the player clicks cancel
 
-var accept_clicks: bool = true
+var accept_clicks: bool = true  ## If the player can click
 
-@onready var click_sound: AudioStreamPlayer2D = $ClickSound
+@onready var click_sound: AudioStreamPlayer2D = $ClickSound  ## Click sound
 
 
+## Called when ok button is pressed
 func _on_ok_pressed() -> void:
+	# handle the click
 	_handle_click(ok)
 
 
+## Called when cancel button is pressed
 func _on_cancel_pressed() -> void:
+	# handle the click
 	_handle_click(cancel)
 
 
+## Handle a button click
 func _handle_click(button_signal: Signal) -> void:
+	# if the player can not click return
 	if not accept_clicks:
 		return
+	# we can not click anymore
 	accept_clicks = false
+
+	# play the click sound, wait for it to finish, emit the signal and hide
 	click_sound.play()
 	await click_sound.finished
 	button_signal.emit()
 	hide()
 
 
+# Handle the focus change on the ok button
 func _on_ok_focus_exited() -> void:
+	# handle the focus change
 	_handle_change_focus()
 
 
+# Handle the focus change on the cancel button
 func _on_cancel_focus_exited() -> void:
+	# handle the focus change
 	_handle_change_focus()
 
 
+## Handle the focus change
 func _handle_change_focus() -> void:
+	# if is visible play the click sound
 	if visible:
 		click_sound.play()
 
 
+## Handle the visibility change
 func _on_visibility_changed() -> void:
+	# if is visible accept clicks
 	if visible:
 		accept_clicks = true
