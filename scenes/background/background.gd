@@ -24,8 +24,9 @@ extends ParallaxBackground
 ##
 ## This is the background of the game scene, it will scroll to the left constantly
 
-@export var scroll_speed: int = 150
+@export var scroll_speed: int = 150 # how fast the background scrolls
 
-
+# called every frame, delta is the elapsed time since the previous frame
 func _process(delta: float) -> void:
+	# scroll the background, using delta for FPS independent scrolling
 	scroll_offset.x -= scroll_speed * delta
