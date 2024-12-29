@@ -24,103 +24,137 @@ extends Area2D
 ##
 ## This is the basic enemy of the game, other enemies will inherit from this
 
-signal destroyed(points: int)
+signal destroyed(points: int)  # Emitted when the enemy is destroyed with the amount of points to add
 
-@export var max_life: int = 1
-@export var damage: int = 1
-@export var speed: float = 250
-@export var points: int = 150
-@export var hit_duration: float = 1.0
+@export var max_life: int = 1  # max life units
+@export var damage: int = 1  # damage units
+@export var speed: float = 250  # speed
+@export var points: int = 150  # points that will add
+@export var hit_duration: float = 1.0  # how long the hit effect will last
 
-var turbo: bool = false:
+var turbo: bool = false:  # indicate if is accelerating, visual the exhaust will be faster
 	set(value):
 		turbo = value
+		# an enemy has an exhaust with two animations depending on turbo
 		exhaust.play("turbo" if turbo else "normal")
 
-var _direction: Vector2 = Vector2.LEFT
-var _on_screen: bool = false
+var _direction: Vector2 = Vector2.LEFT  # in which direction the enemy is moving, default left
+var _on_screen: bool = false  # indicate if the enemy is on the screen
 
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var exhaust: AnimatedSprite2D = $Exhaust
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var ship_explosion: AnimatedSprite2D = $ShipExplosion
-@onready var explosion_sound: AudioStreamPlayer2D = $ExplosionSound
-@onready var points_label: Label = $Points
-@onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")
-@onready var initial_speed: float = speed
-@onready var life: int = max_life
-@onready var player: Player = get_tree().get_first_node_in_group("player")
+@onready var sprite: Sprite2D = $Sprite2D  # enemy sprite, the enemy ship
+@onready var exhaust: AnimatedSprite2D = $Exhaust  # exhaust animation
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D  # collision shape
+@onready var ship_explosion: AnimatedSprite2D = $ShipExplosion  # ship explosion animation
+@onready var explosion_sound: AudioStreamPlayer2D = $ExplosionSound  # explosion sound
+@onready var points_label: Label = $Points  # label to show the points when destroyed
+@onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")  # material for the hit effect
+@onready var initial_speed: float = speed  # initial speed of the enemy
+@onready var life: int = max_life  # current life units
+@onready var player: Player = get_tree().get_first_node_in_group("player")  # the player ship
 
 
+## Called when the enemy is added to the scene
 func _ready() -> void:
 	exhaust.play("normal")
 	points_label.text = str(points)
 
 
+## Called every physics iteration, delta is the elapsed time since the previous call, this is a constant value (FPS independent)
 func _physics_process(delta: float) -> void:
-	position += _direction * (speed if sprite.visible else initial_speed) * delta
+	# Move the enemy. If the enemy is not alive, move it at its initial speed. This ensures that enemies that were accelerating
+	# when they died, that now are visually an explosion, are noticeable to the player, if not they will move too fast
+	position += _direction * (speed if life > 0 else initial_speed) * delta
 
 
+## Called when an area enters the enemy, current only player shots
 func _on_area_entered(object: Area2D) -> void:
+	# if the enemy is not on screen, do nothing, we do this because we spawn enemies off screen, our player shots are destroyed
+	# of screen too, but there is an small chance that they collide just before they are off screen
 	if not _on_screen:
 		return
+	# cast to player shot, destroy the shot, it will play its animation and do damage to this enemy
 	var player_shot: PlayerShot = object as PlayerShot
-	if player_shot:
-		player_shot.destroy()
-		_damage(player_shot.damage)
+	player_shot.destroy()
+	_damage(player_shot.damage)
 
 
+## Called when a body enters the enemy, current only the player
 func _on_body_entered(body: Node2D) -> void:
+	# this shouldn't happen since our player can not go off screen, however it is here for safety
 	if not _on_screen:
 		return
+	# cast to player, damage the player and do damage this enemy
 	var player_body: Player = body as Player
-	if player_body:
-		_damage(max_life)
-		player_body.damage(damage)
+	_damage(max_life)
+	player_body.damage(damage)
 
 
+## Called when the enemy goes off screen
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	# delete the enemy
 	queue_free()
 
 
+## Called when the enemy is on screen
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	# set that the enemy is on screen
 	_on_screen = true
 
 
+## Damage the enemy for an amount
 func _damage(amount: int) -> void:
-	life -= amount
+	# add hit effect
 	_add_hit_effect()
+
+	# damage the enemy and check if it is dead
+	life -= amount
 	if life <= 0:
 		_die()
 
-
+## Add a hit effect to the enemy
 func _add_hit_effect() -> void:
+	# we use a hit material that do a red blink effect, wait for the hit duration and remove the effect
 	self.material = hit_material
 	await get_tree().create_timer(hit_duration).timeout
 	self.material = null
 
-
+## Called when the enemy is destroyed
 func _die() -> void:
+	# signal that the enemy was destroyed and add the points
+	destroyed.emit(points)
+
+	# disable the collision shape, in the next physics iteration, so no more collisions
+	collision_shape.set_deferred("disabled", true)
+
+	# hide the enemy ship and it exhaust
 	sprite.visible = false
 	exhaust.visible = false
-	points_label.visible = true
-	collision_shape.set_deferred("disabled", true)
+
+	# show the ship explosion and points, play the explosion animation and sound
 	ship_explosion.visible = true
+	points_label.visible = true
 	ship_explosion.play()
 	explosion_sound.play()
-	destroyed.emit(points)
+
+	# wait for the explosion animation to finish and delete the enemy
 	await ship_explosion.animation_finished
 	queue_free()
 
-
+## Helper to check if the enemy is on the line of sight of the player, that means
+## when the center of the enemy ship is in line with the player
 func _is_player_on_line_of_sight() -> bool:
+	# if the player has died we don't have a valid instance, so return false
 	if not is_instance_valid(player):
 		return false
 
+	# get half of the height of the player ship, since is a centered sprite
 	var texture: Texture2D = player.ship.texture
 	var player_half_height: float = texture.get_height() / 2.0
 
+	# calculate the top and bottom y position of the player
 	var player_top_y: float = player.global_position.y - player_half_height
 	var player_bottom_y: float = player.global_position.y + player_half_height
 
+	# calculate if enemy y position, is inside the player top and bottom y position this will make that
+	# when the center of the enemy ship is in line with the player to return true
 	return (global_position.y >= player_top_y) and (global_position.y <= player_bottom_y)
