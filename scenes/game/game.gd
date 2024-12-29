@@ -53,9 +53,7 @@ func _on_enemies_spawn_timeout() -> void:
 
 	var max_viewport: Vector2 = get_viewport_rect().size
 	var y_range: float = (max_viewport.y / 2) * 0.7
-	var spawn_position: Vector2 = Vector2(
-		max_viewport.x + 50, max_viewport.y / 2 + randf_range(-y_range, y_range)
-	)
+	var spawn_position: Vector2 = Vector2(max_viewport.x + 50, max_viewport.y / 2 + randf_range(-y_range, y_range))
 	enemy_instance.global_position = spawn_position
 	if not enemy_instance.destroyed.connect(_on_enemy_died.bind()) == OK:
 		assert(false, "Failed to connect to enemy destroyed signal")
@@ -78,8 +76,8 @@ func _on_player_shields_changed(current_shields: int) -> void:
 
 
 func _on_ui_game_over_ok() -> void:
-	FadeOutIn.play()
-	await FadeOutIn.out_ended
+	FadeOutInGlobal.play()
+	await FadeOutInGlobal.out_ended
 	var reload: int = get_tree().reload_current_scene()
 	if not reload == OK:
 		assert(false, "Failed to reload scene")
