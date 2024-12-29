@@ -24,35 +24,46 @@ extends Area2D
 ##
 ## Shots from the player
 
-@export var speed: int = 700
-@export var damage: int = 1
+@export var speed: int = 11  ## How fast the shot moves
+@export var damage: int = 1  ## How much damage the shot does
 
-var direction: Vector2 = Vector2(1, 0)
+var direction: Vector2 = Vector2.RIGHT  ## Direction of the shot
 
-@onready var shot_explosion: AnimatedSprite2D = $ShotExplosion
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var shot_hit: AudioStreamPlayer2D = $ShotHit
-
-
-func _process(delta: float) -> void:
-	global_position += direction * speed * delta
+@onready var shot_explosion: AnimatedSprite2D = $ShotExplosion  ## Explosion animation
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D  ## Collision shape
+@onready var sprite: Sprite2D = $Sprite2D  ## Shot sprite
+@onready var shot_hit: AudioStreamPlayer2D = $ShotHit  ## Shot hit sound
 
 
+## Called every physics iteration, delta is the elapsed time since the previous call, this is FPS independent
+func _physics_process(_delta: float) -> void:
+	global_position += direction * speed
+
+
+## Called when the shot goes off screen
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	# delete the shot
 	queue_free()
 
 
+## Initialize the shot when from a spawn point
 func init(from: Node2D) -> void:
 	global_position = from.global_position
 
 
 func destroy() -> void:
-	direction = Vector2.ZERO
+	# disable the collision shape, in the next physics iteration, so no more collisions
 	collision_shape.set_deferred("disabled", true)
+
+	# stop the shot for moving, hide the sprite and play the hit sound
+	direction = Vector2.ZERO
 	sprite.visible = false
-	shot_explosion.visible = true
 	shot_hit.play()
+
+	# show the explosion and play the explosion animation
+	shot_explosion.visible = true
 	shot_explosion.play()
+
+	# wait for the explosion animation to finish and delete the shot
 	await shot_explosion.animation_finished
 	queue_free()

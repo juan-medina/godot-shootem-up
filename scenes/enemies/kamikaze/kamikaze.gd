@@ -36,7 +36,7 @@ enum KamikazeState {
 var _state: KamikazeState = KamikazeState.IDLE  ## The kamikaze state, idle by default
 
 
-## Called every physics iteration, delta is the elapsed time since the previous call, this is a constant value (FPS independent)
+## Called every physics iteration, delta is the elapsed time since the previous call, this is FPS independent
 func _physics_process(delta: float) -> void:
 	# if the player is in line of sight, change state to kamikaze and activate turbo
 	if _state == KamikazeState.SEARCHING_FOR_PLAYER and super._is_player_on_line_of_sight():

@@ -59,7 +59,7 @@ func _ready() -> void:
 	points_label.text = str(points)
 
 
-## Called every physics iteration, delta is the elapsed time since the previous call, this is a constant value (FPS independent)
+## Called every physics iteration, delta is the elapsed time since the previous call, this is FPS independent
 func _physics_process(delta: float) -> void:
 	# Move the enemy. If the enemy is not alive, move it at its initial speed. This ensures that enemies that were accelerating
 	# when they died, that now are visually an explosion, are noticeable to the player, if not they will move too fast
