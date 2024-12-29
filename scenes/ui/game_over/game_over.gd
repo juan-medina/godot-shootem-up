@@ -27,62 +27,79 @@ extends Panel
 signal ok  ## Signal when the player clicks ok
 signal cancel  ## Signal when the player clicks cancel
 
-var accept_clicks: bool = true  ## If the player can click
+var previous_focus: Button = null  ## The previous focus
+var last_sound_play_time: float = 0.0  ## The last time the click sound was played
+var click_sound_delay: int = 100  ## The delay to avoid playing repeated click sound
 
 @onready var click_sound: AudioStreamPlayer2D = $ClickSound  ## Click sound
-@onready var ok_button: Button = $OK ## Ok button
+@onready var ok_button: Button = $OK  ## Ok button
+@onready var cancel_button: Button = $Cancel  ## Cancel button
 
 
-## Called when ok button is pressed
-func _on_ok_pressed() -> void:
-	# handle the click
-	_handle_click(ok)
+## Called when the game over UI is added to the scene
+func _ready() -> void:
+	# connect the signals
+	if not ok_button.focus_entered.connect(_change_focus.bind()) == OK:
+		assert(false, "Failed to connect to ok focus entered signal")
+	if not cancel_button.focus_entered.connect(_change_focus.bind()) == OK:
+		assert(false, "Failed to connect to cancel focus entered signal")
+	if not ok_button.pressed.connect(_on_button_pressed.bind()) == OK:
+		assert(false, "Failed to connect to ok button pressed signal")
+	if not cancel_button.pressed.connect(_on_button_pressed.bind()) == OK:
+		assert(false, "Failed to connect to cancel button pressed signal")
 
 
-## Called when cancel button is pressed
-func _on_cancel_pressed() -> void:
-	# handle the click
-	_handle_click(cancel)
-
-
-## Handle a button click
-func _handle_click(button_signal: Signal) -> void:
-	# if the player can not click return
-	if not accept_clicks:
-		return
-	# we can not click anymore
-	accept_clicks = false
-
-	# play the click sound, wait for it to finish, emit the signal and hide
-	click_sound.play()
-	await click_sound.finished
-	button_signal.emit()
-	hide()
-
-
-# Handle the focus change on the ok button
-func _on_ok_focus_exited() -> void:
-	# handle the focus change
-	_handle_change_focus()
-
-
-# Handle the focus change on the cancel button
-func _on_cancel_focus_exited() -> void:
-	# handle the focus change
-	_handle_change_focus()
-
-
-## Handle the focus change
-func _handle_change_focus() -> void:
-	# if is visible play the click sound
+## Called when the focus changes
+func _change_focus() -> void:
+	# if is visible
 	if visible:
-		click_sound.play()
+		# get the current focus, if is a button and not the same that last focus
+		var current_focus: Node = get_viewport().gui_get_focus_owner()
+		if current_focus is Button and previous_focus != current_focus:
+			# set the previous focus
+			previous_focus = current_focus
+			# play the click sound and wait for it to finish
+			await _play_click_sound()
+
+
+## Called when a button is pressed
+func _on_button_pressed() -> void:
+	# get the current focus, if is a button
+	var current_focus: Node = get_viewport().gui_get_focus_owner()
+	if current_focus is Button:
+		# get what signal we should emit
+		var button_signal: Signal
+		match current_focus:
+			ok_button:
+				button_signal = ok
+			cancel_button:
+				button_signal = cancel
+			_:
+				# should never happen
+				return
+
+		# play the click sound and wait for it to finish
+		await _play_click_sound()
+
+		# emit the signal and hide the Game Over UI
+		button_signal.emit()
+		hide()
 
 
 ## Handle the visibility change
 func _on_visibility_changed() -> void:
-	# if is visible accept clicks
+	# if is visible
 	if visible:
-		accept_clicks = true
 		# focus the ok button
+		previous_focus = ok_button
 		ok_button.grab_focus()
+		# reset the last sound play time
+		last_sound_play_time = Time.get_ticks_msec()
+
+## Play the click sound, but only if enough time has passed to avoid repetition
+func _play_click_sound() -> void:
+	# play the click sound if enough time has passed, avoid playing often
+	if Time.get_ticks_msec() - last_sound_play_time > click_sound_delay:
+		click_sound.play()
+		last_sound_play_time = Time.get_ticks_msec()
+		await click_sound.finished
