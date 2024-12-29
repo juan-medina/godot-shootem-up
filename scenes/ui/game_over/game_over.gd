@@ -30,6 +30,7 @@ signal cancel  ## Signal when the player clicks cancel
 var accept_clicks: bool = true  ## If the player can click
 
 @onready var click_sound: AudioStreamPlayer2D = $ClickSound  ## Click sound
+@onready var ok_button: Button = $OK ## Ok button
 
 
 ## Called when ok button is pressed
@@ -83,3 +84,5 @@ func _on_visibility_changed() -> void:
 	# if is visible accept clicks
 	if visible:
 		accept_clicks = true
+		# focus the ok button
+		ok_button.grab_focus()

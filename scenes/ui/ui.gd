@@ -24,56 +24,69 @@ extends Control
 ##
 ## In-game UI
 
-signal game_over_ok
-signal game_over_cancel
+signal game_over_ok  ## Signal when the player clicks ok on the game over UI
+signal game_over_cancel  ## Signal when the player clicks cancel on the game over UI
 
-const _VERSION_KEY: String = "application/config/version"
+const _VERSION_KEY: String = "application/config/version"  ## Where the game version is stored
 
-@export var shield_depleted_duration: float = 0.25
+@export var shield_depleted_duration: float = 0.25  ## How long the shield depleted animation will last
 
-var points: int = 0:
+var points: int = 0:  ## How many points the player has
 	set(value):
+		# Update the points
 		points = value
 		points_label.text = str(points)
 
-var shields: int = 0:
+var shields: int = 0:  ## How many shields the player has
 	set(value):
+		# Update the shields
 		shields = value
+		# we need to use value, not shields, since a player can get two hits consecutively
+		# and since the animation last some time we need to make sure that display in the right shield
 		_deplete_shield(shields_sprites[value])
 
-@onready
-var shields_sprites: Array[Sprite2D] = [$ShieldBar/Shield1, $ShieldBar/Shield2, $ShieldBar/Shield3]
-@onready
-var version_labels: Array[Label] = [$Version/Major, $Version/Minor, $Version/Patch, $Version/Build]
-@onready var game_over_panel: Panel = $GameOver
-@onready var game_over_ok_button: Button = $GameOver/OK
-@onready var points_label: Label = $Points
-@onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")
+@onready var shields_sprites: Array[Sprite2D] = [$ShieldBar/Shield1, $ShieldBar/Shield2, $ShieldBar/Shield3]  ## Shields sprites
+@onready var version_labels: Array[Label] = [$Version/Major, $Version/Minor, $Version/Patch, $Version/Build]  ## Version labels
+@onready var game_over_ui: Panel = $GameOver  ## Game over UI
+@onready var points_label: Label = $Points  ## Points label
+@onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")  ## Hit material
 
 
+## Called when the UI is added to the scene
 func _ready() -> void:
+	# Get the game version
 	var version_string: String = ProjectSettings.get_setting(_VERSION_KEY)
 	var version: PackedStringArray = version_string.split(".")
 
+	# Update the version labels
 	for i: int in range(version.size()):
 		version_labels[i].text = version[i]
 
 
+## Add the depleted animation to a shield
 func _deplete_shield(shield: Sprite2D) -> void:
+	# use the hit material, blinking red
 	shield.material = hit_material
+
+	# wait a the depleted time, remove it and hide the shield
 	await get_tree().create_timer(shield_depleted_duration).timeout
 	shield.material = null
 	shield.visible = false
 
 
+## Show the game over UI
 func game_over() -> void:
-	game_over_panel.visible = true
-	game_over_ok_button.grab_focus()
+	# make the game over UI visible
+	game_over_ui.visible = true
 
 
+## Called when the player clicks ok on the game over UI
 func _on_game_over_ok() -> void:
+	# emit the game over ok signal
 	game_over_ok.emit()
 
 
+## Called when the player clicks cancel on the game over UI
 func _on_game_over_cancel() -> void:
+	# emit the game over cancel signal
 	game_over_cancel.emit()
