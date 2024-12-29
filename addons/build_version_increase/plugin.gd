@@ -26,9 +26,9 @@ extends EditorPlugin
 ## This plugin adds a tool menu item to the editor, and a shortcut, that will
 ## increase the build number and launch the main scene.
 
-const _TOOL_MENU: String = "Build Version: Increase And Launch Main Scene (CTRL+F5)"  # tool menu text
-const _VERSION_KEY: String = "application/config/version"  # where the build version is stored
-var _shortcut: Shortcut = preload("res://addons/build_version_increase/shortcut.tres")  # the shortcut to use
+const _TOOL_MENU: String = "Build Version: Increase And Launch Main Scene (CTRL+F5)"  ## Tool menu text
+const _VERSION_KEY: String = "application/config/version"  ## Where the build version is stored
+var _shortcut: Shortcut = preload("res://addons/build_version_increase/shortcut.tres")  ## The shortcut to use
 
 
 ## Plugin enabled
