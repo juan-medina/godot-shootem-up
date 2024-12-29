@@ -26,36 +26,46 @@ extends EditorPlugin
 ## This plugin adds a tool menu item to the editor, and a shortcut, that will
 ## increase the build number and launch the main scene.
 
-const _TOOL_MENU_ITEM_NAME: String = "Build Version: Increase And Launch Main Scene (CTRL+F5)"
-const _VERSION_KEY: String = "application/config/version"
+const _TOOL_MENU: String = "Build Version: Increase And Launch Main Scene (CTRL+F5)"  # tool menu text
+const _VERSION_KEY: String = "application/config/version"  # where the build version is stored
+var _shortcut: Shortcut = preload("res://addons/build_version_increase/shortcut.tres")  # the shortcut to use
 
-var _shortcut: Shortcut = preload("res://addons/build_version_increase/default_shortcut.tres")
 
-
+# plugin enabled
 func _enter_tree() -> void:
-	add_tool_menu_item(_TOOL_MENU_ITEM_NAME, _increase_build_and_launch)
+	# add our tool menu item to our function
+	add_tool_menu_item(_TOOL_MENU, _increase_build_and_launch)
 
 
+# plugin disabled
 func _exit_tree() -> void:
-	remove_tool_menu_item(_TOOL_MENU_ITEM_NAME)
+	# remove our tool menu item
+	remove_tool_menu_item(_TOOL_MENU)
 
 
+# when we get any shortcut pressed
 func _shortcut_input(event: InputEvent) -> void:
+	# return if we're not in the editor, if is not a key press, or a repetition
 	if not Engine.is_editor_hint() or not event.is_pressed() or event.is_echo():
 		return
 
+	# if is our shortcut
 	if _shortcut.matches_event(event):
 		_increase_build_and_launch()
 
 
+# increase the project build number, save it and launch the main scene
 func _increase_build_and_launch() -> void:
-	if Engine.is_editor_hint():
-		var version_string: String = ProjectSettings.get_setting(_VERSION_KEY)
-		var version: PackedStringArray = version_string.split(".")
+	# get the current version: major.minor.patch.build
+	var version_string: String = ProjectSettings.get_setting(_VERSION_KEY)
+	var version: PackedStringArray = version_string.split(".")
 
-		version[3] = str(int(version[3]) + 1)
+	# increase the build number
+	version[3] = str(int(version[3]) + 1)
 
-		ProjectSettings.set_setting(_VERSION_KEY, ".".join(version))
-		ProjectSettings.save()
+	# save the new version
+	ProjectSettings.set_setting(_VERSION_KEY, ".".join(version))
+	ProjectSettings.save()
 
-		EditorInterface.play_main_scene()
+	# launch the main scene
+	EditorInterface.play_main_scene()
