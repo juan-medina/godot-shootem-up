@@ -26,7 +26,7 @@ extends ParallaxBackground
 
 @export var scroll_speed: int = 150 # how fast the background scrolls
 
-# called every frame, delta is the elapsed time since the previous frame
+## Called every frame, delta is the elapsed time since the previous frame
 func _process(delta: float) -> void:
 	# scroll the background, using delta for FPS independent scrolling
 	scroll_offset.x -= scroll_speed * delta

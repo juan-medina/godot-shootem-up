@@ -31,19 +31,19 @@ const _VERSION_KEY: String = "application/config/version"  # where the build ver
 var _shortcut: Shortcut = preload("res://addons/build_version_increase/shortcut.tres")  # the shortcut to use
 
 
-# plugin enabled
+## Plugin enabled
 func _enter_tree() -> void:
 	# add our tool menu item to our function
 	add_tool_menu_item(_TOOL_MENU, _increase_build_and_launch)
 
 
-# plugin disabled
+## Plugin disabled
 func _exit_tree() -> void:
 	# remove our tool menu item
 	remove_tool_menu_item(_TOOL_MENU)
 
 
-# when we get any shortcut pressed
+## When we get any shortcut pressed
 func _shortcut_input(event: InputEvent) -> void:
 	# return if we're not in the editor, if is not a key press, or a repetition
 	if not Engine.is_editor_hint() or not event.is_pressed() or event.is_echo():
@@ -54,7 +54,7 @@ func _shortcut_input(event: InputEvent) -> void:
 		_increase_build_and_launch()
 
 
-# increase the project build number, save it and launch the main scene
+## Increase the project build number, save it and launch the main scene
 func _increase_build_and_launch() -> void:
 	# get the current version: major.minor.patch.build
 	var version_string: String = ProjectSettings.get_setting(_VERSION_KEY)
