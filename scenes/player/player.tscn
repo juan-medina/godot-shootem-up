@@ -157,5 +157,3 @@ sprite_frames = SubResource("SpriteFrames_lnpvr")
 [node name="ShipExplosion" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_d1jhe")
-
-[connection signal="animation_finished" from="ShotOutEffect" to="." method="_on_shot_out_effect_animation_finished"]
