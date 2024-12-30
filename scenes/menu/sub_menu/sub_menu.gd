@@ -46,7 +46,7 @@ func _ready() -> void:
 	# setup all buttons
 	_on_visibility_changed()
 	_setup_button(self)
-	if not visibility_changed.connect(_change_focus) == OK:
+	if not visibility_changed.connect(_on_visibility_changed) == OK:
 		assert(false, "Failed to connect to visibility_changed signal")
 
 

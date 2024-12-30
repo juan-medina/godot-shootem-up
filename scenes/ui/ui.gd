@@ -44,7 +44,7 @@ var shields: int = 0:  ## How many shields the player has
 		_deplete_shield(shields_sprites[value])
 
 @onready var shields_sprites: Array[Sprite2D] = [$ShieldBar/Shield1, $ShieldBar/Shield2, $ShieldBar/Shield3]  ## Shields sprites
-@onready var game_over_ui: Panel = $GameOver  ## Game over UI
+@onready var game_over_ui: GameOver = $GameOver  ## Game over UI
 @onready var points_label: Label = $Points  ## Points label
 @onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")  ## Hit material
 
@@ -65,14 +65,9 @@ func game_over() -> void:
 	# make the game over UI visible
 	game_over_ui.visible = true
 
-
-## Called when the player clicks ok on the game over UI
-func _on_game_over_ok() -> void:
-	# emit the game over ok signal
-	game_over_ok.emit()
-
-
-## Called when the player clicks cancel on the game over UI
-func _on_game_over_cancel() -> void:
-	# emit the game over cancel signal
-	game_over_cancel.emit()
+func _on_game_over_button_click(button: Button) -> void:
+	match button:
+		game_over_ui.ok_button:
+			game_over_ok.emit()
+		game_over_ui.cancel_button:
+			game_over_cancel.emit()

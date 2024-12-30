@@ -61,5 +61,4 @@ centered = false
 visible = false
 layout_mode = 1
 
-[connection signal="cancel" from="GameOver" to="." method="_on_game_over_cancel"]
-[connection signal="ok" from="GameOver" to="." method="_on_game_over_ok"]
+[connection signal="button_click" from="GameOver" to="." method="_on_game_over_button_click"]
