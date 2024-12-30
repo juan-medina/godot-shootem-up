@@ -18,18 +18,47 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-class_name Background
-extends ParallaxBackground
-## Game Scene Background
+class_name Menu
+extends Control
+## Menu scene
 ##
-## This is the background of the game scene, it will scroll to the left constantly
+## This is the main menu scene
 
-@export var scroll_speed: int = 150  ## How fast the background scrolls
+@onready var game_scene: PackedScene = preload("res://scenes/game/game.tscn")  ## Game scene
+@onready var main_menu: MainMenu = $MainMenu  ## Main menu
+@onready var background: Background = $Background  ## Background
 
-var paused: bool = false  ## Pause background scroll
+
+# Called when the main menu is added to the scene
+func _ready() -> void:
+	main_menu.visible = true
+	background.paused = true
 
 
-## Called every physics iteration, delta is the elapsed time since the previous call, this is FPS independent
-func _physics_process(delta: float) -> void:
-	if not paused:
-		scroll_offset.x -= scroll_speed * delta
+## Called every frame, delta is the elapsed time since the previous frame
+func _process(_delta: float) -> void:
+	# if the escape key is pressed, exit
+	if Input.is_action_just_pressed("ui_cancel"):
+		exit()
+
+
+func _on_main_menu_button_click(button: Button) -> void:
+	match button:
+		main_menu.play_button:
+			play_game()
+		main_menu.exit_button:
+			exit()
+
+
+## Call to Play the game
+func play_game() -> void:
+	# fade out and go to game scene
+	FadeOutInGlobal.play()
+	await FadeOutInGlobal.out_ended
+	if not get_tree().change_scene_to_packed(game_scene) == OK:
+		assert(false, "Could not change to game scene")
+
+
+## Call to exit the game
+func exit() -> void:
+	get_tree().quit()

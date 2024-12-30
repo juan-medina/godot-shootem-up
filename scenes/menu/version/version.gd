@@ -18,18 +18,23 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-class_name Background
-extends ParallaxBackground
-## Game Scene Background
+class_name Version
+extends HBoxContainer
+## Version control
 ##
-## This is the background of the game scene, it will scroll to the left constantly
+## Display the game version
 
-@export var scroll_speed: int = 150  ## How fast the background scrolls
+const _VERSION_KEY: String = "application/config/version"  ## Where the game version is stored
 
-var paused: bool = false  ## Pause background scroll
+@onready var version_labels: Array[Label] = [$Major, $Minor, $Patch, $Build]  ## Version labels
 
 
-## Called every physics iteration, delta is the elapsed time since the previous call, this is FPS independent
-func _physics_process(delta: float) -> void:
-	if not paused:
-		scroll_offset.x -= scroll_speed * delta
+## Called when the version is added to the scene
+func _ready() -> void:
+	# Get the game version
+	var version_string: String = ProjectSettings.get_setting(_VERSION_KEY)
+	var version: PackedStringArray = version_string.split(".")
+
+	# Update the version labels
+	for i: int in range(version.size()):
+		version_labels[i].text = version[i]

@@ -32,6 +32,7 @@ extends Node2D
 @onready var game_over_sound: AudioStreamPlayer2D = $GameOver  ## sound for game over
 @onready var enemy1: PackedScene = preload("res://scenes/enemies/basic_enemy/basic_enemy.tscn")  ## the basic enemy
 @onready var enemy2: PackedScene = preload("res://scenes/enemies/kamikaze/kamikaze.tscn")  ## the kamikaze enemy
+@onready var menu_scene: PackedScene = load("res://scenes/menu/menu.tscn")  ## the menu scene
 
 
 ## Called when the game is added
@@ -42,9 +43,9 @@ func _ready() -> void:
 
 ## Called every frame, delta is the elapsed time since the previous frame
 func _process(_delta: float) -> void:
-	# if the escape key is pressed, quit
+	# if the escape key is pressed, go to the menu
 	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
+		_go_to_menu()
 
 	# if the fullscreen key is pressed, toggle fullscreen
 	elif Input.is_action_just_pressed("toggle_fullscreen"):
@@ -95,12 +96,14 @@ func _on_player_shields_changed(current_shields: int) -> void:
 		await get_tree().create_timer(1).timeout
 		game_over()
 
+
 ## Called when the game is over
 func game_over() -> void:
 	# stop the music, play the game over sound and show the game over screen
 	music.stop()
 	game_over_sound.play()
 	ui.game_over()
+
 
 ## Called when the game over screen ok button is pressed
 func _on_ui_game_over_ok() -> void:
@@ -111,7 +114,17 @@ func _on_ui_game_over_ok() -> void:
 	if not reload == OK:
 		assert(false, "Failed to reload scene")
 
+
 ## Called when the game over screen cancel button is pressed
 func _on_ui_game_over_cancel() -> void:
-	# quit the game
-	get_tree().quit()
+	# go to the menu
+	_go_to_menu()
+
+
+func _go_to_menu() -> void:
+	# stop the music, fade out and go to the menu
+	music.stop()
+	FadeOutInGlobal.play()
+	await FadeOutInGlobal.out_ended
+	if not get_tree().change_scene_to_packed(menu_scene) == OK:
+		assert(false, "Could not change to menu scene")

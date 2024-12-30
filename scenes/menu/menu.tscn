@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyj6c2hadv5jj"]
+
+[ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_qw6yr"]
+[ext_resource type="PackedScene" uid="uid://cy8jkae75pwng" path="res://scenes/menu/version/version.tscn" id="2_r1hd6"]
+[ext_resource type="PackedScene" uid="uid://biy2u4cpspq6s" path="res://scenes/menu/main_menu/main_menu.tscn" id="3_37w2c"]
+[ext_resource type="PackedScene" uid="uid://be6ewehio5siv" path="res://scenes/background/background.tscn" id="4_y4bgd"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qw6yr")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -210.0
+offset_top = 140.0
+offset_right = 210.0
+offset_bottom = 219.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0.632813, 0.632813, 0.632813, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 64
+text = "Shoot'em up"
+horizontal_alignment = 1
+
+[node name="Version" parent="." instance=ExtResource("2_r1hd6")]
+layout_mode = 1
+offset_left = -95.0
+
+[node name="MainMenu" parent="." instance=ExtResource("3_37w2c")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="Background" parent="." instance=ExtResource("4_y4bgd")]
+
+[connection signal="button_click" from="MainMenu" to="." method="_on_main_menu_button_click"]

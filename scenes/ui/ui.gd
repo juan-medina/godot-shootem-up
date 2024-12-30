@@ -27,8 +27,6 @@ extends Control
 signal game_over_ok  ## Signal when the player clicks ok on the game over UI
 signal game_over_cancel  ## Signal when the player clicks cancel on the game over UI
 
-const _VERSION_KEY: String = "application/config/version"  ## Where the game version is stored
-
 @export var shield_depleted_duration: float = 0.25  ## How long the shield depleted animation will last
 
 var points: int = 0:  ## How many points the player has
@@ -46,21 +44,9 @@ var shields: int = 0:  ## How many shields the player has
 		_deplete_shield(shields_sprites[value])
 
 @onready var shields_sprites: Array[Sprite2D] = [$ShieldBar/Shield1, $ShieldBar/Shield2, $ShieldBar/Shield3]  ## Shields sprites
-@onready var version_labels: Array[Label] = [$Version/Major, $Version/Minor, $Version/Patch, $Version/Build]  ## Version labels
 @onready var game_over_ui: Panel = $GameOver  ## Game over UI
 @onready var points_label: Label = $Points  ## Points label
 @onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")  ## Hit material
-
-
-## Called when the UI is added to the scene
-func _ready() -> void:
-	# Get the game version
-	var version_string: String = ProjectSettings.get_setting(_VERSION_KEY)
-	var version: PackedStringArray = version_string.split(".")
-
-	# Update the version labels
-	for i: int in range(version.size()):
-		version_labels[i].text = version[i]
 
 
 ## Add the depleted animation to a shield
