@@ -41,23 +41,6 @@ func _ready() -> void:
 	enemies_spawn_timer.start(spawn_default_timer)
 
 
-## Called every frame, delta is the elapsed time since the previous frame
-func _process(_delta: float) -> void:
-	# if the escape key is pressed, go to the menu
-	if Input.is_action_just_pressed("ui_cancel"):
-		_go_to_menu()
-
-	# if the fullscreen key is pressed, toggle fullscreen
-	elif Input.is_action_just_pressed("toggle_fullscreen"):
-		var current_mode: int = DisplayServer.window_get_mode()
-		if current_mode == DisplayServer.WINDOW_MODE_WINDOWED:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-		else:
-			# if we are restoring windowed we need to restore the size
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-			DisplayServer.window_set_size(get_viewport_rect().size)
-
-
 ## Called when we need to spawn an enemy
 func _on_enemies_spawn_timeout() -> void:
 	# spawn a random enemy, 70% basic, 30% kamikaze
@@ -105,8 +88,8 @@ func game_over() -> void:
 	ui.game_over()
 
 
-## Called when the game over screen ok button is pressed
-func _on_ui_game_over_ok() -> void:
+## Called when we need to reload the level
+func _reload_level() -> void:
 	# fade out and reload the scene
 	FadeOutInGlobal.play()
 	await FadeOutInGlobal.out_ended
@@ -115,12 +98,7 @@ func _on_ui_game_over_ok() -> void:
 		assert(false, "Failed to reload scene")
 
 
-## Called when the game over screen cancel button is pressed
-func _on_ui_game_over_cancel() -> void:
-	# go to the menu
-	_go_to_menu()
-
-
+## Called when the we need to go to the menu
 func _go_to_menu() -> void:
 	# stop the music, fade out and go to the menu
 	music.stop()

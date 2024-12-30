@@ -50,6 +50,12 @@ func _ready() -> void:
 		assert(false, "Failed to connect to visibility_changed signal")
 
 
+# if the escape key is pressed, exit
+func _process(_delta: float) -> void:
+	if visible and Input.is_action_just_pressed("ui_cancel"):
+		_press_cancel_button()
+
+
 # Setup all buttons signals recursively
 func _setup_button(node: Node) -> void:
 	for child: Node in node.get_children():
@@ -108,16 +114,32 @@ func _on_visibility_changed() -> void:
 	# if the menu is visible
 	if visible:
 		# get first button and focus it
-		var button: Button = _find_first_button(self)
-		assert(button != null, "Could not find first button")
-		_previous_focus = button
-		button.grab_focus()
+		_previous_focus = _focus_default_button()
 
 
-## Find the first button
-func _find_first_button(node: Node) -> Button:
-	for child: Node in node.get_children():
-		if child is Button:
-			return child
-		return _find_first_button(child)
+## Find the default button and focus it
+func _focus_default_button() -> Button:
+	# find a button that has the focus_on_visible meta to true
+	var children: Array[Node] = self.find_children("*", "Button")
+	for button: Button in children:
+		if button.get_meta("focus_on_visible", false) == true:
+			_previous_focus = button
+			button.grab_focus()
+			return button
+
+	# if no button was found
+	assert(false, "No button with focus_on_visible = true meta found")
 	return null
+
+
+## Find if we have a cancel menu button and press it
+func _press_cancel_button() -> void:
+	# find a button that has the cancel_menu meta to true
+	var children: Array[Node] = self.find_children("*", "Button")
+	for button: Button in children:
+		if button.get_meta("cancel_menu", false) == true:
+			# focus and press the button
+			_previous_focus = button
+			button.grab_focus()
+			button.pressed.emit()
+			break

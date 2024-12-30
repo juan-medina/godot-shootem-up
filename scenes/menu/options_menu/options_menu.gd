@@ -18,11 +18,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-class_name GameOver
+class_name OptionsMenu
 extends SubMenu
-## Game over UI
+## Options menu
 ##
-## This is the UI that appears when the player died
+## The menu that allows the player to change the game settings
 
-@onready var restart_button: Button = $Panel/Restart  ## Restart button
-@onready var exit_button: Button = $Panel/Exit  ## Exit button
+@onready var back_button: Button = $Back  ## Back button

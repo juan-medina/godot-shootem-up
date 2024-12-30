@@ -31,7 +31,7 @@ offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OK" type="Button" parent="Panel"]
+[node name="Restart" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -43,8 +43,9 @@ offset_bottom = -12.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 16
 text = "Restart"
+metadata/focus_on_visible = true
 
-[node name="Cancel" type="Button" parent="Panel"]
+[node name="Exit" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -60,6 +61,7 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 16
 text = "Exit
 "
+metadata/cancel_menu = true
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1

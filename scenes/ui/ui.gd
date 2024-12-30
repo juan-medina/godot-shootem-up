@@ -24,8 +24,8 @@ extends Control
 ##
 ## In-game UI
 
-signal game_over_ok  ## Signal when the player clicks ok on the game over UI
-signal game_over_cancel  ## Signal when the player clicks cancel on the game over UI
+signal level_restart  ## Signal when the player clicks ok on the game over UI
+signal back_to_menu  ## Signal when the player clicks cancel on the game over UI
 
 @export var shield_depleted_duration: float = 0.25  ## How long the shield depleted animation will last
 
@@ -65,9 +65,10 @@ func game_over() -> void:
 	# make the game over UI visible
 	game_over_ui.visible = true
 
+
 func _on_game_over_button_click(button: Button) -> void:
 	match button:
-		game_over_ui.ok_button:
-			game_over_ok.emit()
-		game_over_ui.cancel_button:
-			game_over_cancel.emit()
+		game_over_ui.restart_button:
+			level_restart.emit()
+		game_over_ui.exit_button:
+			back_to_menu.emit()

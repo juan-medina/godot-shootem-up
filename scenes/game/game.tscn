@@ -33,5 +33,5 @@ stream = ExtResource("6_fm1b2")
 
 [connection signal="shields_changed" from="Player" to="." method="_on_player_shields_changed"]
 [connection signal="timeout" from="EnemiesSpawn" to="." method="_on_enemies_spawn_timeout"]
-[connection signal="game_over_cancel" from="CanvasLayer/UI" to="." method="_on_ui_game_over_cancel"]
-[connection signal="game_over_ok" from="CanvasLayer/UI" to="." method="_on_ui_game_over_ok"]
+[connection signal="back_to_menu" from="CanvasLayer/UI" to="." method="_go_to_menu"]
+[connection signal="level_restart" from="CanvasLayer/UI" to="." method="_reload_level"]

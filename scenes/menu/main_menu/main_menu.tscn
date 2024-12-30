@@ -34,6 +34,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 32
 text = "Play"
+metadata/focus_on_visible = true
 
 [node name="HFlowContainer" type="HFlowContainer" parent="VFlowContainer"]
 layout_mode = 2
@@ -61,3 +62,4 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 20
 text = "Exit"
+metadata/cancel_menu = true

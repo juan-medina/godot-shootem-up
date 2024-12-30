@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyj6c2hadv5jj"]
+[gd_scene load_steps=8 format=3 uid="uid://cyj6c2hadv5jj"]
 
 [ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_qw6yr"]
 [ext_resource type="PackedScene" uid="uid://cy8jkae75pwng" path="res://scenes/menu/version/version.tscn" id="2_r1hd6"]
 [ext_resource type="PackedScene" uid="uid://biy2u4cpspq6s" path="res://scenes/menu/main_menu/main_menu.tscn" id="3_37w2c"]
 [ext_resource type="PackedScene" uid="uid://be6ewehio5siv" path="res://scenes/background/background.tscn" id="4_y4bgd"]
 [ext_resource type="AudioStream" uid="uid://c57j2yuwdwu86" path="res://resources/music/menu.ogg" id="5_lhpay"]
+[ext_resource type="PackedScene" uid="uid://ouxn606x0jj6" path="res://scenes/menu/about_menu/about_menu.tscn" id="6_hdt8b"]
+[ext_resource type="PackedScene" uid="uid://bycj1vp3wj1pe" path="res://scenes/menu/options_menu/options_menu.tscn" id="7_67e2e"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -21,9 +23,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -210.0
-offset_top = 140.0
+offset_top = 100.0
 offset_right = 210.0
-offset_bottom = 219.0
+offset_bottom = 179.0
 grow_horizontal = 2
 theme_override_colors/font_shadow_color = Color(0.632813, 0.632813, 0.632813, 1)
 theme_override_constants/outline_size = 8
@@ -51,4 +53,14 @@ stream = ExtResource("5_lhpay")
 autoplay = true
 parameters/looping = true
 
+[node name="AboutMenu" parent="." instance=ExtResource("6_hdt8b")]
+visible = false
+layout_mode = 1
+
+[node name="OptionsMenu" parent="." instance=ExtResource("7_67e2e")]
+visible = false
+layout_mode = 1
+
 [connection signal="button_click" from="MainMenu" to="." method="_on_main_menu_button_click"]
+[connection signal="button_click" from="AboutMenu" to="." method="_on_about_menu_button_click"]
+[connection signal="button_click" from="OptionsMenu" to="." method="_on_options_menu_button_click"]

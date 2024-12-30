@@ -26,6 +26,8 @@ extends Control
 
 @onready var game_scene: PackedScene = preload("res://scenes/game/game.tscn")  ## Game scene
 @onready var main_menu: MainMenu = $MainMenu  ## Main menu
+@onready var about_menu: AboutMenu = $AboutMenu  ## About menu
+@onready var options_menu: OptionsMenu = $OptionsMenu  ## Options menu
 @onready var background: Background = $Background  ## Background
 @onready var music: AudioStreamPlayer2D = $Music  ## Music
 
@@ -35,13 +37,6 @@ func _ready() -> void:
 	main_menu.visible = true
 
 
-## Called every frame, delta is the elapsed time since the previous frame
-func _process(_delta: float) -> void:
-	# if the escape key is pressed, exit
-	if Input.is_action_just_pressed("ui_cancel"):
-		exit()
-
-
 ## Called when a button is clicked in the main menu
 func _on_main_menu_button_click(button: Button) -> void:
 	match button:
@@ -49,6 +44,10 @@ func _on_main_menu_button_click(button: Button) -> void:
 			play_game()
 		main_menu.exit_button:
 			exit()
+		main_menu.about_button:
+			about_menu.visible = true
+		main_menu.options_button:
+			options_menu.visible = true
 
 
 ## Call to Play the game
@@ -64,3 +63,15 @@ func play_game() -> void:
 ## Call to exit the game
 func exit() -> void:
 	get_tree().quit()
+
+
+func _on_about_menu_button_click(button: Button) -> void:
+	match button:
+		about_menu.back_button:
+			main_menu.visible = true
+
+
+func _on_options_menu_button_click(button: Button) -> void:
+	match button:
+		options_menu.back_button:
+			main_menu.visible = true
