@@ -27,12 +27,12 @@ extends Control
 @onready var game_scene: PackedScene = preload("res://scenes/game/game.tscn")  ## Game scene
 @onready var main_menu: MainMenu = $MainMenu  ## Main menu
 @onready var background: Background = $Background  ## Background
+@onready var music: AudioStreamPlayer2D = $Music  ## Music
 
 
 # Called when the main menu is added to the scene
 func _ready() -> void:
 	main_menu.visible = true
-	background.paused = true
 
 
 ## Called every frame, delta is the elapsed time since the previous frame
@@ -42,6 +42,7 @@ func _process(_delta: float) -> void:
 		exit()
 
 
+## Called when a button is clicked in the main menu
 func _on_main_menu_button_click(button: Button) -> void:
 	match button:
 		main_menu.play_button:
@@ -52,9 +53,10 @@ func _on_main_menu_button_click(button: Button) -> void:
 
 ## Call to Play the game
 func play_game() -> void:
-	# fade out and go to game scene
+	# fade out, stop the music and go to game scene
 	FadeOutInGlobal.play()
 	await FadeOutInGlobal.out_ended
+	music.stop()
 	if not get_tree().change_scene_to_packed(game_scene) == OK:
 		assert(false, "Could not change to game scene")
 

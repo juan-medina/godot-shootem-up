@@ -29,7 +29,8 @@ extends ParallaxBackground
 var paused: bool = false  ## Pause background scroll
 
 
-## Called every physics iteration, delta is the elapsed time since the previous call, this is FPS independent
-func _physics_process(delta: float) -> void:
+## Called every frame, delta is the elapsed time since the previous call, this is FPS dependent
+func _process(delta: float) -> void:
+	# if the game is not paused, scroll
 	if not paused:
 		scroll_offset.x -= scroll_speed * delta
