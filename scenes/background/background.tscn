@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://be6ewehio5siv"]
 
 [ext_resource type="Script" path="res://scenes/background/background.gd" id="1_3y2qg"]
-[ext_resource type="Texture2D" uid="uid://pw7gtk8b625i" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/sky.png" id="2_ol8cr"]
-[ext_resource type="Texture2D" uid="uid://bxyeqr1salh2o" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/clouds_bg.png" id="3_shas4"]
-[ext_resource type="Texture2D" uid="uid://djhdvdrokghmu" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/cloud_lonely.png" id="4_ikt5t"]
-[ext_resource type="Texture2D" uid="uid://del273v50asjg" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/glacial_mountains.png" id="4_qt26q"]
-[ext_resource type="Texture2D" uid="uid://bsltj1sd7sx5k" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/clouds_mg_3.png" id="6_rycks"]
-[ext_resource type="Texture2D" uid="uid://w8cqndgtpavy" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/clouds_mg_2.png" id="7_5c45p"]
-[ext_resource type="Texture2D" uid="uid://cs8twxadve0kt" path="res://resources/Glacial-mountains-parallax-background_vnitti_v3/clouds_mg_1.png" id="8_xqh0f"]
+[ext_resource type="Texture2D" uid="uid://pw7gtk8b625i" path="res://resources/backgrounds/sky.png" id="2_ol8cr"]
+[ext_resource type="Texture2D" uid="uid://bxyeqr1salh2o" path="res://resources/backgrounds/clouds_bg.png" id="3_shas4"]
+[ext_resource type="Texture2D" uid="uid://djhdvdrokghmu" path="res://resources/backgrounds/cloud_lonely.png" id="4_ikt5t"]
+[ext_resource type="Texture2D" uid="uid://del273v50asjg" path="res://resources/backgrounds/glacial_mountains.png" id="4_qt26q"]
+[ext_resource type="Texture2D" uid="uid://bsltj1sd7sx5k" path="res://resources/backgrounds/clouds_mg_3.png" id="6_rycks"]
+[ext_resource type="Texture2D" uid="uid://w8cqndgtpavy" path="res://resources/backgrounds/clouds_mg_2.png" id="7_5c45p"]
+[ext_resource type="Texture2D" uid="uid://cs8twxadve0kt" path="res://resources/backgrounds/clouds_mg_1.png" id="8_xqh0f"]
 
 [node name="Background" type="ParallaxBackground"]
 scale = Vector2(3, 3)

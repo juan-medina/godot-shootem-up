@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cy8jkae75pwng" path="res://scenes/menu/version/version.tscn" id="2_r1hd6"]
 [ext_resource type="PackedScene" uid="uid://biy2u4cpspq6s" path="res://scenes/menu/main_menu/main_menu.tscn" id="3_37w2c"]
 [ext_resource type="PackedScene" uid="uid://be6ewehio5siv" path="res://scenes/background/background.tscn" id="4_y4bgd"]
-[ext_resource type="AudioStream" uid="uid://c57j2yuwdwu86" path="res://resources/three-red-hearts-loops/Three Red Hearts - Box Jump.ogg" id="5_lhpay"]
+[ext_resource type="AudioStream" uid="uid://c57j2yuwdwu86" path="res://resources/music/menu.ogg" id="5_lhpay"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3

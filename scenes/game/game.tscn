@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_kn14q"]
 [ext_resource type="PackedScene" uid="uid://be6ewehio5siv" path="res://scenes/background/background.tscn" id="2_wai1s"]
 [ext_resource type="PackedScene" uid="uid://dv34skp6agxhm" path="res://scenes/player/player.tscn" id="3_t1g8v"]
-[ext_resource type="AudioStream" uid="uid://dhkdhvs3htbj" path="res://resources/three-red-hearts-loops/Three Red Hearts - Out of Time.ogg" id="4_ueojc"]
+[ext_resource type="AudioStream" uid="uid://dhkdhvs3htbj" path="res://resources/music/level.ogg" id="4_ueojc"]
 [ext_resource type="PackedScene" uid="uid://beg1iuhl8ave5" path="res://scenes/ui/ui.tscn" id="5_rjl8s"]
-[ext_resource type="AudioStream" uid="uid://clixxw3rgap1u" path="res://resources/freesound/442127__euphrosyyn__8-bit-game-over.wav" id="6_fm1b2"]
+[ext_resource type="AudioStream" uid="uid://clixxw3rgap1u" path="res://resources/sounds/game_over.wav" id="6_fm1b2"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_kn14q")

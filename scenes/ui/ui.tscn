@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_a3gfh"]
 [ext_resource type="FontFile" uid="uid://byqkqg20ffjvu" path="res://resources/fonts/PixeloidMono-d94EV.ttf" id="1_cd55t"]
-[ext_resource type="Texture2D" uid="uid://bs6a8ma1gwkis" path="res://resources/shield/shield_bar.png" id="4_0qrsm"]
-[ext_resource type="Texture2D" uid="uid://bqvgn1ys2uume" path="res://resources/shield/shield.png" id="5_oaivt"]
+[ext_resource type="Texture2D" uid="uid://bs6a8ma1gwkis" path="res://resources/sprites/shield/shield_bar.png" id="4_0qrsm"]
+[ext_resource type="Texture2D" uid="uid://bqvgn1ys2uume" path="res://resources/sprites/shield/shield.png" id="5_oaivt"]
 [ext_resource type="PackedScene" uid="uid://dmb0xakcacd5c" path="res://scenes/ui/game_over/game_over.tscn" id="6_rsuai"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2de44"]

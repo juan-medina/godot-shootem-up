@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmb0xakcacd5c"]
 
 [ext_resource type="Script" path="res://scenes/ui/game_over/game_over.gd" id="1_56n2c"]
-[ext_resource type="AudioStream" uid="uid://c6fcx86e742c8" path="res://resources/freesound/653049__novasoundtechnology__8-bit-2022-poke-bright-select-button-bbm-nova-sound.wav" id="1_sto7u"]
+[ext_resource type="AudioStream" uid="uid://c6fcx86e742c8" path="res://resources/sounds/button_click.wav" id="1_sto7u"]
 
 [node name="GameOver" type="Panel"]
 anchors_preset = 8

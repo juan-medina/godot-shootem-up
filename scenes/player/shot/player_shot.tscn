@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://c38wnspfppg2o"]
 
 [ext_resource type="Script" path="res://scenes/player/shot/player_shot.gd" id="1_pgl2n"]
-[ext_resource type="Texture2D" uid="uid://cmgootxhdqj2h" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_exp1.png" id="3_kmfon"]
-[ext_resource type="Texture2D" uid="uid://c0tevf60q3fvr" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_exp2.png" id="4_8g7fy"]
-[ext_resource type="Texture2D" uid="uid://y3mxrwdj1o6y" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_asset.png" id="4_ogy3a"]
-[ext_resource type="Texture2D" uid="uid://bgvyerpkn5se6" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_exp3.png" id="5_1dob7"]
-[ext_resource type="Texture2D" uid="uid://lvstxny5pjdv" path="res://resources/free-pixel-art-enemy-spaceship-2d-sprites/Shot3/shot3_exp4.png" id="6_dr2s6"]
-[ext_resource type="AudioStream" uid="uid://dph036x240yuj" path="res://resources/freesound/398957__profmudkip__hithurt.wav" id="7_kpi8j"]
+[ext_resource type="Texture2D" uid="uid://cmgootxhdqj2h" path="res://resources/sprites/shot3/shot3_exp1.png" id="3_kmfon"]
+[ext_resource type="Texture2D" uid="uid://c0tevf60q3fvr" path="res://resources/sprites/shot3/shot3_exp2.png" id="4_8g7fy"]
+[ext_resource type="Texture2D" uid="uid://y3mxrwdj1o6y" path="res://resources/sprites/shot3/shot3_asset.png" id="4_ogy3a"]
+[ext_resource type="Texture2D" uid="uid://bgvyerpkn5se6" path="res://resources/sprites/shot3/shot3_exp3.png" id="5_1dob7"]
+[ext_resource type="Texture2D" uid="uid://lvstxny5pjdv" path="res://resources/sprites/shot3/shot3_exp4.png" id="6_dr2s6"]
+[ext_resource type="AudioStream" uid="uid://dph036x240yuj" path="res://resources/sounds/hit.wav" id="7_kpi8j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hyc0"]
 size = Vector2(18, 16.5)
