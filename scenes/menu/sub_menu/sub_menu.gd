@@ -26,21 +26,23 @@ extends Control
 
 signal button_click(button: Button)  ## Signal when the player clicks a button
 
+const _DISABLE_SOUND_TIME: float = 0.15  ## How long the click sound is disable to avoid repetition
+const _DISABLE_CLICK_TIME: float = 0.2  ## How long we can not make a click
+
 var _previous_focus: Button = null  ## The previous focus
-var _disable_sound_time: float = 0.2  ## How long the click sound is disable to avoid repetition
 var _allow_sound: bool = true  ## Allow the click sound
-var _disable_click_time: float = 0.2  ## How long we can not make a click
 var _allow_click: bool = true  ## Allow the click
 
-@onready var _click_sound: AudioStreamPlayer2D ## Click sound
+@onready var _click_sound: AudioStreamPlayer2D = AudioStreamPlayer2D.new()  ## Click sound player
+@onready var _click_stream: Resource = preload("res://resources/sounds/button_click.wav")  ## Click sound stream
 
 
 # Called when the main menu is added to the scene
 func _ready() -> void:
-	_click_sound = AudioStreamPlayer2D.new()
+	# setup the click sound
+	_click_sound.stream = _click_stream
 	add_child(_click_sound)
-	var audio_stream:Resource = ResourceLoader.load("res://resources/sounds/button_click.wav")
-	_click_sound.stream = audio_stream
+
 	# setup all buttons
 	_on_visibility_changed()
 	_setup_button(self)
@@ -74,7 +76,7 @@ func _on_button_pressed() -> void:
 		button_click.emit(current_focus)
 		hide()
 		# wait for the click time
-		await get_tree().create_timer(_disable_click_time).timeout
+		await get_tree().create_timer(_DISABLE_CLICK_TIME).timeout
 		_allow_click = true
 
 
@@ -97,7 +99,7 @@ func _play_click_sound() -> void:
 	# play the sound
 	_allow_sound = false
 	_click_sound.play()
-	await get_tree().create_timer(_disable_sound_time).timeout
+	await get_tree().create_timer(_DISABLE_SOUND_TIME).timeout
 	_allow_sound = true
 
 
