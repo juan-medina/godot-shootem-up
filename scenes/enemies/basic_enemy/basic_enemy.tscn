@@ -135,6 +135,7 @@ sprite_frames = SubResource("SpriteFrames_mo40e")
 
 [node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("22_0epju")
+bus = &"SFX"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(99, 0)

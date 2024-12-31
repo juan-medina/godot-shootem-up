@@ -40,6 +40,7 @@ var _allow_click: bool = true  ## Allow the click
 # Called when the main menu is added to the scene
 func _ready() -> void:
 	# setup the click sound
+	_click_sound.bus = "SFX"
 	_click_sound.stream = _click_stream
 	add_child(_click_sound)
 

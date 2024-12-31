@@ -18,6 +18,7 @@ position = Vector2(103, 397)
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ueojc")
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [node name="EnemiesSpawn" type="Timer" parent="."]
@@ -30,6 +31,7 @@ follow_viewport_enabled = true
 
 [node name="GameOver" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_fm1b2")
+bus = &"Music"
 
 [connection signal="shields_changed" from="Player" to="." method="_on_player_shields_changed"]
 [connection signal="timeout" from="EnemiesSpawn" to="." method="_on_enemies_spawn_timeout"]

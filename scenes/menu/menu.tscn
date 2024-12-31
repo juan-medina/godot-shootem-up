@@ -51,6 +51,7 @@ scroll_speed = 25
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_lhpay")
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [node name="AboutMenu" parent="." instance=ExtResource("6_hdt8b")]
