@@ -73,6 +73,8 @@ func _about() -> void:
 ## Open the about menu
 func _options() -> void:
 	options_menu.display_mode = GlobalConfig.display_mode
+	options_menu.screen_options = GlobalConfig.screens
+	options_menu.screen = GlobalConfig.screen
 	options_menu.visible = true
 
 
@@ -96,3 +98,5 @@ func _on_options_menu_button_click(button: Button) -> void:
 ## Apply the options
 func _apply_options() -> void:
 	GlobalConfig.display_mode = options_menu.display_mode
+	GlobalConfig.screen = options_menu.screen
+

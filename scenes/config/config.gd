@@ -24,17 +24,28 @@ extends Node
 ##
 ## This is the Config Global
 
-enum DisplayMode { WINDOWED, FULLSCREEN } ## The display mode
+enum DisplayMode { WINDOWED, FULLSCREEN }  ## The display mode
 
-var display_mode: DisplayMode: ## The current display mode
+var display_mode: DisplayMode:  ## The current display mode
 	set(mode):
-		_display_mode_change(mode, DisplayServer.window_get_current_screen()) ## when we get call via options use current screen
+		_display_mode_change(mode, DisplayServer.window_get_current_screen())  # because the user can move the window
 	get():
 		return _display_mode
 
-var _default_window_size: Vector2i
-var _screen: int
-var _display_mode: DisplayMode
+var screen: int:  ## The current screen
+	set(screen):
+		_display_mode_change(_display_mode, screen)
+	get():
+		_screen = DisplayServer.window_get_current_screen()  # because the user can move the window
+		return _screen
+
+var screens: PackedStringArray:  ## The list of screens
+	get = _get_screens
+
+var _default_window_size: Vector2i  ## The default window size defined in the project
+var _screen: int  ## The current screen
+var _display_mode: DisplayMode  ## The current display mode
+
 
 ## Called when the config is added to the scene
 func _ready() -> void:
@@ -42,13 +53,16 @@ func _ready() -> void:
 	var default_width: int = ProjectSettings.get_setting("window/size/window_width_override", 1728)
 	var default_height: int = ProjectSettings.get_setting("window/size/window_height_override", 972)
 	_default_window_size = Vector2(default_width, default_height)
+
 	# Read the config and save
 	_read_config()
 	save()
 
+
 ## Called when the config is removed from the scene, so we exit the game
 func _exit_tree() -> void:
 	save()
+
 
 ## Read the config
 func _read_config() -> void:
@@ -56,13 +70,22 @@ func _read_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	if not config.load("user://config.cfg") == OK:
 		pass
-	# get the screen and display mode
-	_screen = config.get_value("display", "screen", DisplayServer.get_primary_screen())
+
+	# since we just read the config we are windowed and in the current window screen
+	_display_mode = DisplayMode.WINDOWED
+	_screen = DisplayServer.window_get_current_screen()
+
+	# Get the display mode and screen from the config
+	var new_screen: int = config.get_value("display", "screen", _screen)
 	var display_mode_str: String = config.get_value("display", "mode", "WINDOWED")
-	_display_mode = DisplayMode.WINDOWED if display_mode_str == "WINDOWED" else DisplayMode.FULLSCREEN
+	var new_display_mode: DisplayMode = DisplayMode.WINDOWED if display_mode_str == "WINDOWED" else DisplayMode.FULLSCREEN
+
+	# Safe guard, check that the screen actually exist
+	if new_screen >= DisplayServer.get_screen_count():
+		new_screen = _screen
 
 	# Set the display mode
-	_display_mode_change(_display_mode, _screen)
+	_display_mode_change(new_display_mode, new_screen)
 
 
 ## Save the config
@@ -81,11 +104,17 @@ func save() -> void:
 	if not config.save("user://config.cfg") == OK:
 		assert(false, "Failed to save config")
 
+
 ## Change the display mode
-func _display_mode_change(mode: DisplayMode, screen: int) -> void:
+func _display_mode_change(new_mode: DisplayMode, new_screen: int) -> void:
+	# nothing to do
+	if new_mode == _display_mode and new_screen == _screen:
+		return
+
 	# set display mode and screen
-	_display_mode = mode
-	_screen = screen
+	_display_mode = new_mode
+	_screen = new_screen
+
 	# set the screen
 	DisplayServer.window_set_current_screen(_screen)
 	# if window or fullscreen
@@ -99,5 +128,29 @@ func _display_mode_change(mode: DisplayMode, screen: int) -> void:
 	else:
 		# just set fullscreen
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+	# wring window to the foreground
+	DisplayServer.window_move_to_foreground()
+
 	# save the config
 	save()
+
+
+## Get the list of screens that the user has
+func _get_screens() -> PackedStringArray:
+	# Create a PackedStringArray to store the screen display names
+	var screen_names: PackedStringArray = PackedStringArray()
+
+	# Get the primary screen
+	var primary: int = DisplayServer.get_primary_screen()
+
+	# Get the screen display names, since godot does not support it we do "number. resolution" e.g. "0. 1920x1080"
+	for screen_number: int in range(DisplayServer.get_screen_count()):
+		var resolution: Vector2i = DisplayServer.screen_get_size(screen_number)
+		var screen_name: String = "%d. %dx%d" % [screen_number, resolution.x, resolution.y]
+		# if the screen is the primary screen add (primary) e.g. "0. 1920x1080 (primary)"
+		if screen_number == primary:
+			screen_name += " (primary)"
+		assert(not screen_names.append(screen_name), "Failed to add screen name")
+
+	return screen_names

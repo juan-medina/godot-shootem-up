@@ -35,9 +35,22 @@ var display_mode: Config.DisplayMode = Config.DisplayMode.WINDOWED:  ## The disp
 			return Config.DisplayMode.WINDOWED
 		return Config.DisplayMode.FULLSCREEN
 
+var screen_options: PackedStringArray = PackedStringArray():  ## The list of screens
+	set(value):
+		_screen_options_button.clear()
+		for screen_name: String in value:
+			_screen_options_button.add_item(screen_name)
+
+var screen: int:  ## The current screen
+	set(value):
+		_screen_options_button.selected = value
+	get:
+		return _screen_options_button.selected
+
 @onready var ok_button: Button = $Buttons/Ok  ## Ok button
 @onready var back_button: Button = $Buttons/Back  ## Back button
 @onready var apply_button: Button = $Buttons/Apply  ## Apply button
 
 @onready var _windowed_check: CheckButton = $Panel/VFlowContainer/DisplayModeRow/WindowedCheck  ## Windowed check
 @onready var _full_screen_check: CheckButton = $Panel/VFlowContainer/DisplayModeRow/FullScreenCheck  ## Fullscreen check
+@onready var _screen_options_button: OptionButton = $Panel/VFlowContainer/ScreenRow/ScreenOptionButton  ## Screen option button
