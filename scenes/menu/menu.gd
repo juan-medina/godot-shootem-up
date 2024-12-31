@@ -41,17 +41,17 @@ func _ready() -> void:
 func _on_main_menu_button_click(button: Button) -> void:
 	match button:
 		main_menu.play_button:
-			play_game()
+			_play_game()
 		main_menu.exit_button:
-			exit()
+			_exit()
 		main_menu.about_button:
-			about_menu.visible = true
+			_about()
 		main_menu.options_button:
-			options_menu.visible = true
+			_options()
 
 
 ## Call to Play the game
-func play_game() -> void:
+func _play_game() -> void:
 	# fade out, stop the music and go to game scene
 	FadeOutInGlobal.play()
 	await FadeOutInGlobal.out_ended
@@ -61,17 +61,38 @@ func play_game() -> void:
 
 
 ## Call to exit the game
-func exit() -> void:
+func _exit() -> void:
 	get_tree().quit()
 
 
+## Open the about menu
+func _about() -> void:
+	about_menu.visible = true
+
+
+## Open the about menu
+func _options() -> void:
+	print("we should get the config and set then in the options menu")
+	options_menu.visible = true
+
+
+## When a button is pressed in the about menu
 func _on_about_menu_button_click(button: Button) -> void:
 	match button:
 		about_menu.back_button:
 			main_menu.visible = true
 
 
+## When a button is pressed in the options menu
 func _on_options_menu_button_click(button: Button) -> void:
-	match button:
-		options_menu.back_button:
-			main_menu.visible = true
+	## if the button is ok or apply, apply the options
+	if button == options_menu.ok_button or button == options_menu.apply_button:
+		_apply_options()
+
+	## if the button is ok or back, show the main menu
+	main_menu.visible = button == options_menu.ok_button or button == options_menu.back_button
+
+
+## Apply the options
+func _apply_options() -> void:
+	print("we should get the options menu values and save in the config")

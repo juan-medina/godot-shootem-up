@@ -24,4 +24,6 @@ extends SubMenu
 ##
 ## The menu that allows the player to change the game settings
 
-@onready var back_button: Button = $Back  ## Back button
+@onready var ok_button: Button = $Buttons/Ok  ## Ok button
+@onready var back_button: Button = $Buttons/Back  ## Back button
+@onready var apply_button: Button = $Buttons/Apply  ## Apply button

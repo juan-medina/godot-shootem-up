@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bycj1vp3wj1pe"]
+[gd_scene load_steps=3 format=3 uid="uid://bycj1vp3wj1pe"]
 
 [ext_resource type="Script" path="res://scenes/menu/options_menu/options_menu.gd" id="1_ac0i8"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_og817"]
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
@@ -27,23 +29,185 @@ theme_override_font_sizes/font_size = 32
 text = "Options"
 horizontal_alignment = 1
 
-[node name="Back" type="Button" parent="."]
-custom_minimum_size = Vector2(200, 40)
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -20.0
-offset_right = 100.0
-offset_bottom = 20.0
+offset_left = -215.0
+offset_top = -129.0
+offset_right = 215.0
+offset_bottom = 191.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
+
+[node name="VFlowContainer" type="VFlowContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -150.0
+offset_right = 210.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Display" type="Label" parent="Panel/VFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Display"
+horizontal_alignment = 1
+
+[node name="DisplayModeRow" type="HFlowContainer" parent="Panel/VFlowContainer"]
+custom_minimum_size = Vector2(410, 35)
+layout_mode = 2
+
+[node name="DispayModeLabel" type="Label" parent="Panel/VFlowContainer/DisplayModeRow"]
+layout_mode = 2
+text = "Mode: "
+
+[node name="WindowedCheck" type="CheckButton" parent="Panel/VFlowContainer/DisplayModeRow"]
+layout_mode = 2
+button_pressed = true
+button_group = SubResource("ButtonGroup_og817")
+text = "Windowed"
+metadata/hide_menu = false
+
+[node name="FullScreenCheck" type="CheckButton" parent="Panel/VFlowContainer/DisplayModeRow"]
+layout_mode = 2
+button_group = SubResource("ButtonGroup_og817")
+text = "Full screen"
+metadata/hide_menu = false
+
+[node name="Audio" type="Label" parent="Panel/VFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Audio"
+horizontal_alignment = 1
+
+[node name="MasterVolumeRow" type="HFlowContainer" parent="Panel/VFlowContainer"]
+custom_minimum_size = Vector2(410, 25)
+layout_mode = 2
+
+[node name="MasterVolumeLabel" type="Label" parent="Panel/VFlowContainer/MasterVolumeRow"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+text = "Master Volume: "
+
+[node name="MasterVolumeSlider" type="HSlider" parent="Panel/VFlowContainer/MasterVolumeRow"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+metadata/value_label = NodePath("../MasterVolumeValueLabel")
+
+[node name="MasterVolumeValueLabel" type="Label" parent="Panel/VFlowContainer/MasterVolumeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " 100 %"
+horizontal_alignment = 2
+
+[node name="MasterVolumeMuted" type="CheckButton" parent="Panel/VFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 2
+text = "Muted"
+metadata/hide_menu = false
+
+[node name="SfxVolumeRow" type="HFlowContainer" parent="Panel/VFlowContainer"]
+custom_minimum_size = Vector2(410, 25)
+layout_mode = 2
+
+[node name="SfxVolumeLabel" type="Label" parent="Panel/VFlowContainer/SfxVolumeRow"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+text = "Sfx Volume: "
+
+[node name="SfxVolumeSlider" type="HSlider" parent="Panel/VFlowContainer/SfxVolumeRow"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+metadata/value_label = NodePath("../SfxVolumeValueLabel")
+
+[node name="SfxVolumeValueLabel" type="Label" parent="Panel/VFlowContainer/SfxVolumeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " 100 %"
+horizontal_alignment = 2
+
+[node name="MasterVolumeMuted2" type="CheckButton" parent="Panel/VFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 2
+text = "Muted"
+metadata/hide_menu = false
+
+[node name="MusicVolumeRow" type="HFlowContainer" parent="Panel/VFlowContainer"]
+custom_minimum_size = Vector2(410, 25)
+layout_mode = 2
+
+[node name="MusicVolumeLabel" type="Label" parent="Panel/VFlowContainer/MusicVolumeRow"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+text = "Music Volume: "
+
+[node name="MusicVolumeSlider" type="HSlider" parent="Panel/VFlowContainer/MusicVolumeRow"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+metadata/value_label = NodePath("../MusicVolumeValueLabel")
+
+[node name="MusicVolumeValueLabel" type="Label" parent="Panel/VFlowContainer/MusicVolumeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = " 100 %"
+horizontal_alignment = 2
+
+[node name="MasterVolumeMuted3" type="CheckButton" parent="Panel/VFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 2
+text = "Muted"
+metadata/hide_menu = false
+
+[node name="Buttons" type="HFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -112.0
+offset_right = 160.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Ok" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 20
+text = "OK"
+metadata/focus_on_visible = true
+
+[node name="Apply" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 20
+text = "Apply"
+metadata/hide_menu = false
+
+[node name="Back" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 10
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 20
 text = "Back"
 metadata/cancel_menu = true
-metadata/focus_on_visible = true

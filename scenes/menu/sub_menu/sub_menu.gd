@@ -29,7 +29,7 @@ signal button_click(button: Button)  ## Signal when the player clicks a button
 const _DISABLE_SOUND_TIME: float = 0.15  ## How long the click sound is disable to avoid repetition
 const _DISABLE_CLICK_TIME: float = 0.2  ## How long we can not make a click
 
-var _previous_focus: Button = null  ## The previous focus
+var _previous_focus: Control = null  ## The previous focus
 var _allow_sound: bool = true  ## Allow the click sound
 var _allow_click: bool = true  ## Allow the click
 
@@ -45,7 +45,7 @@ func _ready() -> void:
 
 	# setup all buttons
 	_on_visibility_changed()
-	_setup_button(self)
+	_setup_controls()
 	if not visibility_changed.connect(_on_visibility_changed) == OK:
 		assert(false, "Failed to connect to visibility_changed signal")
 
@@ -56,17 +56,20 @@ func _process(_delta: float) -> void:
 		_press_cancel_button()
 
 
-# Setup all buttons signals recursively
-func _setup_button(node: Node) -> void:
-	for child: Node in node.get_children():
-		if child is Button:
-			var button: Button = child
-			if not button.pressed.connect(_on_button_pressed.bind()) == OK:
-				assert(false, "Failed to connect to button pressed signal")
-			if not button.focus_entered.connect(_change_focus.bind()) == OK:
-				assert(false, "Failed to connect to button focus_entered signal")
-		else:
-			_setup_button(child)
+# Setup all controls signals
+func _setup_controls() -> void:
+	var buttons: Array[Node] = self.find_children("*", "Button")
+	for button: Button in buttons:
+		if not button.pressed.connect(_on_button_pressed.bind()) == OK:
+			assert(false, "Failed to connect to button pressed signal")
+	var controls: Array[Node] = self.find_children("*", "Control")
+	for control: Control in controls:
+		if not control.focus_entered.connect(_change_focus.bind()) == OK:
+			assert(false, "Failed to connect to button focus_entered signal")
+	var sliders: Array[Node] = self.find_children("*", "Slider")
+	for slider: Slider in sliders:
+		if not slider.value_changed.connect(_slider_changed.bind()) == OK:
+			assert(false, "Failed to connect to slider focus_entered signal")
 
 
 ## Called when a button is pressed
@@ -79,8 +82,12 @@ func _on_button_pressed() -> void:
 		await _play_click_sound()
 
 		# emit the signal
-		button_click.emit(current_focus)
-		hide()
+		button_click.emit(current_focus as Button)
+
+		# if the button needs to hide the menu
+		if current_focus.get_meta("hide_menu", true) == true:
+			hide()
+
 		# wait for the click time
 		await get_tree().create_timer(_DISABLE_CLICK_TIME).timeout
 		_allow_click = true
@@ -90,7 +97,7 @@ func _on_button_pressed() -> void:
 func _change_focus() -> void:
 	# get the current focus, if is a button and not the same that last focus
 	var current_focus: Node = get_viewport().gui_get_focus_owner()
-	if current_focus is Button and _previous_focus != current_focus:
+	if current_focus is Control and _previous_focus != current_focus:
 		# set the previous focus
 		_previous_focus = current_focus
 		# play the click sound and wait for it to finish
@@ -143,3 +150,20 @@ func _press_cancel_button() -> void:
 			button.grab_focus()
 			button.pressed.emit()
 			break
+
+
+## Called when the a value changes
+func _slider_changed(value: float) -> void:
+	# if the menu is visible
+	if visible:
+		# play the click sound and wait for it to finish
+		await _play_click_sound()
+		# if the slider has a value label update it
+		var current_focus: Node = get_viewport().gui_get_focus_owner()
+		var slider: Slider = current_focus
+		var meta: Variant = slider.get_meta("value_label")
+		if meta and meta is NodePath:
+			var path: NodePath = meta
+			var label: Label = slider.get_node(path)
+			if label:
+				label.text = "%d %%" % value
