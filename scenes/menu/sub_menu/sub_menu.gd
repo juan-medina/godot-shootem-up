@@ -161,8 +161,9 @@ func _slider_changed(value: float) -> void:
 		await _play_click_sound()
 		# if the slider has a value label update it
 		var current_focus: Node = get_viewport().gui_get_focus_owner()
-		var slider: Slider = current_focus
-		_change_slider_label(slider, value as int)
+		if current_focus is Slider:
+			var slider: Slider = current_focus
+			_change_slider_label(slider, value as int)
 
 
 ## Change the label of a slider
