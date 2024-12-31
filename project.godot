@@ -14,15 +14,20 @@ config/name="Shoot'em up"
 config/description="This is just an example of creating a Shoot 'em up in Godot 4.
 
 "
-config/version="0.4.0.975"
+config/version="0.4.0.1012"
 run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://resources/icon/juan_medina.png"
 config/windows_native_icon="res://resources/icon/juan_medina.ico"
 
+[audio]
+
+buses/default_bus_layout=""
+
 [autoload]
 
 FadeOutInGlobal="*res://scenes/fade_out_in/fade_out_in.tscn"
+GlobalConfig="*res://scenes/config/config.gd"
 
 [debug]
 

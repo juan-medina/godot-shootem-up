@@ -24,20 +24,20 @@ extends SubMenu
 ##
 ## The menu that allows the player to change the game settings
 
-enum OptionsDisplayMode { WINDOWED, FULLSCREEN }
-
-var display_mode: OptionsDisplayMode = OptionsDisplayMode.WINDOWED:
+var display_mode: Config.DisplayMode = Config.DisplayMode.WINDOWED:  ## The display mode in the options
 	set(value):
-		_windowed_check.set_pressed(value == OptionsDisplayMode.WINDOWED)
-		_full_screen_check.set_pressed(value == OptionsDisplayMode.FULLSCREEN)
+		# set the check depending on the display mode
+		_windowed_check.set_pressed(value == Config.DisplayMode.WINDOWED)
+		_full_screen_check.set_pressed(value == Config.DisplayMode.FULLSCREEN)
 	get():
+		# if windowed is pressed return windowed if not fullscreen
 		if _windowed_check.is_pressed():
-			return OptionsDisplayMode.WINDOWED
-		return OptionsDisplayMode.FULLSCREEN
+			return Config.DisplayMode.WINDOWED
+		return Config.DisplayMode.FULLSCREEN
 
 @onready var ok_button: Button = $Buttons/Ok  ## Ok button
 @onready var back_button: Button = $Buttons/Back  ## Back button
 @onready var apply_button: Button = $Buttons/Apply  ## Apply button
 
-@onready var _windowed_check: CheckButton = $Panel/VFlowContainer/DisplayModeRow/WindowedCheck
-@onready var _full_screen_check: CheckButton = $Panel/VFlowContainer/DisplayModeRow/FullScreenCheck
+@onready var _windowed_check: CheckButton = $Panel/VFlowContainer/DisplayModeRow/WindowedCheck  ## Windowed check
+@onready var _full_screen_check: CheckButton = $Panel/VFlowContainer/DisplayModeRow/FullScreenCheck  ## Fullscreen check

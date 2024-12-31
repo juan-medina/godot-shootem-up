@@ -72,17 +72,7 @@ func _about() -> void:
 
 ## Open the about menu
 func _options() -> void:
-	# read the config, if not found we ignore since they may be not config yet
-	var config: ConfigFile = ConfigFile.new()
-	if not config.load("user://config.cfg") == OK:
-		pass
-	# get display mode and set it on the options menu
-	var display_mode: String = config.get_value("options", "display_mode", "WINDOWED")
-	var option_display_mode: OptionsMenu.OptionsDisplayMode = (
-		OptionsMenu.OptionsDisplayMode.WINDOWED if display_mode == "WINDOWED" else OptionsMenu.OptionsDisplayMode.FULLSCREEN
-	)
-	options_menu.display_mode = option_display_mode
-
+	options_menu.display_mode = GlobalConfig.display_mode
 	options_menu.visible = true
 
 
@@ -105,17 +95,4 @@ func _on_options_menu_button_click(button: Button) -> void:
 
 ## Apply the options
 func _apply_options() -> void:
-	var config: ConfigFile = ConfigFile.new()
-	config.set_value("options", "display_mode", "WINDOWED" if options_menu.display_mode == OptionsMenu.OptionsDisplayMode.WINDOWED else "FULLSCREEN")
-	if not config.save("user://config.cfg") == OK:
-		assert(false, "Failed to save config")
-
-	if options_menu.display_mode == OptionsMenu.OptionsDisplayMode.WINDOWED:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		DisplayServer.window_set_size(Vector2(1728, 972))
-		# center window
-		DisplayServer.window_set_position(
-			DisplayServer.screen_get_position() + (DisplayServer.screen_get_size() - DisplayServer.window_get_size()) / 2
-		)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	GlobalConfig.display_mode = options_menu.display_mode
