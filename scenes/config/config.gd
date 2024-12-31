@@ -42,9 +42,52 @@ var screen: int:  ## The current screen
 var screens: PackedStringArray:  ## The list of screens
 	get = _get_screens
 
+var master_volume: int:  ## The master volume
+	set(value):
+		_audio_change(value, _is_master_volume_muted, _music_volume, _is_music_volume_muted, _sfx_volume, _is_sfx_volume_muted)
+	get:
+		return _master_volume
+
+var master_volume_muted: bool:  ## Is the master volume muted
+	set(value):
+		_audio_change(_master_volume, value, _music_volume, _is_music_volume_muted, _sfx_volume, _is_sfx_volume_muted)
+	get:
+		return _is_master_volume_muted
+
+var music_volume: int:  ## The music volume
+	set(value):
+		_audio_change(_master_volume, _is_master_volume_muted, value, _is_music_volume_muted, _sfx_volume, _is_sfx_volume_muted)
+	get:
+		return _music_volume
+
+var music_volume_muted: bool:  ## Is the music volume muted
+	set(value):
+		_audio_change(_master_volume, _is_master_volume_muted, _music_volume, value, _sfx_volume, _is_sfx_volume_muted)
+	get:
+		return _is_music_volume_muted
+
+var sfx_volume: int:  ## The sfx volume
+	set(value):
+		_audio_change(_master_volume, _is_master_volume_muted, _music_volume, _is_music_volume_muted, value, _is_sfx_volume_muted)
+	get:
+		return _sfx_volume
+
+var sfx_volume_muted: bool:  ## Is the sfx volume muted
+	set(value):
+		_audio_change(_master_volume, _is_master_volume_muted, _music_volume, _is_music_volume_muted, _sfx_volume, value)
+	get:
+		return _is_sfx_volume_muted
+
 var _default_window_size: Vector2i  ## The default window size defined in the project
 var _screen: int  ## The current screen
 var _display_mode: DisplayMode  ## The current display mode
+
+var _master_volume: int = 50  ## The master volume
+var _is_master_volume_muted: bool = false  ## Is the master volume muted
+var _music_volume: int = 50  ## The music volume
+var _is_music_volume_muted: bool = false  ## Is the music volume muted
+var _sfx_volume: int = 50  ## The sfx volume
+var _is_sfx_volume_muted: bool = false  ## Is the sfx volume muted
 
 
 ## Called when the config is added to the scene
@@ -71,6 +114,15 @@ func _read_config() -> void:
 	if not config.load("user://config.cfg") == OK:
 		pass
 
+	# Read the display config
+	_read_display_config(config)
+
+	# Read the audio config
+	_read_audio_config(config)
+
+
+## Read the display config
+func _read_display_config(config: ConfigFile) -> void:
 	# since we just read the config we are windowed and in the current window screen
 	_display_mode = DisplayMode.WINDOWED
 	_screen = DisplayServer.window_get_current_screen()
@@ -103,6 +155,26 @@ func save() -> void:
 	# save the config
 	if not config.save("user://config.cfg") == OK:
 		assert(false, "Failed to save config")
+
+	# save the display config
+	_save_display_config(config)
+
+	# save the audio config
+	_audio_config_save(config)
+
+	# save the config
+	if not config.save("user://config.cfg") == OK:
+		assert(false, "Failed to save config")
+
+
+## Save the display config
+func _save_display_config(config: ConfigFile) -> void:
+	# get the screen since the user can move the window around
+	_screen = DisplayServer.window_get_current_screen()
+
+	# set the screen and display mode
+	config.set_value("display", "screen", _screen)
+	config.set_value("display", "mode", "WINDOWED" if _display_mode == DisplayMode.WINDOWED else "FULLSCREEN")
 
 
 ## Change the display mode
@@ -154,3 +226,78 @@ func _get_screens() -> PackedStringArray:
 		assert(not screen_names.append(screen_name), "Failed to add screen name")
 
 	return screen_names
+
+
+func _read_audio_config(config: ConfigFile) -> void:
+	var new_master_volume: int = config.get_value("audio", "master_volume", _master_volume)
+	var new_is_master_volume_muted: bool = config.get_value("audio", "is_master_volume_muted", _is_master_volume_muted)
+	var new_music_volume: int = config.get_value("audio", "music_volume", _music_volume)
+	var new_is_music_volume_muted: bool = config.get_value("audio", "is_music_volume_muted", _is_music_volume_muted)
+	var new_sfx_volume: int = config.get_value("audio", "sfx_volume", _sfx_volume)
+	var new_is_sfx_volume_muted: bool = config.get_value("audio", "is_sfx_volume_muted", _is_sfx_volume_muted)
+
+	_audio_change(new_master_volume, new_is_master_volume_muted, new_music_volume, new_is_music_volume_muted, new_sfx_volume, new_is_sfx_volume_muted)
+
+
+func _audio_config_save(config: ConfigFile) -> void:
+	config.set_value("audio", "master_volume", _master_volume)
+	config.set_value("audio", "is_master_volume_muted", _is_master_volume_muted)
+	config.set_value("audio", "music_volume", _music_volume)
+	config.set_value("audio", "is_music_volume_muted", _is_music_volume_muted)
+	config.set_value("audio", "sfx_volume", _sfx_volume)
+	config.set_value("audio", "is_sfx_volume_muted", _is_sfx_volume_muted)
+
+
+func _audio_change(
+	new_master_volume: int,
+	new_is_master_volume_muted: bool,
+	new_music_volume: int,
+	new_is_music_volume_muted: bool,
+	new_sfx_volume: int,
+	new_is_sfx_volume_muted: bool
+) -> void:
+	if new_master_volume != _master_volume:
+		_master_volume = new_master_volume
+		_change_bus_volume("Master", _master_volume)
+
+	if new_is_master_volume_muted != _is_master_volume_muted:
+		_is_master_volume_muted = new_is_master_volume_muted
+		_mute_bus("Master", _is_master_volume_muted)
+
+	if new_music_volume != _music_volume:
+		_music_volume = new_music_volume
+		_change_bus_volume("Music", _music_volume)
+
+	if new_is_music_volume_muted != _is_music_volume_muted:
+		_is_music_volume_muted = new_is_music_volume_muted
+		_mute_bus("Music", _is_music_volume_muted)
+
+	if new_sfx_volume != _sfx_volume:
+		_sfx_volume = new_sfx_volume
+		_change_bus_volume("SFX", _sfx_volume)
+
+	if new_is_sfx_volume_muted != _is_sfx_volume_muted:
+		_is_sfx_volume_muted = new_is_sfx_volume_muted
+		_mute_bus("SFX", _is_sfx_volume_muted)
+
+
+## Change the volume of a bus
+func _change_bus_volume(_bus: String, _volume: int) -> void:
+	# calculate the db
+	#   0 to 50  = -30db to -5db
+	#  50 to 100 = -5db to  15db
+	var db: float = 0.0
+	if _volume <= 50:
+		db = lerp(-30, -5, _volume / 50.0)
+	else:
+		db = lerp(-5, 15, (_volume - 50) / 50.0)
+
+	# Set the volume of the specified bus
+	var bus_index: int = AudioServer.get_bus_index(_bus)
+	AudioServer.set_bus_volume_db(bus_index, db)
+
+
+## Mute/un-mute a bus
+func _mute_bus(_bus: String, _muted: bool) -> void:
+	var bus_index: int = AudioServer.get_bus_index(_bus)
+	AudioServer.set_bus_mute(bus_index, _muted)
