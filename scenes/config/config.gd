@@ -26,68 +26,44 @@ extends Node
 
 enum DisplayMode { WINDOWED, FULLSCREEN }  ## The display mode
 
-var display_mode: DisplayMode:  ## The current display mode
-	set(mode):
-		_display_mode_change(mode, DisplayServer.window_get_current_screen())  # because the user can move the window
-	get():
-		return _display_mode
-
-var screen: int:  ## The current screen
-	set(screen):
-		_display_mode_change(_display_mode, screen)
-	get():
-		_screen = DisplayServer.window_get_current_screen()  # because the user can move the window
-		return _screen
-
-var screens: PackedStringArray:  ## The list of screens
-	get = _get_screens
-
-var master_volume: int:  ## The master volume
-	set(value):
-		_audio_change(value, _master_muted, _music_volume, _music_muted, _sfx_volume, _sfx_muted)
+var current_values: ConfiguredValues:
+	set(values):
+		_change_current_values(values)
 	get:
-		return _master_volume
-
-var master_muted: bool:  ## Is the master volume muted
-	set(value):
-		_audio_change(_master_volume, value, _music_volume, _music_muted, _sfx_volume, _sfx_muted)
-	get:
-		return _master_muted
-
-var music_volume: int:  ## The music volume
-	set(value):
-		_audio_change(_master_volume, _master_muted, value, _music_muted, _sfx_volume, _sfx_muted)
-	get:
-		return _music_volume
-
-var music_muted: bool:  ## Is the music volume muted
-	set(value):
-		_audio_change(_master_volume, _master_muted, _music_volume, value, _sfx_volume, _sfx_muted)
-	get:
-		return _music_muted
-
-var sfx_volume: int:  ## The sfx volume
-	set(value):
-		_audio_change(_master_volume, _master_muted, _music_volume, _music_muted, value, _sfx_muted)
-	get:
-		return _sfx_volume
-
-var sfx_muted: bool:  ## Is the sfx volume muted
-	set(value):
-		_audio_change(_master_volume, _master_muted, _music_volume, _music_muted, _sfx_volume, value)
-	get:
-		return _sfx_muted
+		return _get_current_values()
 
 var _default_window_size: Vector2i  ## The default window size defined in the project
-var _screen: int  ## The current screen
-var _display_mode: DisplayMode  ## The current display mode
 
-var _master_volume: int = 50  ## The master volume
-var _master_muted: bool = false  ## Is the master volume muted
-var _music_volume: int = 50  ## The music volume
-var _music_muted: bool = false  ## Is the music volume muted
-var _sfx_volume: int = 50  ## The sfx volume
-var _sfx_muted: bool = false  ## Is the sfx volume muted
+
+## The definition of configured values
+class ConfiguredValues:
+	var display_mode: DisplayMode  ## The current display mode
+	var screen: int  ## The current screen
+	var screens: PackedStringArray  ## The list of screens
+	var master_volume: int = 50  ## The master volume
+	var master_muted: bool = false  ## Is the master volume muted
+	var music_volume: int = 50  ## The music volume
+	var music_muted: bool = false  ## Is the music volume muted
+	var sfx_volume: int = 50  ## The sfx volume
+	var sfx_muted: bool = false  ## Is the sfx volume muted
+
+
+## The configured values
+@onready var _configured_values: ConfiguredValues = ConfiguredValues.new()
+
+
+## Change the current values
+func _change_current_values(new: ConfiguredValues) -> void:
+	_display_mode_change(new)
+	_audio_change(new)
+	save()
+
+
+## Get the current values
+func _get_current_values() -> ConfiguredValues:
+	_configured_values.screen = DisplayServer.window_get_current_screen()  # because the user can move the window
+	_configured_values.screens = _get_screens()  # get the screens
+	return _configured_values
 
 
 ## Called when the config is added to the scene
@@ -124,20 +100,23 @@ func _read_config() -> void:
 ## Read the display config
 func _read_display_config(config: ConfigFile) -> void:
 	# since we just read the config we are windowed and in the current window screen
-	_display_mode = DisplayMode.WINDOWED
-	_screen = DisplayServer.window_get_current_screen()
+	_configured_values.display_mode = DisplayMode.WINDOWED
+	_configured_values.screen = DisplayServer.window_get_current_screen()
+
+	# preparing new values
+	var new: ConfiguredValues = ConfiguredValues.new()
 
 	# Get the display mode and screen from the config
-	var new_screen: int = config.get_value("display", "screen", _screen)
+	new.screen = config.get_value("display", "screen", _configured_values.screen)
 	var display_mode_str: String = config.get_value("display", "mode", "WINDOWED")
-	var new_display_mode: DisplayMode = DisplayMode.WINDOWED if display_mode_str == "WINDOWED" else DisplayMode.FULLSCREEN
+	new.display_mode = DisplayMode.WINDOWED if display_mode_str == "WINDOWED" else DisplayMode.FULLSCREEN
 
 	# Safe guard, check that the screen actually exist
-	if new_screen >= DisplayServer.get_screen_count():
-		new_screen = _screen
+	if new.screen >= DisplayServer.get_screen_count():
+		new.screen = _configured_values.screen
 
 	# Set the display mode
-	_display_mode_change(new_display_mode, new_screen)
+	_display_mode_change(new)
 
 
 ## Save the config
@@ -146,15 +125,7 @@ func save() -> void:
 	var config: ConfigFile = ConfigFile.new()
 
 	# get the screen since the user can move the window around
-	_screen = DisplayServer.window_get_current_screen()
-
-	# set the screen and display mode
-	config.set_value("display", "screen", _screen)
-	config.set_value("display", "mode", "WINDOWED" if _display_mode == DisplayMode.WINDOWED else "FULLSCREEN")
-
-	# save the config
-	if not config.save("user://config.cfg") == OK:
-		assert(false, "Failed to save config")
+	_configured_values.screen = DisplayServer.window_get_current_screen()
 
 	# save the display config
 	_save_display_config(config)
@@ -169,33 +140,33 @@ func save() -> void:
 
 ## Save the display config
 func _save_display_config(config: ConfigFile) -> void:
-	# get the screen since the user can move the window around
-	_screen = DisplayServer.window_get_current_screen()
-
 	# set the screen and display mode
-	config.set_value("display", "screen", _screen)
-	config.set_value("display", "mode", "WINDOWED" if _display_mode == DisplayMode.WINDOWED else "FULLSCREEN")
+	config.set_value("display", "screen", _configured_values.screen)
+	config.set_value("display", "mode", "WINDOWED" if _configured_values.display_mode == DisplayMode.WINDOWED else "FULLSCREEN")
 
 
 ## Change the display mode
-func _display_mode_change(new_mode: DisplayMode, new_screen: int) -> void:
+func _display_mode_change(new: ConfiguredValues) -> void:
 	# nothing to do
-	if new_mode == _display_mode and new_screen == _screen:
+	if new.display_mode == _configured_values.display_mode and new.screen == _configured_values.screen:
 		return
 
 	# set display mode and screen
-	_display_mode = new_mode
-	_screen = new_screen
+	_configured_values.display_mode = new.display_mode
+	_configured_values.screen = new.screen
 
 	# set the screen
-	DisplayServer.window_set_current_screen(_screen)
+	DisplayServer.window_set_current_screen(_configured_values.screen)
 	# if window or fullscreen
-	if _display_mode == DisplayMode.WINDOWED:
+	if _configured_values.display_mode == DisplayMode.WINDOWED:
 		# set the mode, window size is the default, then center it
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		DisplayServer.window_set_size(_default_window_size)
 		DisplayServer.window_set_position(
-			DisplayServer.screen_get_position(_screen) + (DisplayServer.screen_get_size(_screen) - DisplayServer.window_get_size()) / 2
+			(
+				DisplayServer.screen_get_position(_configured_values.screen)
+				+ (DisplayServer.screen_get_size(_configured_values.screen) - DisplayServer.window_get_size()) / 2
+			)
 		)
 	else:
 		# just set fullscreen
@@ -203,9 +174,6 @@ func _display_mode_change(new_mode: DisplayMode, new_screen: int) -> void:
 
 	# wring window to the foreground
 	DisplayServer.window_move_to_foreground()
-
-	# save the config
-	save()
 
 
 ## Get the list of screens that the user has
@@ -228,52 +196,55 @@ func _get_screens() -> PackedStringArray:
 	return screen_names
 
 
+## Read the audio config
 func _read_audio_config(config: ConfigFile) -> void:
-	var new_master_volume: int = config.get_value("audio", "master_volume", _master_volume)
-	var new_master_muted: bool = config.get_value("audio", "master_muted", _master_muted)
-	var new_music_volume: int = config.get_value("audio", "music_volume", _music_volume)
-	var new_music_muted: bool = config.get_value("audio", "music_muted", _music_muted)
-	var new_sfx_volume: int = config.get_value("audio", "sfx_volume", _sfx_volume)
-	var new_sfx_muted: bool = config.get_value("audio", "sfx_muted", _sfx_muted)
+	var new: ConfiguredValues = ConfiguredValues.new()
 
-	_audio_change(new_master_volume, new_master_muted, new_music_volume, new_music_muted, new_sfx_volume, new_sfx_muted)
+	new.master_volume = config.get_value("audio", "master_volume", _configured_values.master_volume)
+	new.master_muted = config.get_value("audio", "master_muted", _configured_values.master_muted)
+	new.music_volume = config.get_value("audio", "music_volume", _configured_values.music_volume)
+	new.music_muted = config.get_value("audio", "music_muted", _configured_values.music_muted)
+	new.sfx_volume = config.get_value("audio", "sfx_volume", _configured_values.sfx_volume)
+	new.sfx_muted = config.get_value("audio", "sfx_muted", _configured_values.sfx_muted)
+
+	_audio_change(new)
 
 
+## Save the audio config
 func _audio_config_save(config: ConfigFile) -> void:
-	config.set_value("audio", "master_volume", _master_volume)
-	config.set_value("audio", "master_muted", _master_muted)
-	config.set_value("audio", "music_volume", _music_volume)
-	config.set_value("audio", "music_muted", _music_muted)
-	config.set_value("audio", "sfx_volume", _sfx_volume)
-	config.set_value("audio", "sfx_muted", _sfx_muted)
+	config.set_value("audio", "master_volume", _configured_values.master_volume)
+	config.set_value("audio", "master_muted", _configured_values.master_muted)
+	config.set_value("audio", "music_volume", _configured_values.music_volume)
+	config.set_value("audio", "music_muted", _configured_values.music_muted)
+	config.set_value("audio", "sfx_volume", _configured_values.sfx_volume)
+	config.set_value("audio", "sfx_muted", _configured_values.sfx_muted)
 
 
-func _audio_change(
-	new_master_volume: int, new_master_muted: bool, new_music_volume: int, new_music_muted: bool, new_sfx_volume: int, new_sfx_muted: bool
-) -> void:
-	if new_master_volume != _master_volume:
-		_master_volume = new_master_volume
-		_change_bus_volume("Master", _master_volume)
+# Change the audio
+func _audio_change(new: ConfiguredValues) -> void:
+	if new.master_volume != _configured_values.master_volume:
+		_configured_values.master_volume = new.master_volume
+		_change_bus_volume("Master", _configured_values.master_volume)
 
-	if new_master_muted != _master_muted:
-		_master_muted = new_master_muted
-		_mute_bus("Master", _master_muted)
+	if new.master_muted != _configured_values.master_muted:
+		_configured_values.master_muted = new.master_muted
+		_mute_bus("Master", _configured_values.master_muted)
 
-	if new_music_volume != _music_volume:
-		_music_volume = new_music_volume
-		_change_bus_volume("Music", _music_volume)
+	if new.music_volume != _configured_values.music_volume:
+		_configured_values.music_volume = new.music_volume
+		_change_bus_volume("Music", _configured_values.music_volume)
 
-	if new_music_muted != _music_muted:
-		_music_muted = new_music_muted
-		_mute_bus("Music", _music_muted)
+	if new.music_muted != _configured_values.music_muted:
+		_configured_values.music_muted = new.music_muted
+		_mute_bus("Music", _configured_values.music_muted)
 
-	if new_sfx_volume != _sfx_volume:
-		_sfx_volume = new_sfx_volume
-		_change_bus_volume("SFX", _sfx_volume)
+	if new.sfx_volume != _configured_values.sfx_volume:
+		_configured_values.sfx_volume = new.sfx_volume
+		_change_bus_volume("SFX", _configured_values.sfx_volume)
 
-	if new_sfx_muted != _sfx_muted:
-		_sfx_muted = new_sfx_muted
-		_mute_bus("SFX", _sfx_muted)
+	if new.sfx_muted != _configured_values.sfx_muted:
+		_configured_values.sfx_muted = new.sfx_muted
+		_mute_bus("SFX", _configured_values.sfx_muted)
 
 
 ## Change the volume of a bus

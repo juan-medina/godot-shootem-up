@@ -72,19 +72,8 @@ func _about() -> void:
 
 ## Open the about menu
 func _options() -> void:
-	# set the display options
-	options_menu.display_mode = GlobalConfig.display_mode
-	options_menu.screen_options = GlobalConfig.screens
-	options_menu.screen = GlobalConfig.screen
-
-	# audio options
-	options_menu.master_volume = GlobalConfig.master_volume
-	options_menu.master_muted = GlobalConfig.master_muted
-	options_menu.sfx_volume = GlobalConfig.sfx_volume
-	options_menu.sfx_muted = GlobalConfig.sfx_muted
-	options_menu.music_volume = GlobalConfig.music_volume
-	options_menu.music_muted = GlobalConfig.music_muted
-
+	# set the display options and show the menu
+	options_menu.values = GlobalConfig.current_values
 	options_menu.visible = true
 
 
@@ -107,14 +96,5 @@ func _on_options_menu_button_click(button: Button) -> void:
 
 ## Apply the options
 func _apply_options() -> void:
-	# display options
-	GlobalConfig.display_mode = options_menu.display_mode
-	GlobalConfig.screen = options_menu.screen
-
-	# audio options
-	GlobalConfig.master_volume = options_menu.master_volume
-	GlobalConfig.master_muted = options_menu.master_muted
-	GlobalConfig.sfx_volume = options_menu.sfx_volume
-	GlobalConfig.sfx_muted = options_menu.sfx_muted
-	GlobalConfig.music_volume = options_menu.music_volume
-	GlobalConfig.music_muted = options_menu.music_muted
+	# save the options
+	GlobalConfig.current_values = options_menu.values

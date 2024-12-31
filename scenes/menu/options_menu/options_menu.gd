@@ -24,67 +24,48 @@ extends SubMenu
 ##
 ## The menu that allows the player to change the game settings
 
-var display_mode: Config.DisplayMode = Config.DisplayMode.WINDOWED:  ## The display mode in the options
-	set(value):
-		# set the check depending on the display mode
-		_windowed_check.set_pressed(value == Config.DisplayMode.WINDOWED)
-		_full_screen_check.set_pressed(value == Config.DisplayMode.FULLSCREEN)
-	get():
-		# if windowed is pressed return windowed if not fullscreen
-		if _windowed_check.is_pressed():
-			return Config.DisplayMode.WINDOWED
-		return Config.DisplayMode.FULLSCREEN
+var values: Config.ConfiguredValues = Config.ConfiguredValues.new():  ## The options values
+	set(new):
+		# set the display mode
+		_windowed_check.set_pressed(new.display_mode == Config.DisplayMode.WINDOWED)
+		_full_screen_check.set_pressed(new.display_mode == Config.DisplayMode.FULLSCREEN)
 
-var screen_options: PackedStringArray = PackedStringArray():  ## The list of screens
-	set(value):
+		# add the screens
 		_screen_options_button.clear()
-		for screen_name: String in value:
+		for screen_name: String in new.screens:
 			_screen_options_button.add_item(screen_name)
 
-var screen: int:  ## The current screen
-	set(value):
-		_screen_options_button.selected = value
-	get:
-		return _screen_options_button.selected
+		# select the screen
+		_screen_options_button.selected = new.screen
 
-var master_volume: int:  ## The current master volume
-	set(value):
-		_master_volume_slider.value = value
-		super._change_slider_label(_master_volume_slider, value)
-	get:
-		return _master_volume_slider.value as int
+		# set the audio values
+		_master_volume_slider.value = new.master_volume
+		super._change_slider_label(_master_volume_slider, new.master_volume)
 
-var master_muted: bool:  ## Is the master volume muted
-	set(value):
-		_master_volumen_check.set_pressed(value)
-	get:
-		return _master_volumen_check.is_pressed()
+		_sfx_volume_slider.value = new.sfx_volume
+		super._change_slider_label(_sfx_volume_slider, new.sfx_volume)
 
-var sfx_volume: int:  ## The current sfx volume
-	set(value):
-		_sfx_volume_slider.value = value
-		super._change_slider_label(_sfx_volume_slider, value)
-	get:
-		return _sfx_volume_slider.value as int
+		_music_volume_slider.value = new.music_volume
+		super._change_slider_label(_music_volume_slider, new.music_volume)
 
-var sfx_muted: bool:  ## Is the sfx volume muted
-	set(value):
-		_sfx_volume_check.set_pressed(value)
-	get:
-		return _sfx_volume_check.is_pressed()
+	get():
+		# configuration that we going to return
+		var new: Config.ConfiguredValues = Config.ConfiguredValues.new()
 
-var music_volume: int:  ## The current music volume
-	set(value):
-		_music_volume_slider.value = value
-		super._change_slider_label(_music_volume_slider, value)
-	get:
-		return _music_volume_slider.value as int
+		# set the display mode
+		new.display_mode = Config.DisplayMode.WINDOWED if _windowed_check.is_pressed() else Config.DisplayMode.FULLSCREEN
+		new.screen = _screen_options_button.selected
 
-var music_muted: bool:  ## Is the music volume muted
-	set(value):
-		_music_volume_check.set_pressed(value)
-	get:
-		return _music_volume_check.is_pressed()
+		# set the audio values
+		new.master_volume = _master_volume_slider.value as int
+		new.master_muted = _master_volumen_check.is_pressed()
+
+		new.music_volume = _music_volume_slider.value as int
+		new.music_muted = _music_volume_check.is_pressed()
+
+		new.sfx_volume = _sfx_volume_slider.value as int
+		new.sfx_muted = _sfx_volume_check.is_pressed()
+		return new
 
 @onready var ok_button: Button = $Buttons/Ok  ## Ok button
 @onready var back_button: Button = $Buttons/Back  ## Back button
