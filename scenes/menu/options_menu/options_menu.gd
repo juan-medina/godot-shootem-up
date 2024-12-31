@@ -47,6 +47,45 @@ var screen: int:  ## The current screen
 	get:
 		return _screen_options_button.selected
 
+var master_volume: int:  ## The current master volume
+	set(value):
+		_master_volume_slider.value = value
+		super._change_slider_label(_master_volume_slider, value)
+	get:
+		return _master_volume_slider.value as int
+
+var master_muted: bool:  ## Is the master volume muted
+	set(value):
+		_master_volumen_check.set_pressed(value)
+	get:
+		return _master_volumen_check.is_pressed()
+
+var sfx_volume: int:  ## The current sfx volume
+	set(value):
+		_sfx_volume_slider.value = value
+		super._change_slider_label(_sfx_volume_slider, value)
+	get:
+		return _sfx_volume_slider.value as int
+
+var sfx_muted: bool:  ## Is the sfx volume muted
+	set(value):
+		_sfx_volume_check.set_pressed(value)
+	get:
+		return _sfx_volume_check.is_pressed()
+
+var music_volume: int:  ## The current music volume
+	set(value):
+		_music_volume_slider.value = value
+		super._change_slider_label(_music_volume_slider, value)
+	get:
+		return _music_volume_slider.value as int
+
+var music_muted: bool:  ## Is the music volume muted
+	set(value):
+		_music_volume_check.set_pressed(value)
+	get:
+		return _music_volume_check.is_pressed()
+
 @onready var ok_button: Button = $Buttons/Ok  ## Ok button
 @onready var back_button: Button = $Buttons/Back  ## Back button
 @onready var apply_button: Button = $Buttons/Apply  ## Apply button
@@ -54,3 +93,12 @@ var screen: int:  ## The current screen
 @onready var _windowed_check: CheckButton = $Panel/VFlowContainer/DisplayModeRow/WindowedCheck  ## Windowed check
 @onready var _full_screen_check: CheckButton = $Panel/VFlowContainer/DisplayModeRow/FullScreenCheck  ## Fullscreen check
 @onready var _screen_options_button: OptionButton = $Panel/VFlowContainer/ScreenRow/ScreenOptionButton  ## Screen option button
+
+@onready var _master_volume_slider: HSlider = $Panel/VFlowContainer/MasterVolumeRow/MasterVolumeSlider  ## Master volume slider
+@onready var _master_volumen_check: CheckButton = $Panel/VFlowContainer/MasterVolumeMuted  ## Master volume check
+
+@onready var _sfx_volume_slider: HSlider = $Panel/VFlowContainer/SfxVolumeRow/SfxVolumeSlider  ## Sfx volume slider
+@onready var _sfx_volume_check: CheckButton = $Panel/VFlowContainer/SfxVolumeMuted  ## Sfx volume check
+
+@onready var _music_volume_slider: HSlider = $Panel/VFlowContainer/MusicVolumeRow/MusicVolumeSlider  ## Music volume slider
+@onready var _music_volume_check: CheckButton = $Panel/VFlowContainer/MusicVolumeMuted  ## Music volume check

@@ -162,9 +162,15 @@ func _slider_changed(value: float) -> void:
 		# if the slider has a value label update it
 		var current_focus: Node = get_viewport().gui_get_focus_owner()
 		var slider: Slider = current_focus
-		var meta: Variant = slider.get_meta("value_label")
-		if meta and meta is NodePath:
-			var path: NodePath = meta
-			var label: Label = slider.get_node(path)
-			if label:
-				label.text = "%d %%" % value
+		_change_slider_label(slider, value as int)
+
+
+## Change the label of a slider
+func _change_slider_label(slider: Slider, value: int) -> void:
+	# get from meta the value label and update it
+	var meta: Variant = slider.get_meta("value_label")
+	if meta and meta is NodePath:
+		var path: NodePath = meta
+		var label: Label = slider.get_node(path)
+		if label:
+			label.text = "%d %%" % value

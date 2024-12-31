@@ -152,7 +152,7 @@ size_flags_horizontal = 3
 text = " 100 %"
 horizontal_alignment = 2
 
-[node name="MasterVolumeMuted2" type="CheckButton" parent="Panel/VFlowContainer"]
+[node name="SfxVolumeMuted" type="CheckButton" parent="Panel/VFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 2
@@ -179,7 +179,7 @@ size_flags_horizontal = 3
 text = " 100 %"
 horizontal_alignment = 2
 
-[node name="MasterVolumeMuted3" type="CheckButton" parent="Panel/VFlowContainer"]
+[node name="MusicVolumeMuted" type="CheckButton" parent="Panel/VFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 2

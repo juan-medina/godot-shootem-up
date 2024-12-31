@@ -44,50 +44,50 @@ var screens: PackedStringArray:  ## The list of screens
 
 var master_volume: int:  ## The master volume
 	set(value):
-		_audio_change(value, _is_master_volume_muted, _music_volume, _is_music_volume_muted, _sfx_volume, _is_sfx_volume_muted)
+		_audio_change(value, _master_muted, _music_volume, _music_muted, _sfx_volume, _sfx_muted)
 	get:
 		return _master_volume
 
-var master_volume_muted: bool:  ## Is the master volume muted
+var master_muted: bool:  ## Is the master volume muted
 	set(value):
-		_audio_change(_master_volume, value, _music_volume, _is_music_volume_muted, _sfx_volume, _is_sfx_volume_muted)
+		_audio_change(_master_volume, value, _music_volume, _music_muted, _sfx_volume, _sfx_muted)
 	get:
-		return _is_master_volume_muted
+		return _master_muted
 
 var music_volume: int:  ## The music volume
 	set(value):
-		_audio_change(_master_volume, _is_master_volume_muted, value, _is_music_volume_muted, _sfx_volume, _is_sfx_volume_muted)
+		_audio_change(_master_volume, _master_muted, value, _music_muted, _sfx_volume, _sfx_muted)
 	get:
 		return _music_volume
 
-var music_volume_muted: bool:  ## Is the music volume muted
+var music_muted: bool:  ## Is the music volume muted
 	set(value):
-		_audio_change(_master_volume, _is_master_volume_muted, _music_volume, value, _sfx_volume, _is_sfx_volume_muted)
+		_audio_change(_master_volume, _master_muted, _music_volume, value, _sfx_volume, _sfx_muted)
 	get:
-		return _is_music_volume_muted
+		return _music_muted
 
 var sfx_volume: int:  ## The sfx volume
 	set(value):
-		_audio_change(_master_volume, _is_master_volume_muted, _music_volume, _is_music_volume_muted, value, _is_sfx_volume_muted)
+		_audio_change(_master_volume, _master_muted, _music_volume, _music_muted, value, _sfx_muted)
 	get:
 		return _sfx_volume
 
-var sfx_volume_muted: bool:  ## Is the sfx volume muted
+var sfx_muted: bool:  ## Is the sfx volume muted
 	set(value):
-		_audio_change(_master_volume, _is_master_volume_muted, _music_volume, _is_music_volume_muted, _sfx_volume, value)
+		_audio_change(_master_volume, _master_muted, _music_volume, _music_muted, _sfx_volume, value)
 	get:
-		return _is_sfx_volume_muted
+		return _sfx_muted
 
 var _default_window_size: Vector2i  ## The default window size defined in the project
 var _screen: int  ## The current screen
 var _display_mode: DisplayMode  ## The current display mode
 
 var _master_volume: int = 50  ## The master volume
-var _is_master_volume_muted: bool = false  ## Is the master volume muted
+var _master_muted: bool = false  ## Is the master volume muted
 var _music_volume: int = 50  ## The music volume
-var _is_music_volume_muted: bool = false  ## Is the music volume muted
+var _music_muted: bool = false  ## Is the music volume muted
 var _sfx_volume: int = 50  ## The sfx volume
-var _is_sfx_volume_muted: bool = false  ## Is the sfx volume muted
+var _sfx_muted: bool = false  ## Is the sfx volume muted
 
 
 ## Called when the config is added to the scene
@@ -230,55 +230,50 @@ func _get_screens() -> PackedStringArray:
 
 func _read_audio_config(config: ConfigFile) -> void:
 	var new_master_volume: int = config.get_value("audio", "master_volume", _master_volume)
-	var new_is_master_volume_muted: bool = config.get_value("audio", "is_master_volume_muted", _is_master_volume_muted)
+	var new_master_muted: bool = config.get_value("audio", "master_muted", _master_muted)
 	var new_music_volume: int = config.get_value("audio", "music_volume", _music_volume)
-	var new_is_music_volume_muted: bool = config.get_value("audio", "is_music_volume_muted", _is_music_volume_muted)
+	var new_music_muted: bool = config.get_value("audio", "music_muted", _music_muted)
 	var new_sfx_volume: int = config.get_value("audio", "sfx_volume", _sfx_volume)
-	var new_is_sfx_volume_muted: bool = config.get_value("audio", "is_sfx_volume_muted", _is_sfx_volume_muted)
+	var new_sfx_muted: bool = config.get_value("audio", "sfx_muted", _sfx_muted)
 
-	_audio_change(new_master_volume, new_is_master_volume_muted, new_music_volume, new_is_music_volume_muted, new_sfx_volume, new_is_sfx_volume_muted)
+	_audio_change(new_master_volume, new_master_muted, new_music_volume, new_music_muted, new_sfx_volume, new_sfx_muted)
 
 
 func _audio_config_save(config: ConfigFile) -> void:
 	config.set_value("audio", "master_volume", _master_volume)
-	config.set_value("audio", "is_master_volume_muted", _is_master_volume_muted)
+	config.set_value("audio", "master_muted", _master_muted)
 	config.set_value("audio", "music_volume", _music_volume)
-	config.set_value("audio", "is_music_volume_muted", _is_music_volume_muted)
+	config.set_value("audio", "music_muted", _music_muted)
 	config.set_value("audio", "sfx_volume", _sfx_volume)
-	config.set_value("audio", "is_sfx_volume_muted", _is_sfx_volume_muted)
+	config.set_value("audio", "sfx_muted", _sfx_muted)
 
 
 func _audio_change(
-	new_master_volume: int,
-	new_is_master_volume_muted: bool,
-	new_music_volume: int,
-	new_is_music_volume_muted: bool,
-	new_sfx_volume: int,
-	new_is_sfx_volume_muted: bool
+	new_master_volume: int, new_master_muted: bool, new_music_volume: int, new_music_muted: bool, new_sfx_volume: int, new_sfx_muted: bool
 ) -> void:
 	if new_master_volume != _master_volume:
 		_master_volume = new_master_volume
 		_change_bus_volume("Master", _master_volume)
 
-	if new_is_master_volume_muted != _is_master_volume_muted:
-		_is_master_volume_muted = new_is_master_volume_muted
-		_mute_bus("Master", _is_master_volume_muted)
+	if new_master_muted != _master_muted:
+		_master_muted = new_master_muted
+		_mute_bus("Master", _master_muted)
 
 	if new_music_volume != _music_volume:
 		_music_volume = new_music_volume
 		_change_bus_volume("Music", _music_volume)
 
-	if new_is_music_volume_muted != _is_music_volume_muted:
-		_is_music_volume_muted = new_is_music_volume_muted
-		_mute_bus("Music", _is_music_volume_muted)
+	if new_music_muted != _music_muted:
+		_music_muted = new_music_muted
+		_mute_bus("Music", _music_muted)
 
 	if new_sfx_volume != _sfx_volume:
 		_sfx_volume = new_sfx_volume
 		_change_bus_volume("SFX", _sfx_volume)
 
-	if new_is_sfx_volume_muted != _is_sfx_volume_muted:
-		_is_sfx_volume_muted = new_is_sfx_volume_muted
-		_mute_bus("SFX", _is_sfx_volume_muted)
+	if new_sfx_muted != _sfx_muted:
+		_sfx_muted = new_sfx_muted
+		_mute_bus("SFX", _sfx_muted)
 
 
 ## Change the volume of a bus
