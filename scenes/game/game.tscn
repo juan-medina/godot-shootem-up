@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://clixxw3rgap1u" path="res://resources/sounds/game_over.wav" id="6_fm1b2"]
 
 [node name="Game" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_kn14q")
 
 [node name="Background" parent="." instance=ExtResource("2_wai1s")]
@@ -25,6 +26,7 @@ parameters/looping = true
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 follow_viewport_enabled = true
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("5_rjl8s")]

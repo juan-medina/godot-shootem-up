@@ -1,21 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmb0xakcacd5c"]
+[gd_scene load_steps=2 format=3 uid="uid://ccy43tjhsc3tx"]
 
-[ext_resource type="Script" path="res://scenes/ui/game_over/game_over.gd" id="1_56n2c"]
+[ext_resource type="Script" path="res://scenes/ui/pause/pause.gd" id="1_hoc31"]
 
-[node name="GameOver" type="Control"]
+[node name="Pause" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_56n2c")
+script = ExtResource("1_hoc31")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -31,7 +25,7 @@ offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Restart" type="Button" parent="Panel"]
+[node name="Resume" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -42,7 +36,7 @@ offset_right = 115.0
 offset_bottom = -12.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 16
-text = "Restart"
+text = "Resume"
 metadata/focus_on_visible = true
 
 [node name="Exit" type="Button" parent="Panel"]
@@ -61,7 +55,6 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 16
 text = "Exit
 "
-metadata/cancel_menu = true
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1
@@ -73,5 +66,5 @@ offset_right = 92.5
 offset_bottom = 40.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
-text = "Game Over"
+text = "Paused"
 horizontal_alignment = 1

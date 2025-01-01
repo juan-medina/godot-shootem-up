@@ -45,8 +45,18 @@ var shields: int = 0:  ## How many shields the player has
 
 @onready var shields_sprites: Array[Sprite2D] = [$ShieldBar/Shield1, $ShieldBar/Shield2, $ShieldBar/Shield3]  ## Shields sprites
 @onready var game_over_ui: GameOver = $GameOver  ## Game over UI
+@onready var pause_ui: Pause = $Pause  ## Pause UI
 @onready var points_label: Label = $Points  ## Points label
 @onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")  ## Hit material
+
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		if not game_over_ui.visible and not pause_ui.visible:
+			get_viewport().set_input_as_handled()
+			var game: Game = get_tree().current_scene
+			game.get_tree().paused = true
+			pause_ui.visible = true
 
 
 ## Add the depleted animation to a shield
@@ -63,7 +73,8 @@ func _deplete_shield(shield: Sprite2D) -> void:
 ## Show the game over UI
 func game_over() -> void:
 	# make the game over UI visible
-	game_over_ui.visible = true
+	if not pause_ui.visible:
+		game_over_ui.visible = true
 
 
 func _on_game_over_button_click(button: Button) -> void:
@@ -72,3 +83,11 @@ func _on_game_over_button_click(button: Button) -> void:
 			level_restart.emit()
 		game_over_ui.exit_button:
 			back_to_menu.emit()
+
+
+func _on_pause_button_click(button: Button) -> void:
+	var game: Game = get_tree().current_scene
+	game.get_tree().paused = false
+
+	if button == pause_ui.exit_button:
+		back_to_menu.emit()
