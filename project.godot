@@ -14,7 +14,7 @@ config/name="Shoot'em up"
 config/description="This is just an example of creating a Shoot 'em up in Godot 4.
 
 "
-config/version="0.5.0.1123"
+config/version="0.5.1.1124"
 run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://resources/icon/juan_medina.png"
