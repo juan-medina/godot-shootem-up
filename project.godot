@@ -14,7 +14,7 @@ config/name="Shoot'em up"
 config/description="This is just an example of creating a Shoot 'em up in Godot 4.
 
 "
-config/version="0.5.2.1125"
+config/version="0.5.2.1126"
 run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://resources/icon/juan_medina.png"
@@ -45,7 +45,7 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/window_width_override=1728
 window/size/window_height_override=972
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 
 [editor_plugins]
@@ -139,6 +139,7 @@ pause={
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 driver/threads/thread_model=2
+textures/vram_compression/import_etc2_astc=true
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 environment/defaults/default_clear_color=Color(0.0117647, 0.266667, 0.396078, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
