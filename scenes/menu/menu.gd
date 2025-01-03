@@ -62,6 +62,21 @@ func _play_game() -> void:
 
 ## Call to exit the game
 func _exit() -> void:
+	# stop the music, we dont want this on the loop since this audio will never finish
+	music.stop()
+	# get all audios and stop them
+	for audio:AudioStreamPlayer2D in find_children("*", "AudioStreamPlayer2D"):
+		if audio.playing:
+			await audio.finished
+			audio.stop()
+	# do a fade out
+	FadeOutInGlobal.play()
+	await FadeOutInGlobal.out_ended
+	# remove every node on the tree
+	for child:Node in get_children():
+		child.queue_free()
+	# quit after some time
+	await get_tree().create_timer(0.5).timeout
 	get_tree().quit()
 
 
@@ -70,7 +85,7 @@ func _about() -> void:
 	about_menu.visible = true
 
 
-## Open the about menu
+## Open the options menu
 func _options() -> void:
 	# set the display options and show the menu
 	options_menu.values = GlobalConfig.current_values

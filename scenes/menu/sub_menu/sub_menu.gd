@@ -50,6 +50,14 @@ func _ready() -> void:
 	if not visibility_changed.connect(_on_visibility_changed) == OK:
 		assert(false, "Failed to connect to visibility_changed signal")
 
+## when the node is free from the scene, stop the click sound
+
+func _exit_tree() -> void:
+	if is_instance_valid(_click_sound) and not _click_sound.is_queued_for_deletion():
+		if _click_sound.playing:
+			_click_sound.stop()
+		_click_sound.queue_free()
+
 
 # if the escape key is pressed, exit
 func _process(_delta: float) -> void:
