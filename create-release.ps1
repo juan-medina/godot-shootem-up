@@ -19,15 +19,15 @@ if ($versionLine -match 'config/version="(\d+\.\d+\.\d+\.\d+)"') {
     $tagCommand = "git tag -a $version -m 'Release $version'"
     $pushTagsCommand = "git push --tags"
 
-    # GitHub CLI command to create a release with custom release notes
-    $releaseCommand = "gh release create $version -F $releaseNotesFilePath"
+    # GitHub CLI command to create a release with custom release notes and title
+    $releaseCommand = "gh release create $version -F $releaseNotesFilePath -t $version"
 
     # Execute the Git commands
     Invoke-Expression $tagCommand
     Invoke-Expression $pushTagsCommand
     Invoke-Expression $releaseCommand
 
-    Write-Output "Release $version created successfully with custom release notes."
+    Write-Output "Release $version created successfully with custom release notes and title."
 } else {
     Write-Output "Version not found in the project.godot file."
 }

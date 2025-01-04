@@ -28,10 +28,6 @@ jobs:
           preset: ${{ matrix.platform }}
           debugMode: "false"
 
-      - name: Condition to check for Windows
-        if: matrix.platform == 'windows'
-        run: echo "Windows build detected"
-
       - name: Install Wine
         if: matrix.platform == 'windows'
         run: |
@@ -43,11 +39,6 @@ jobs:
         if: matrix.platform == 'windows'
         run: |
           wget https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x86.exe
-
-      - name: Debug Release name
-        if: matrix.platform == 'windows'
-        run: |
-          echo "Release name: ${{ github.event.release.name }}"
 
       - name: Modify Executable with rcedit
         if: matrix.platform == 'windows'
