@@ -44,6 +44,11 @@ jobs:
         run: |
           wget https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x86.exe
 
+      - name: Debug Release name
+        if: matrix.platform == 'windows'
+        run: |
+          echo "Release name: ${{ github.event.release.name }}"
+
       - name: Modify Executable with rcedit
         if: matrix.platform == 'windows'
         run: |

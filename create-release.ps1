@@ -1,10 +1,7 @@
 # Define the path to the project.godot file
 $projectFilePath = "project.godot"
 
-# Define the path to the release notes file
-$releaseNotesFilePath = "release_notes.md"
-
-# Read the lines from the project.godot file
+# Read the lines from the file
 $fileContent = Get-Content $projectFilePath
 
 # Find the line that contains the version information
@@ -18,23 +15,14 @@ if ($versionLine -match 'config/version="(\d+\.\d+\.\d+\.\d+)"') {
     # Define the Git commands
     $tagCommand = "git tag -a $version -m 'Release $version'"
     $pushTagsCommand = "git push --tags"
-
-    # Read the custom release notes from the file
-    $releaseNotes = Get-Content $releaseNotesFilePath -Raw
-
-    # Save the release notes to a temporary file (if needed)
-    $tempReleaseNotesFile = "temp_release_notes_$version.md"
-    $releaseNotes | Set-Content $tempReleaseNotesFile
-
-    # GitHub CLI command to create a release with custom release notes
-    $releaseCommand = "gh release create $version --notes-file $tempReleaseNotesFile"
+    $releaseCommand = "gh release create $version --notes-file release_notes.md"
 
     # Execute the Git commands
     Invoke-Expression $tagCommand
     Invoke-Expression $pushTagsCommand
     Invoke-Expression $releaseCommand
 
-    Write-Output "Release $version created successfully with custom release notes."
+    Write-Output "Release $version created successfully."
 } else {
     Write-Output "Version not found in the project.godot file."
 }
