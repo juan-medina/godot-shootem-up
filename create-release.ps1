@@ -15,7 +15,7 @@ if ($versionLine -match 'config/version="(\d+\.\d+\.\d+\.\d+)"') {
     # Define the Git commands
     $tagCommand = "git tag -a $version -m 'Release $version'"
     $pushTagsCommand = "git push --tags"
-    $releaseCommand = "gh release create $version --notes-file release_notes.md"
+    $releaseCommand = "gh release create $version --generate-notes"
 
     # Execute the Git commands
     Invoke-Expression $tagCommand
