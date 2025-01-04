@@ -91,8 +91,8 @@ func game_over() -> void:
 ## Called when we need to reload the level
 func _reload_level() -> void:
 	# fade out and reload the scene
-	FadeOutInGlobal.play()
-	await FadeOutInGlobal.out_ended
+	EffectsGlobal.fade_out_in()
+	await EffectsGlobal.out_ended
 	var reload: int = get_tree().reload_current_scene()
 	if not reload == OK:
 		assert(false, "Failed to reload scene")
@@ -102,7 +102,7 @@ func _reload_level() -> void:
 func _go_to_menu() -> void:
 	# stop the music, fade out and go to the menu
 	music.stop()
-	FadeOutInGlobal.play()
-	await FadeOutInGlobal.out_ended
+	EffectsGlobal.fade_out_in()
+	await EffectsGlobal.out_ended
 	if not get_tree().change_scene_to_packed(menu_scene) == OK:
 		assert(false, "Could not change to menu scene")

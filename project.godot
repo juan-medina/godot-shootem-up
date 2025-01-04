@@ -14,7 +14,7 @@ config/name="Shoot'em up"
 config/description="This is just an example of creating a Shoot 'em up in Godot 4.
 
 "
-config/version="0.5.3.1131"
+config/version="0.5.4.1139"
 run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/image="res://resources/splash/godot.png"
@@ -29,7 +29,7 @@ buses/default_bus_layout="res://resources/audio_bus/default_bus_layout.tres"
 
 [autoload]
 
-FadeOutInGlobal="*res://scenes/fade_out_in/fade_out_in.tscn"
+EffectsGlobal="*res://scenes/effects/effects.tscn"
 GlobalConfig="*res://scenes/config/config.gd"
 
 [debug]
@@ -46,17 +46,15 @@ gdscript/warnings/return_value_discarded=1
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/resizable=false
 window/size/borderless=true
-window/size/always_on_top=true
 window/size/window_width_override=320
 window/size/window_height_override=180
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/build_version_increase/plugin.cfg")
+enabled=PackedStringArray("res://addons/build_version_increase/plugin.cfg", "res://addons/crt_shader/plugin.cfg")
 
 [gui]
 

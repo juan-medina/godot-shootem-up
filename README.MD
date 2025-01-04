@@ -24,6 +24,7 @@ If you need to open a bug or enhancement please do it [here](https://github.com/
 - Game Over sound: [8-bit Game Over](https://freesound.org/people/Euphrosyyn/sounds/442127/) by [Euphrosyyn](https://freesound.org/people/Euphrosyyn/).
 - Button press sound: [8-bit 2022 Poke Bright Select Button BBM](https://freesound.org/people/NovaSoundTechnology/sounds/653049/) by [NovaSoundTechnology](https://freesound.org/people/NovaSoundTechnology/).
 - Font: [Pixeloid](https://www.fontspace.com/pixeloid-font-f69232) by [GGBotNet](https://www.fontspace.com/ggbotnet)
+- CRT effect: [Godot CRT Shader](https://perons.itch.io/godot-crt-shader) by [Perons](https://perons.itch.io/).
 
 ## CI
 To trigger a new release I use this powershell [script](create-release.ps1).

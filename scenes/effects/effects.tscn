@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://o378cd38jbpn"]
+
+[ext_resource type="Script" path="res://scenes/effects/effects.gd" id="1_684xl"]
+[ext_resource type="Material" uid="uid://cxr7ihe8nn4hv" path="res://addons/crt_shader/ShaderScreen.material" id="2_6s0uc"]
+[ext_resource type="Texture2D" uid="uid://b7rrbl58e5lm6" path="res://addons/crt_shader/CRTFrame.png" id="2_gnld5"]
+[ext_resource type="Script" path="res://addons/crt_shader/crt_screen.gd" id="3_fnqjd"]
+
+[sub_resource type="Animation" id="Animation_nei75"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeLayer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uimty"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeLayer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mwstw"]
+_data = {
+"fade_in": SubResource("Animation_nei75"),
+"fade_out": SubResource("Animation_uimty")
+}
+
+[node name="Effects" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_684xl")
+
+[node name="FadeLayer" type="ColorRect" parent="."]
+visible = false
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FadeAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mwstw")
+}
+
+[node name="CRTScreen" type="ColorRect" parent="."]
+z_index = 999
+material = ExtResource("2_6s0uc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_fnqjd")
+
+[node name="CRTCorners" type="TextureRect" parent="."]
+top_level = true
+z_index = 999
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_gnld5")
+expand_mode = 2
+
+[connection signal="animation_finished" from="FadeAnimation" to="." method="_on_animation_player_animation_finished"]

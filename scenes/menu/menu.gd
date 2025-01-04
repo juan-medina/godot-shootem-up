@@ -35,6 +35,7 @@ extends Control
 # Called when the main menu is added to the scene
 func _ready() -> void:
 	main_menu.visible = true
+	get_tree().get_root().grab_focus()
 
 
 ## Called when a button is clicked in the main menu
@@ -53,8 +54,8 @@ func _on_main_menu_button_click(button: Button) -> void:
 ## Call to Play the game
 func _play_game() -> void:
 	# fade out, stop the music and go to game scene
-	FadeOutInGlobal.play()
-	await FadeOutInGlobal.out_ended
+	EffectsGlobal.fade_out_in()
+	await EffectsGlobal.out_ended
 	music.stop()
 	if not get_tree().change_scene_to_packed(game_scene) == OK:
 		assert(false, "Could not change to game scene")
@@ -65,15 +66,15 @@ func _exit() -> void:
 	# stop the music, we dont want this on the loop since this audio will never finish
 	music.stop()
 	# get all audios and stop them
-	for audio:AudioStreamPlayer2D in find_children("*", "AudioStreamPlayer2D"):
+	for audio: AudioStreamPlayer2D in find_children("*", "AudioStreamPlayer2D"):
 		if audio.playing:
 			await audio.finished
 			audio.stop()
 	# do a fade out
-	FadeOutInGlobal.play()
-	await FadeOutInGlobal.out_ended
+	EffectsGlobal.fade_out_in()
+	await EffectsGlobal.out_ended
 	# remove every node on the tree
-	for child:Node in get_children():
+	for child: Node in get_children():
 		child.queue_free()
 	# quit after some time
 	await get_tree().create_timer(0.5).timeout

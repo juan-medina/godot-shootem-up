@@ -26,8 +26,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
+offset_left = -60.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 52.0
 grow_horizontal = 0
 pivot_offset = Vector2(-5, 5)
 text = "0"
@@ -36,7 +38,7 @@ horizontal_alignment = 2
 justification_flags = 162
 
 [node name="ShieldBar" type="Node2D" parent="."]
-position = Vector2(5, 5)
+position = Vector2(20, 20)
 scale = Vector2(1.5, 1.5)
 
 [node name="BG" type="Sprite2D" parent="ShieldBar"]
@@ -44,17 +46,20 @@ texture = ExtResource("4_0qrsm")
 centered = false
 
 [node name="Shield1" type="Sprite2D" parent="ShieldBar"]
-position = Vector2(2, 2)
+modulate = Color(0, 1, 1, 1)
+position = Vector2(2, 3)
 texture = ExtResource("5_oaivt")
 centered = false
 
 [node name="Shield2" type="Sprite2D" parent="ShieldBar"]
-position = Vector2(34, 2)
+modulate = Color(0, 1, 1, 1)
+position = Vector2(34, 3)
 texture = ExtResource("5_oaivt")
 centered = false
 
 [node name="Shield3" type="Sprite2D" parent="ShieldBar"]
-position = Vector2(66, 2)
+modulate = Color(0, 1, 1, 1)
+position = Vector2(66, 3)
 texture = ExtResource("5_oaivt")
 centered = false
 

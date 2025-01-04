@@ -18,22 +18,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-class_name FadeOutIn
+class_name Effects
 extends CanvasLayer
-## Fade out and in scene
+## Do screen effects
 ##
-## This scene it means to be run as a global to transition between scenes
+## This scene it means to be run as a global to do effects
 
 signal out_ended  ## Signal emitted when the fade out animation is finished
 signal in_ended  ## Signal emitted when the fade in animation is finished
 
-@onready var color_rect: ColorRect = $ColorRect  ## The color that we fade to
-@onready var animation_player: AnimationPlayer = $AnimationPlayer  ## Animation player to control the fade
+@onready var fade_layer: ColorRect = $FadeLayer  ## The color that we fade to
+@onready var fade_animation: AnimationPlayer = $FadeAnimation  ## Animation player to control the fade
 
 
 ## Called when the global is add to the world
 func _ready() -> void:
-	color_rect.visible = false
+	fade_layer.visible = false
 
 
 ## Called when an fade in/out animation finishes
@@ -41,14 +41,15 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	# when the fade out animation finishes, play the fade in, and emmit the signal
 	if anim_name == "fade_out":
 		out_ended.emit()
-		animation_player.play("fade_in")
+		fade_animation.play("fade_in")
 	# when the fade in animation finishes, hide and emmit the signal
 	elif anim_name == "fade_in":
-		color_rect.visible = false
+		fade_layer.visible = false
 		in_ended.emit()
 
+
 ## Helper to do the fade in and out
-func play() -> void:
+func fade_out_in() -> void:
 	## make it visible and start the fade out
-	color_rect.visible = true
-	animation_player.play("fade_out")
+	fade_layer.visible = true
+	fade_animation.play("fade_out")

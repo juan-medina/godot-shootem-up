@@ -27,7 +27,7 @@ extends Control
 signal level_restart  ## Signal when the player clicks ok on the game over UI
 signal back_to_menu  ## Signal when the player clicks cancel on the game over UI
 
-@export var shield_depleted_duration: float = 0.25  ## How long the shield depleted animation will last
+@export var shield_depleted_duration: float = 0.5  ## How long the shield depleted animation will last
 
 var points: int = 0:  ## How many points the player has
 	set(value):
@@ -64,10 +64,10 @@ func _deplete_shield(shield: Sprite2D) -> void:
 	# use the hit material, blinking red
 	shield.material = hit_material
 
-	# wait a the depleted time, remove it and hide the shield
+	# wait a the depleted time, remove it and make it red
 	await get_tree().create_timer(shield_depleted_duration).timeout
 	shield.material = null
-	shield.visible = false
+	shield.modulate = Color.RED
 
 
 ## Show the game over UI
@@ -77,6 +77,7 @@ func game_over() -> void:
 		game_over_ui.visible = true
 
 
+## Called when a button is clicked in the game over UI
 func _on_game_over_button_click(button: Button) -> void:
 	match button:
 		game_over_ui.restart_button:
@@ -85,6 +86,7 @@ func _on_game_over_button_click(button: Button) -> void:
 			back_to_menu.emit()
 
 
+## Called when a button is clicked in the pause UI
 func _on_pause_button_click(button: Button) -> void:
 	var game: Game = get_tree().current_scene
 	game.get_tree().paused = false

@@ -103,7 +103,7 @@ func _read_display_config(config: ConfigFile) -> void:
 
 	# Get the display mode and screen from the config
 	new.screen = config.get_value("display", "screen", _configured_values.screen)
-	var display_mode_str: String = config.get_value("display", "mode", "WINDOWED")
+	var display_mode_str: String = config.get_value("display", "mode", "FULLSCREEN")
 	new.display_mode = DisplayMode.WINDOWED if display_mode_str == "WINDOWED" else DisplayMode.FULLSCREEN
 
 	# Safe guard, check that the screen actually exist
@@ -152,13 +152,14 @@ func _display_mode_change(new: ConfiguredValues, forced: bool = false) -> void:
 
 	# set the screen
 	DisplayServer.window_set_current_screen(_configured_values.screen)
-	# remove always on top
+
+	# set not borderless
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, false)
+
 	# if window or fullscreen
 	if _configured_values.display_mode == DisplayMode.WINDOWED:
 		# set the mode, window size is the default, then center it
-		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
-		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_RESIZE_DISABLED, false)
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		DisplayServer.window_set_size(_default_window_size)
 		DisplayServer.window_set_position(
