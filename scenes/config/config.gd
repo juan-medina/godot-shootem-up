@@ -32,7 +32,7 @@ var current_values: ConfiguredValues:
 	get:
 		return _get_current_values()
 
-var _default_window_size: Vector2i  ## The default window size defined in the project
+var _default_window_size: Vector2i = Vector2i(1728, 972)  ## The default window size defined in the project
 
 
 ## The definition of configured values
@@ -68,11 +68,6 @@ func _get_current_values() -> ConfiguredValues:
 
 ## Called when the config is added to the scene
 func _ready() -> void:
-	# Get the default window size
-	var default_width: int = ProjectSettings.get_setting("window/size/window_width_override", 1728)
-	var default_height: int = ProjectSettings.get_setting("window/size/window_height_override", 972)
-	_default_window_size = Vector2(default_width, default_height)
-
 	# Read the config and save
 	_read_config()
 	save()
@@ -115,8 +110,8 @@ func _read_display_config(config: ConfigFile) -> void:
 	if new.screen >= DisplayServer.get_screen_count():
 		new.screen = _configured_values.screen
 
-	# Set the display mode
-	_display_mode_change(new)
+	# Set the display mode, we force it to change since we just read the config
+	_display_mode_change(new, true)
 
 
 ## Save the config
@@ -145,10 +140,10 @@ func _save_display_config(config: ConfigFile) -> void:
 	config.set_value("display", "mode", "WINDOWED" if _configured_values.display_mode == DisplayMode.WINDOWED else "FULLSCREEN")
 
 
-## Change the display mode
-func _display_mode_change(new: ConfiguredValues) -> void:
+## Change the display mode, we can force to change the display mode even if not changed
+func _display_mode_change(new: ConfiguredValues, forced: bool = false) -> void:
 	# nothing to do
-	if new.display_mode == _configured_values.display_mode and new.screen == _configured_values.screen:
+	if new.display_mode == _configured_values.display_mode and new.screen == _configured_values.screen and not forced:
 		return
 
 	# set display mode and screen
@@ -157,9 +152,13 @@ func _display_mode_change(new: ConfiguredValues) -> void:
 
 	# set the screen
 	DisplayServer.window_set_current_screen(_configured_values.screen)
+	# remove always on top
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, false)
 	# if window or fullscreen
 	if _configured_values.display_mode == DisplayMode.WINDOWED:
 		# set the mode, window size is the default, then center it
+		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_RESIZE_DISABLED, false)
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		DisplayServer.window_set_size(_default_window_size)
 		DisplayServer.window_set_position(

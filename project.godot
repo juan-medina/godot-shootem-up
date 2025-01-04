@@ -14,11 +14,14 @@ config/name="Shoot'em up"
 config/description="This is just an example of creating a Shoot 'em up in Godot 4.
 
 "
-config/version="0.5.3.1129"
+config/version="0.5.3.1131"
 run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/image="res://resources/splash/godot.png"
+boot_splash/fullsize=false
 config/icon="res://resources/icon/juan_medina.png"
 config/windows_native_icon="res://resources/icon/juan_medina.ico"
+boot_splash/minimum_display_time=1500
 
 [audio]
 
@@ -43,9 +46,12 @@ gdscript/warnings/return_value_discarded=1
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/window_width_override=1728
-window/size/window_height_override=972
-window/stretch/mode="viewport"
+window/size/resizable=false
+window/size/borderless=true
+window/size/always_on_top=true
+window/size/window_width_override=320
+window/size/window_height_override=180
+window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 
 [editor_plugins]
