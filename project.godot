@@ -14,8 +14,8 @@ config/name="Shoot'em up"
 config/description="This is just an example of creating a Shoot 'em up in Godot 4.
 
 "
-config/version="0.5.4.1139"
-run/main_scene="res://scenes/menu/menu.tscn"
+config/version="0.5.4.1158"
+run/main_scene="res://scenes/splash/splash.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/image="res://resources/splash/godot.png"
 boot_splash/fullsize=false
@@ -59,6 +59,7 @@ enabled=PackedStringArray("res://addons/build_version_increase/plugin.cfg", "res
 [gui]
 
 theme/custom_font="res://resources/fonts/PixeloidSans-mLxMm.ttf"
+theme/default_font_antialiasing=0
 theme/default_font_multichannel_signed_distance_field=true
 theme/default_font_generate_mipmaps=true
 

@@ -1,7 +1,7 @@
 ## Release Notes
 
 ### New Features
-- **CRT Display**: For a more retro look we have now the game in a CRT screen.
+- **Splash Screen**: A new splash screen have been added to the game. [#20](https://github.com/juan-medina/godot-shootem-up/issues/20)
 
 ### Bug Fixes
 

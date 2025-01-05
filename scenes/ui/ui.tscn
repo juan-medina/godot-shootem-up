@@ -10,6 +10,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_2de44"]
 font = ExtResource("1_cd55t")
 font_size = 26
+font_color = Color(0.72549, 0.980392, 0, 1)
 shadow_color = Color(0, 0, 0, 1)
 
 [node name="UI" type="Control"]
