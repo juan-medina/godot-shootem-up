@@ -30,8 +30,9 @@ extends Node2D
 
 ## Called when the splash screen is added
 func _ready() -> void:
-    # wait for the duration and fade out to the menu
+	# wait for the duration and fade out to the menu
 	await get_tree().create_timer(duration).timeout
 	EffectsGlobal.fade_out_in()
 	await EffectsGlobal.out_ended
-	assert(get_tree().change_scene_to_packed(menu_scene) == OK, "Could not change to menu scene")
+	if not get_tree().change_scene_to_packed(menu_scene) == OK:
+		assert(false, "Could not change to menu scene")

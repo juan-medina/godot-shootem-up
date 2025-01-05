@@ -191,7 +191,8 @@ func _get_screens() -> PackedStringArray:
 		# if the screen is the primary screen add (primary) e.g. "0. 1920x1080 (primary)"
 		if screen_number == primary:
 			screen_name += " (primary)"
-		assert(not screen_names.append(screen_name), "Failed to add screen name")
+		if screen_names.append(screen_name):
+			assert(false, "Failed to add screen name")
 
 	return screen_names
 
