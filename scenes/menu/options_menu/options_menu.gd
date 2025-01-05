@@ -41,12 +41,20 @@ var values: Config.ConfiguredValues = Config.ConfiguredValues.new():  ## The opt
 		# set the audio values
 		_master_volume_slider.value = new.master_volume
 		super._change_slider_label(_master_volume_slider, new.master_volume)
+		_master_volumen_check.set_pressed(new.master_muted)
 
 		_sfx_volume_slider.value = new.sfx_volume
 		super._change_slider_label(_sfx_volume_slider, new.sfx_volume)
+		_sfx_volume_check.set_pressed(new.sfx_muted)
 
 		_music_volume_slider.value = new.music_volume
 		super._change_slider_label(_music_volume_slider, new.music_volume)
+		_music_volume_check.set_pressed(new.music_muted)
+
+		# set the crt values
+		_crt_corners_check.set_pressed(new.crt_corners)
+		_scanlines_check.set_pressed(new.scanlines)
+		_color_bleed_check.set_pressed(new.color_bleed)
 
 	get():
 		# configuration that we going to return
@@ -65,6 +73,12 @@ var values: Config.ConfiguredValues = Config.ConfiguredValues.new():  ## The opt
 
 		new.sfx_volume = _sfx_volume_slider.value as int
 		new.sfx_muted = _sfx_volume_check.is_pressed()
+
+		# set the crt values
+		new.crt_corners = _crt_corners_check.is_pressed()
+		new.scanlines = _scanlines_check.is_pressed()
+		new.color_bleed = _color_bleed_check.is_pressed()
+
 		return new
 
 @onready var ok_button: Button = $Buttons/Ok  ## Ok button
@@ -83,3 +97,7 @@ var values: Config.ConfiguredValues = Config.ConfiguredValues.new():  ## The opt
 
 @onready var _music_volume_slider: HSlider = $Panel/VFlowContainer/MusicVolumeRow/MusicVolumeSlider  ## Music volume slider
 @onready var _music_volume_check: CheckButton = $Panel/VFlowContainer/MusicVolumeMuted  ## Music volume check
+
+@onready var _crt_corners_check: CheckButton = $Panel/VFlowContainer/CRTRow/CRTCornersCheck  ## Crt corners check
+@onready var _scanlines_check: CheckButton = $Panel/VFlowContainer/CRTRow/ScanlinesCheck  ## Scanlines check
+@onready var _color_bleed_check: CheckButton = $Panel/VFlowContainer/CRTRow/ColorBleedCheck  ## Color bleed check

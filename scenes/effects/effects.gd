@@ -30,6 +30,9 @@ signal in_ended  ## Signal emitted when the fade in animation is finished
 @onready var fade_layer: ColorRect = $FadeLayer  ## The color that we fade to
 @onready var fade_animation: AnimationPlayer = $FadeAnimation  ## Animation player to control the fade
 
+@onready var _crt_corners_texture: TextureRect = $CRTCorners
+@onready var _crt_color_rect: ColorRect = $CRTScreen
+
 
 ## Called when the global is add to the world
 func _ready() -> void:
@@ -53,3 +56,13 @@ func fade_out_in() -> void:
 	## make it visible and start the fade out
 	fade_layer.visible = true
 	fade_animation.play("fade_out")
+
+
+## Change the crt effect
+func crt(crt_corners: bool, scanlines: bool, color_bleed: bool) -> void:
+	_crt_corners_texture.visible = crt_corners
+	_crt_color_rect.visible = scanlines or color_bleed
+
+	var material: ShaderMaterial = _crt_color_rect.material
+	material.set_shader_parameter("scanlines", scanlines)
+	material.set_shader_parameter("color_bleed", color_bleed)

@@ -7,6 +7,6 @@
 - Screen dropdown is empty. [#19](https://github.com/juan-medina/godot-shootem-up/issues/19)
 
 ### Improvements
+- **CRT Effect Options** : Now the CRT effect has configurable options. [#21](https://github.com/juan-medina/godot-shootem-up/issues/21)
 
 ### Known Issues
-

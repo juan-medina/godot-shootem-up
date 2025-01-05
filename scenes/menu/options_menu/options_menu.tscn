@@ -37,9 +37,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -215.0
-offset_top = -125.0
+offset_top = -130.0
 offset_right = 215.0
-offset_bottom = 250.0
+offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -51,9 +51,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -205.0
-offset_top = -180.0
+offset_top = -200.0
 offset_right = 205.0
-offset_bottom = 180.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -186,6 +186,31 @@ size_flags_vertical = 2
 text = "Muted"
 metadata/hide_menu = false
 
+[node name="CRT" type="Label" parent="Panel/VFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "CRT Effect"
+horizontal_alignment = 1
+
+[node name="CRTRow" type="HFlowContainer" parent="Panel/VFlowContainer"]
+custom_minimum_size = Vector2(410, 25)
+layout_mode = 2
+
+[node name="CRTCornersCheck" type="CheckButton" parent="Panel/VFlowContainer/CRTRow"]
+layout_mode = 2
+text = "Corners"
+metadata/hide_menu = false
+
+[node name="ScanlinesCheck" type="CheckButton" parent="Panel/VFlowContainer/CRTRow"]
+layout_mode = 2
+text = "Scanlines"
+metadata/hide_menu = false
+
+[node name="ColorBleedCheck" type="CheckButton" parent="Panel/VFlowContainer/CRTRow"]
+layout_mode = 2
+text = "Color Bleed"
+metadata/hide_menu = false
+
 [node name="Buttons" type="HFlowContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -194,9 +219,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -160.0
-offset_top = -84.0
+offset_top = -63.0
 offset_right = 160.0
-offset_bottom = -34.0
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 0
 

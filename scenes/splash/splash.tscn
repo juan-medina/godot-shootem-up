@@ -1,18 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://dgwr0ijxw02lb"]
 
 [ext_resource type="Script" path="res://scenes/splash/splash.gd" id="1_6y40b"]
-[ext_resource type="Texture2D" uid="uid://o58oknvqipvo" path="res://resources/icon/juan_medina.png" id="1_lsvum"]
 [ext_resource type="Texture2D" uid="uid://cpc2ch1d1txxx" path="res://resources/splash/godot.svg" id="2_2b3pp"]
+[ext_resource type="Texture2D" uid="uid://4v1j3go0gtul" path="res://resources/icon/juan_medina_small.png" id="2_q7h5i"]
 
 [node name="Splash" type="Node2D"]
 script = ExtResource("1_6y40b")
 
 [node name="JuanMedina" type="Sprite2D" parent="."]
-position = Vector2(841, 504)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_lsvum")
+position = Vector2(807, 530)
+scale = Vector2(2, 2)
+texture = ExtResource("2_q7h5i")
 
 [node name="Godot" type="Sprite2D" parent="."]
-position = Vector2(443, 253)
+position = Vector2(539, 238)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_2b3pp")

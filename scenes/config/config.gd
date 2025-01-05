@@ -46,6 +46,9 @@ class ConfiguredValues:
 	var music_muted: bool = false  ## Is the music volume muted
 	var sfx_volume: int = 50  ## The sfx volume
 	var sfx_muted: bool = false  ## Is the sfx volume muted
+	var crt_corners: bool = true  ## Is the crt corners enabled
+	var scanlines: bool = true  ## Is the scanlines enabled
+	var color_bleed: bool = true  ## Is the color bleed enabled
 
 
 ## The configured values
@@ -56,6 +59,8 @@ class ConfiguredValues:
 func _change_current_values(new: ConfiguredValues) -> void:
 	_display_mode_change(new)
 	_audio_change(new)
+	_crt_config_change(new)
+
 	save()
 
 
@@ -90,6 +95,9 @@ func _read_config() -> void:
 
 	# Read the audio config
 	_read_audio_config(config)
+
+	# Read the crt config
+	_read_crt_config(config)
 
 
 ## Read the display config
@@ -127,6 +135,9 @@ func save() -> void:
 
 	# save the audio config
 	_audio_config_save(config)
+
+	# save the crt config
+	_crt_config_save(config)
 
 	# save the config
 	if not config.save("user://config.cfg") == OK:
@@ -268,3 +279,26 @@ func _change_bus_volume(_bus: String, _volume: int) -> void:
 func _mute_bus(_bus: String, _muted: bool) -> void:
 	var bus_index: int = AudioServer.get_bus_index(_bus)
 	AudioServer.set_bus_mute(bus_index, _muted)
+
+## Read the crt config
+func _read_crt_config(config: ConfigFile) -> void:
+	_configured_values.crt_corners = config.get_value("crt", "corners", _configured_values.crt_corners)
+	_configured_values.scanlines = config.get_value("crt", "scanlines", _configured_values.scanlines)
+	_configured_values.color_bleed = config.get_value("crt", "color_bleed", _configured_values.color_bleed)
+
+	_crt_config_change(_configured_values)
+
+
+## Save the crt config
+func _crt_config_save(config: ConfigFile) -> void:
+	config.set_value("crt", "corners", _configured_values.crt_corners)
+	config.set_value("crt", "scanlines", _configured_values.scanlines)
+	config.set_value("crt", "color_bleed", _configured_values.color_bleed)
+
+## Change the crt effect
+func _crt_config_change(new: ConfiguredValues) -> void:
+	_configured_values.crt_corners = new.crt_corners
+	_configured_values.scanlines = new.scanlines
+	_configured_values.color_bleed = new.color_bleed
+
+	EffectsGlobal.crt(_configured_values.crt_corners, _configured_values.scanlines, _configured_values.color_bleed)
