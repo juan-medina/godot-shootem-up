@@ -53,7 +53,7 @@ func _on_enemies_spawn_timeout() -> void:
 	enemy_instance.global_position = spawn_position
 
 	# connect the enemy destroyed signal
-	if not enemy_instance.destroyed.connect(_on_enemy_died.bind()) == OK:
+	if not enemy_instance.destroyed.connect(_on_enemy_died) == OK:
 		assert(false, "Failed to connect to enemy destroyed signal")
 
 	# add the enemy to the scene

@@ -24,7 +24,7 @@ func _ready() -> void:
 	# invoke the parent _ready
 	super._ready()
 	# connect the visibility_changed signal
-	if not rich_text_label.visibility_changed.connect(self._on_visibility_changed.bind()) == OK:
+	if not rich_text_label.visibility_changed.connect(self._on_visibility_changed) == OK:
 		assert(false, "Failed to connect to visibility_changed signal")
 
 	# connect the scrolling signal for user manual scroll

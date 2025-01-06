@@ -69,15 +69,15 @@ func _process(_delta: float) -> void:
 func _setup_controls() -> void:
 	var buttons: Array[Node] = self.find_children("*", "Button")
 	for button: Button in buttons:
-		if not button.pressed.connect(_on_button_pressed.bind()) == OK:
+		if not button.pressed.connect(_on_button_pressed) == OK:
 			assert(false, "Failed to connect to button pressed signal")
 	var controls: Array[Node] = self.find_children("*", "Control")
 	for control: Control in controls:
-		if not control.focus_entered.connect(_change_focus.bind()) == OK:
+		if not control.focus_entered.connect(_change_focus) == OK:
 			assert(false, "Failed to connect to button focus_entered signal")
 	var sliders: Array[Node] = self.find_children("*", "Slider")
 	for slider: Slider in sliders:
-		if not slider.value_changed.connect(_slider_changed.bind()) == OK:
+		if not slider.value_changed.connect(_slider_changed) == OK:
 			assert(false, "Failed to connect to slider focus_entered signal")
 
 
