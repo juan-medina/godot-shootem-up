@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bd2x2osm3t6k0"]
+[gd_scene load_steps=28 format=3 uid="uid://bd2x2osm3t6k0"]
 
 [ext_resource type="Script" path="res://scenes/enemies/kamikaze/kamikaze.gd" id="1_sbdep"]
 [ext_resource type="Texture2D" uid="uid://ca0j6gnjj235f" path="res://resources/sprites/ship2/Exhaust/normal/exhaust1.png" id="2_tnoaa"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://4srkal0lmqtf" path="res://resources/sprites/ship2/Exhaust/turbo/exhaust3.png" id="8_nokv4"]
 [ext_resource type="Texture2D" uid="uid://cuc2d4gb4gn0" path="res://resources/sprites/ship2/Exhaust/turbo/exhaust4.png" id="9_cmgtj"]
 [ext_resource type="Texture2D" uid="uid://ckxnjv8lhesc7" path="res://resources/sprites/ship2/ship2.png" id="10_oexgl"]
+[ext_resource type="Texture2D" uid="uid://dqgdmt418t6rx" path="res://resources/sprites/ship2/ship2_glow.png" id="10_uwuvu"]
 [ext_resource type="Texture2D" uid="uid://cn372l18cxfb" path="res://resources/sprites/explosion1/explosion1_1.png" id="11_75mo6"]
 [ext_resource type="Texture2D" uid="uid://dxhswjoy7myvy" path="res://resources/sprites/explosion1/explosion1_2.png" id="12_dwths"]
 [ext_resource type="Texture2D" uid="uid://bkrhmt6booja1" path="res://resources/sprites/explosion1/explosion1_3.png" id="13_pggiw"]
@@ -118,6 +119,11 @@ points = 250
 position = Vector2(46, 0)
 sprite_frames = SubResource("SpriteFrames_80gq2")
 animation = &"turbo"
+flip_h = true
+
+[node name="SpriteGlow" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("10_uwuvu")
 flip_h = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dqejknaljhhmi"]
+[gd_scene load_steps=28 format=3 uid="uid://dqejknaljhhmi"]
 
 [ext_resource type="Script" path="res://scenes/enemies/basic_enemy/basic_enemy.gd" id="1_4pt7b"]
 [ext_resource type="Texture2D" uid="uid://dvfkbqkw5yctl" path="res://resources/sprites/ship1/Exhaust/normal/exhaust1.png" id="2_iqr8s"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cd71rubdhfcc4" path="res://resources/sprites/ship1/Exhaust/turbo/exhaust3.png" id="8_v1wl8"]
 [ext_resource type="Texture2D" uid="uid://dbeedrq45iewd" path="res://resources/sprites/ship1/Exhaust/turbo/exhaust4.png" id="9_ydbdu"]
 [ext_resource type="Texture2D" uid="uid://bn066wgf7l8iy" path="res://resources/sprites/ship1/ship1.png" id="10_hlbfy"]
+[ext_resource type="Texture2D" uid="uid://dn4lh2s8sdk1m" path="res://resources/sprites/ship1/ship1_glow.png" id="10_tssh7"]
 [ext_resource type="Texture2D" uid="uid://cn372l18cxfb" path="res://resources/sprites/explosion1/explosion1_1.png" id="11_3i24h"]
 [ext_resource type="Texture2D" uid="uid://dxhswjoy7myvy" path="res://resources/sprites/explosion1/explosion1_2.png" id="12_1xsuy"]
 [ext_resource type="Texture2D" uid="uid://bkrhmt6booja1" path="res://resources/sprites/explosion1/explosion1_3.png" id="13_c3ahx"]
@@ -118,6 +119,11 @@ max_life = 2
 position = Vector2(46, 0)
 sprite_frames = SubResource("SpriteFrames_sg4ms")
 animation = &"normal"
+flip_h = true
+
+[node name="SpriteGlow" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("10_tssh7")
 flip_h = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

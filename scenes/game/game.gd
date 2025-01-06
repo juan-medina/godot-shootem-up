@@ -68,6 +68,9 @@ func _on_enemies_spawn_timeout() -> void:
 	# start the timer to spawn the next enemy, with a random delay
 	enemies_spawn_timer.start(spawn_default_timer + randf_range(0, 0.5))
 
+	# set the energy type of the enemy, 50% blue, 50% green
+	enemy_instance.energy = EnergyType.BLUE if randf() < 0.5 else EnergyType.GREEN
+
 
 ## Called when an enemy is destroyed
 func _on_enemy_died(points: int) -> void:

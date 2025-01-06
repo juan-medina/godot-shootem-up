@@ -38,10 +38,20 @@ var turbo: bool = false:  ## Indicates if is accelerating, visually the exhaust 
 		# an enemy has an exhaust with two animations depending on turbo
 		exhaust.play("turbo" if turbo else "normal")
 
+var energy: Game.EnergyType = Game.EnergyType.BLUE:  ## Energy type of the enemy
+	set(value):
+		_energy = value
+		# set the color of the sprite glow depending on the energy type
+		sprite_glow.modulate = Game.ENERGY_TYPE_COLOR[_energy]
+		# reduce alpha
+		sprite_glow.modulate.a = 0.75
+
 var _direction: Vector2 = Vector2.LEFT  ## In which direction the enemy is moving, default left
 var _on_screen: bool = false  ## Indicates if the enemy is on the screen
+var _energy: Game.EnergyType = Game.EnergyType.BLUE  ## Energy type of the enemy
 
 @onready var sprite: Sprite2D = $Sprite2D  ## Enemy sprite, the enemy ship
+@onready var sprite_glow: Sprite2D = $SpriteGlow  ## Sprite glow, a glow effect for the enemy ship
 @onready var exhaust: AnimatedSprite2D = $Exhaust  ## Exhaust animation
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D  ## Collision shape
 @onready var ship_explosion: AnimatedSprite2D = $ShipExplosion  ## Ship explosion animation
@@ -75,7 +85,10 @@ func _on_area_entered(object: Area2D) -> void:
 	# cast to player shot, destroy the shot, it will play its animation and do damage to this enemy
 	var player_shot: PlayerShot = object as PlayerShot
 	player_shot.destroy()
-	_damage(player_shot.damage)
+
+	# we get damage only if the energy type of the player is different to the enemy
+	if player_shot._energy != _energy:
+		_damage(player_shot.damage)
 
 
 ## Called when a body enters the enemy, current only the player
@@ -83,10 +96,14 @@ func _on_body_entered(body: Node2D) -> void:
 	# this shouldn't happen since our player can not go off screen, however it is here for safety
 	if not _on_screen:
 		return
+
 	# cast to player, damage the player and do damage to this enemy
 	var player_body: Player = body as Player
 	_damage(max_life)
-	player_body.damage(damage)
+
+	# we damage the player only if the energy type of the player is different to the enemy
+	if player._energy != _energy:
+		player_body.damage(damage)
 
 
 ## Called when the enemy goes off screen
@@ -128,9 +145,10 @@ func _die() -> void:
 	# disable the collision shape, in the next physics iteration, so no more collisions
 	collision_shape.set_deferred("disabled", true)
 
-	# hide the enemy ship and it exhaust
+	# hide the enemy ship, glow and it exhaust
 	sprite.visible = false
 	exhaust.visible = false
+	sprite_glow.visible = false
 
 	# show the ship explosion and points, play the explosion animation and sound
 	ship_explosion.visible = true
