@@ -28,6 +28,7 @@ extends Area2D
 @export var damage: int = 1  ## How much damage the shot does
 
 var direction: Vector2 = Vector2.RIGHT  ## Direction of the shot
+var energy: Game.EnergyType = Game.EnergyType.BLUE  ## Shot energy type
 
 @onready var shot_explosion: AnimatedSprite2D = $ShotExplosion  ## Explosion animation
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D  ## Collision shape
@@ -46,9 +47,11 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
 
-## Initialize the shot when from a spawn point
-func init(from: Node2D) -> void:
+## Initialize the shot when from a spawn point and an energy type
+func init(from: Node2D, player_energy: Game.EnergyType) -> void:
 	global_position = from.global_position
+	energy = player_energy
+	sprite.modulate = Game.ENERGY_TYPE_COLOR[energy]
 
 
 func destroy() -> void:
@@ -60,7 +63,8 @@ func destroy() -> void:
 	sprite.visible = false
 	shot_hit.play()
 
-	# show the explosion and play the explosion animation
+	# show the explosion and play the explosion animation with the energy color
+	shot_explosion.modulate = Game.ENERGY_TYPE_COLOR[energy]
 	shot_explosion.visible = true
 	shot_explosion.play()
 

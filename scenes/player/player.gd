@@ -123,6 +123,8 @@ func _shot_logic() -> void:
 			_energy = Game.EnergyType.GREEN
 		# update the ship glow color and emit the signal that the energy type has changed
 		ship_glow.modulate = Game.ENERGY_TYPE_COLOR[_energy]
+		# reduce alpha to halve
+		ship_glow.modulate.a = 0.5
 		energy_type_changed.emit(_energy)
 
 
@@ -133,10 +135,11 @@ func _shot() -> void:
 
 	# spawn the shot from the spawn point
 	var shot_instance: PlayerShot = shot_scene.instantiate()
-	shot_instance.init(shot_point)
 	get_parent().add_child(shot_instance)
+	shot_instance.init(shot_point, _energy)
 
 	# play the shot out effect
+	shot_out_effect.modulate = Game.ENERGY_TYPE_COLOR[_energy]
 	shot_out_effect.visible = true
 	shot_out_effect.play()
 	await shot_out_effect.animation_finished

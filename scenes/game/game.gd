@@ -27,7 +27,7 @@ extends Node2D
 enum EnergyType { BLUE, GREEN, DEPLETED }  ## Energy type
 ## Energy type color
 const ENERGY_TYPE_COLOR: Dictionary = {
-	EnergyType.BLUE: Color(0, 1, 1, 0.5), EnergyType.GREEN: Color(0, 1, 0, 0.5), EnergyType.DEPLETED: Color(1, 0, 0, 1.0)
+	EnergyType.BLUE: Color(0, 1, 1, 1), EnergyType.GREEN: Color(0, 1, 0, 1), EnergyType.DEPLETED: Color(1, 0, 0, 1.0)
 }
 
 @export var spawn_default_timer: float = 0.5  ## how often the enemies will spawn
@@ -112,6 +112,7 @@ func _go_to_menu() -> void:
 	await EffectsGlobal.out_ended
 	if not get_tree().change_scene_to_packed(menu_scene) == OK:
 		assert(false, "Could not change to menu scene")
+
 
 ## Called when the player energy type changes
 func _on_player_energy_type_changed(energy_type: Game.EnergyType) -> void:
