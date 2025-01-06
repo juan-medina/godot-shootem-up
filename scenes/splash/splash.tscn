@@ -4,7 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://cpc2ch1d1txxx" path="res://resources/splash/godot.svg" id="2_2b3pp"]
 [ext_resource type="Texture2D" uid="uid://4v1j3go0gtul" path="res://resources/icon/juan_medina_small.png" id="2_q7h5i"]
 
-[node name="Splash" type="Node2D"]
+[node name="Splash" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32, 0.32, 0.32, 1)
 script = ExtResource("1_6y40b")
 
 [node name="JuanMedina" type="Sprite2D" parent="."]

@@ -19,7 +19,7 @@
 # THE SOFTWARE.
 
 class_name Splash
-extends Node2D
+extends ColorRect
 ## Splash screen
 ##
 ## This is the game splash screen

@@ -11,11 +11,12 @@ config_version=5
 [application]
 
 config/name="Shoot'em up"
-config/description="This is just an example of creating a Shoot 'em up in Godot 4.
-
-"
-config/version="0.5.4.1219"
+config/description="This is just an example of creating a Shoot 'em up in Godot 4"
+config/version="0.5.4.1229"
 run/main_scene="res://scenes/splash/splash.tscn"
+run/disable_stdout=true
+run/disable_stderr=true
+run/print_header=false
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/image="res://resources/splash/godot.png"
 boot_splash/fullsize=false
@@ -34,6 +35,8 @@ GlobalConfig="*res://scenes/config/config.gd"
 
 [debug]
 
+settings/crash_handler/message.editor="Please include this when reporting the bug on: https://github.com/juan-medina/godot-shootem-up/issues"
+file_logging/enable_file_logging.pc=false
 gdscript/warnings/untyped_declaration=1
 gdscript/warnings/inferred_declaration=1
 gdscript/warnings/unsafe_property_access=1
@@ -139,6 +142,10 @@ pause={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Enemies Bullets"
 
+[physics]
+
+2d/run_on_separate_thread=true
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
@@ -146,5 +153,6 @@ rendering_device/driver.windows="d3d12"
 driver/threads/thread_model=2
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/screen_space_roughness_limiter/enabled=false
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
