@@ -52,7 +52,7 @@ To trigger a new release I use this powershell [script](create-release.ps1).
 .\create-release.ps1
 ```
 
-This will read the game version from the [project.godot](project.godot) file, requires [Github CLI](https://cli.github.com/), and then push a new release to github.
+This will read the game version from the [project.godot](project.godot) file, requires [Github CLI](https://cli.github.com/), and then push a new release to github and itch.io.
 
 This will trigger a github [action](.github/workflows/release.yaml) that will add to the release a zip package with the game.
 
