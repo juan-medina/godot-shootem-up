@@ -81,7 +81,7 @@ jobs:
         with:
           butlerApiKey: ${{secrets.BUTLER_API_KEY}}
           gameData: shoot_em_up.zip
-          itchUsername: ${{juanmedina}}
-          itchGameId: ${{ godot-shoot-em-up }}
+          itchUsername: juanmedina
+          itchGameId: godot-shoot-em-up
           buildChannel: ${{ matrix.platform }}
           buildNumber: ${{ github.event.release.name }}
