@@ -35,6 +35,7 @@ follow_viewport_enabled = true
 stream = ExtResource("6_fm1b2")
 bus = &"Music"
 
+[connection signal="energy_type_changed" from="Player" to="." method="_on_player_energy_type_changed"]
 [connection signal="shields_changed" from="Player" to="." method="_on_player_shields_changed"]
 [connection signal="timeout" from="EnemiesSpawn" to="." method="_on_enemies_spawn_timeout"]
 [connection signal="back_to_menu" from="CanvasLayer/UI" to="." method="_go_to_menu"]

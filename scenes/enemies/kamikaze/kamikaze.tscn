@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://4dvb00ppir4n" path="res://resources/sprites/ship2/Exhaust/turbo/exhaust2.png" id="7_vhjt5"]
 [ext_resource type="Texture2D" uid="uid://4srkal0lmqtf" path="res://resources/sprites/ship2/Exhaust/turbo/exhaust3.png" id="8_nokv4"]
 [ext_resource type="Texture2D" uid="uid://cuc2d4gb4gn0" path="res://resources/sprites/ship2/Exhaust/turbo/exhaust4.png" id="9_cmgtj"]
-[ext_resource type="Texture2D" uid="uid://ckxnjv8lhesc7" path="res://resources/sprites/ship2/hip2.png" id="10_oexgl"]
+[ext_resource type="Texture2D" uid="uid://ckxnjv8lhesc7" path="res://resources/sprites/ship2/ship2.png" id="10_oexgl"]
 [ext_resource type="Texture2D" uid="uid://cn372l18cxfb" path="res://resources/sprites/explosion1/explosion1_1.png" id="11_75mo6"]
 [ext_resource type="Texture2D" uid="uid://dxhswjoy7myvy" path="res://resources/sprites/explosion1/explosion1_2.png" id="12_dwths"]
 [ext_resource type="Texture2D" uid="uid://bkrhmt6booja1" path="res://resources/sprites/explosion1/explosion1_3.png" id="13_pggiw"]

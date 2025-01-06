@@ -1,15 +1,16 @@
-[gd_scene load_steps=29 format=3 uid="uid://dv34skp6agxhm"]
+[gd_scene load_steps=30 format=3 uid="uid://dv34skp6agxhm"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_qr6qb"]
 [ext_resource type="Texture2D" uid="uid://da4d8xtq0spig" path="res://resources/sprites/ship3/Exhaust/normal/exhaust1.png" id="2_58hbh"]
 [ext_resource type="Texture2D" uid="uid://c7g1fpmqd7035" path="res://resources/sprites/ship3/Exhaust/normal/exhaust2.png" id="3_sbyp7"]
-[ext_resource type="Texture2D" uid="uid://vfo6hnixoiyh" path="res://resources/sprites/ship3/hip3.png" id="4_t853r"]
+[ext_resource type="Texture2D" uid="uid://vfo6hnixoiyh" path="res://resources/sprites/ship3/ship3.png" id="4_t853r"]
 [ext_resource type="Texture2D" uid="uid://cbb4ynexqq44x" path="res://resources/sprites/ship3/Exhaust/normal/exhaust3.png" id="4_wg8po"]
 [ext_resource type="Texture2D" uid="uid://caufmj8lbl6a" path="res://resources/sprites/ship3/Exhaust/normal/exhaust4.png" id="5_g015p"]
 [ext_resource type="Texture2D" uid="uid://b483mt4yoibd1" path="res://resources/sprites/ship3/Exhaust/turbo/exhaust1.png" id="6_le4o6"]
 [ext_resource type="Texture2D" uid="uid://dsw74o6fa6bt8" path="res://resources/sprites/ship3/Exhaust/turbo/exhaust2.png" id="7_bq56t"]
 [ext_resource type="Texture2D" uid="uid://0e8urk8oaksb" path="res://resources/sprites/ship3/Exhaust/turbo/exhaust3.png" id="8_e8ft4"]
 [ext_resource type="Texture2D" uid="uid://pg1urlkr2ru4" path="res://resources/sprites/ship3/Exhaust/turbo/exhaust4.png" id="9_2fsdf"]
+[ext_resource type="Texture2D" uid="uid://p11kep77qovi" path="res://resources/sprites/ship3/ship3_glow.png" id="10_we83o"]
 [ext_resource type="AudioStream" uid="uid://cjng2ueyt1igr" path="res://resources/sounds/laser.wav" id="11_34fei"]
 [ext_resource type="Texture2D" uid="uid://ci8a0i5x20c8d" path="res://resources/sprites/shot3/shot3_1.png" id="12_83sqk"]
 [ext_resource type="Texture2D" uid="uid://qwgd1oxof03p" path="res://resources/sprites/shot3/shot3_2.png" id="13_ojadk"]
@@ -77,7 +78,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 30.0
+"speed": 15.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d1jhe"]
@@ -134,14 +135,19 @@ position = Vector2(-55, 0)
 sprite_frames = SubResource("SpriteFrames_uni5j")
 animation = &"normal"
 
+[node name="ShipGlow" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 1, 0.498039)
+use_parent_material = true
+texture = ExtResource("10_we83o")
+region_rect = Rect2(21, 44, 86, 39)
+
 [node name="Ship" type="Sprite2D" parent="."]
 use_parent_material = true
 texture = ExtResource("4_t853r")
-region_enabled = true
 region_rect = Rect2(21, 44, 86, 39)
 
 [node name="ShotPoint" type="Marker2D" parent="."]
-position = Vector2(46, 7)
+position = Vector2(46, 6)
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-16, -18, -15, -14, -18, -11.2, -21.5, -12.9, -27.4, -13.5, -32.5, -13.5, -32.5, -7.8, -36, -5, -39, -5, -39, 4, -35, 4, -34, 12, -27.2, 12.5, -22.4, 12.5, -18.3, 8.5, -15.6, 10.5, -19, 16, 16, 16, 21, 11, 28, 11, 28, 15, 26, 19, 32, 19, 34.7, 13.5, 37.5, 13.5, 37.5, -1.7, 24.5, -11.8, 15.3, -16.5, 6.4, -16.5, 2, -13, -6, -13)

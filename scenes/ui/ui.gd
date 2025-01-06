@@ -43,6 +43,13 @@ var shields: int = 0:  ## How many shields the player has
 		# and since the animation last some time we need to make sure that display in the right shield
 		_deplete_shield(shields_sprites[value])
 
+var shields_energy: Game.EnergyType = Game.EnergyType.BLUE:  ## The energy type of the shields
+	set(value):
+		# set the energy type of the shields
+		for shield: Sprite2D in shields_sprites:
+			if shield.modulate != Game.ENERGY_TYPE_COLOR[Game.EnergyType.DEPLETED]:
+				shield.modulate = Game.ENERGY_TYPE_COLOR[value]
+
 @onready var shields_sprites: Array[Sprite2D] = [$ShieldBar/Shield1, $ShieldBar/Shield2, $ShieldBar/Shield3]  ## Shields sprites
 @onready var game_over_ui: GameOver = $GameOver  ## Game over UI
 @onready var pause_ui: Pause = $Pause  ## Pause UI
@@ -67,7 +74,7 @@ func _deplete_shield(shield: Sprite2D) -> void:
 	# wait a the depleted time, remove it and make it red
 	await get_tree().create_timer(shield_depleted_duration).timeout
 	shield.material = null
-	shield.modulate = Color.RED
+	shield.modulate = Game.ENERGY_TYPE_COLOR[Game.EnergyType.DEPLETED]
 
 
 ## Show the game over UI

@@ -25,6 +25,7 @@ extends CharacterBody2D
 ## Player logic
 
 signal shields_changed(current_shields: int)  ## Signal when the player's shields change
+signal energy_type_changed(energy_type: Game.EnergyType)  ## Signal when the player's energy type change
 
 @export var speed: float = 400  ## How fast the player moves
 @export var fire_rate: float = 0.30  ## How fast the player fires
@@ -37,7 +38,10 @@ var previous_exhaust: String = "normal"  ## The previous exhaust animation
 var shot_on_cd: bool = false  ## Indicates if the player shot is on cooldown
 var dead: bool = false  ## Indicates if the player is dead
 
+var _energy: Game.EnergyType = Game.EnergyType.BLUE  ## Player energy type
+
 @onready var ship: Sprite2D = $Ship  ## Player ship
+@onready var ship_glow: Sprite2D = $ShipGlow  ## Player ship glow
 @onready var exhaust_anim: AnimatedSprite2D = $Exhaust  ## Exhaust animation
 @onready var shot_point: Marker2D = $ShotPoint  ## Shot spawn point
 @onready var shot_sound: AudioStreamPlayer2D = $ShotSound  ## Shot sound
@@ -111,6 +115,15 @@ func _shot_logic() -> void:
 		shot_on_cd = true
 		await get_tree().create_timer(fire_rate).timeout
 		shot_on_cd = false
+	## Change the player energy type, cycle between green and blue
+	if Input.is_action_just_pressed("change_energy"):
+		if _energy == Game.EnergyType.GREEN:
+			_energy = Game.EnergyType.BLUE
+		else:
+			_energy = Game.EnergyType.GREEN
+		# update the ship glow color and emit the signal that the energy type has changed
+		ship_glow.modulate = Game.ENERGY_TYPE_COLOR[_energy]
+		energy_type_changed.emit(_energy)
 
 
 ## Make the player shot
@@ -161,6 +174,7 @@ func _die() -> void:
 	collision.set_deferred("disabled", true)
 
 	# hide the player ship and it exhaust
+	ship_glow.visible = false
 	ship.visible = false
 	exhaust_anim.visible = false
 
