@@ -3,12 +3,31 @@
 [![Conduct](https://img.shields.io/badge/Conduct-Covenat%202.0-478CBF.svg?style=for-the-badge)](https://www.contributor-covenant.org/version/2/0/code_of_conduct/)
 [![Made with Godot](https://img.shields.io/badge/GODOT-4.3-478CBF?style=for-the-badge&logo=godot%20engine&logoColor=white)](https://godotengine.org)
 [![GitHub Release](https://img.shields.io/github/v/release/juan-medina/godot-shootem-up.svg?style=for-the-badge&color=478CBF&label=Last%20game%20release)](https://github.com/juan-medina/godot-shootem-up/releases/latest)
+[![Itch.io](https://img.shields.io/badge/itch.io-478CBF.svg?style=for-the-badge&logo=itch.io&logoColor=white)](https://juanmedina.itch.io/godot-shoot-em-up)
+
+<p align="center">
+	<img src="media/game_small.jpg" alt="Game Screenshot">
+</p>
 
 This is just an example of creating a Shoot 'em up in Godot.
 
-You can download the latest release [here](https://github.com/juan-medina/godot-shootem-up/releases/latest).
+You can download the latest release [here](https://github.com/juan-medina/godot-shootem-up/releases/latest) or on [itch.io](https://juanmedina.itch.io/godot-shoot-em-up).
 
-If you need to open a bug or enhancement please do it [here](https://github.com/juan-medina/godot-shootem-up/issues/new/choose).
+If you need to open a bug or enhancement, please do it [here](https://github.com/juan-medina/godot-shootem-up/issues/new/choose).
+
+## Features
+
+- Player spaceship with movement and shooting.
+- Different enemy spaceships.
+- CRT effect for retro look.
+- Menu with options including:
+	- Borderless fullscreen or windowed mode.
+	- Music and sound effects volume.
+	- CRT effect configuration.
+- Game over window.
+- Pause and resume game.
+- Score and shield bar.
+- Sound effects and music.
 
 ## Resources
 

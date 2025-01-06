@@ -75,3 +75,13 @@ jobs:
           asset_name: "shoot_em_up-${{ github.event.release.name }}-${{ matrix.platform }}.zip.md5"
           tag: ${{ github.ref }}
           overwrite: true
+
+      - name: Publish to Itch.io
+        uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{secrets.BUTLER_API_KEY}}
+          gameData: shoot_em_up.zip
+          itchUsername: ${{juanmedina}}
+          itchGameId: ${{ godot-shoot-em-up }}
+          buildChannel: ${{ matrix.platform }}
+          buildNumber: ${{ github.event.release.name }}
