@@ -50,7 +50,9 @@ func _ready() -> void:
 	if not visibility_changed.connect(_on_visibility_changed) == OK:
 		assert(false, "Failed to connect to visibility_changed signal")
 
+
 ## when the node is free from the scene, stop the click sound
+
 
 func _exit_tree() -> void:
 	if is_instance_valid(_click_sound) and not _click_sound.is_queued_for_deletion():
@@ -61,8 +63,15 @@ func _exit_tree() -> void:
 
 # if the escape key is pressed, exit
 func _process(_delta: float) -> void:
-	if visible and Input.is_action_just_pressed("ui_cancel"):
-		_press_cancel_button()
+	# if the menu is visible
+	if visible:
+		# if the escape key is pressed, press the cancel button
+		if Input.is_action_just_pressed("ui_cancel"):
+			_press_cancel_button()
+		# keep updating the slider labels
+		var sliders: Array[Node] = self.find_children("*", "Slider")
+		for slider: Slider in sliders:
+			_change_slider_label(slider)
 
 
 # Setup all controls signals
@@ -162,24 +171,19 @@ func _press_cancel_button() -> void:
 
 
 ## Called when the a value changes
-func _slider_changed(value: float) -> void:
+func _slider_changed(_value: float) -> void:
 	# if the menu is visible
 	if visible:
 		# play the click sound and wait for it to finish
 		await _play_click_sound()
-		# if the slider has a value label update it
-		var current_focus: Node = get_viewport().gui_get_focus_owner()
-		if current_focus is Slider:
-			var slider: Slider = current_focus
-			_change_slider_label(slider, value as int)
 
 
 ## Change the label of a slider
-func _change_slider_label(slider: Slider, value: int) -> void:
+func _change_slider_label(slider: Slider) -> void:
 	# get from meta the value label and update it
 	var meta: Variant = slider.get_meta("value_label")
 	if meta and meta is NodePath:
 		var path: NodePath = meta
 		var label: Label = slider.get_node(path)
 		if label:
-			label.text = "%d %%" % value
+			label.text = "%d %%" % (slider.value as int)

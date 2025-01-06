@@ -5,6 +5,7 @@
 
 ### Bug Fixes
 - Screen dropdown is empty. [#19](https://github.com/juan-medina/godot-shootem-up/issues/19)
+- Options sliders does not always update labels. [#22](https://github.com/juan-medina/godot-shootem-up/issues/22)
 
 ### Improvements
 - **CRT Effect Options** : Now the CRT effect has configurable options. [#21](https://github.com/juan-medina/godot-shootem-up/issues/21)

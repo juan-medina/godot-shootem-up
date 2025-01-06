@@ -40,15 +40,12 @@ var values: Config.ConfiguredValues = Config.ConfiguredValues.new():  ## The opt
 
 		# set the audio values
 		_master_volume_slider.value = new.master_volume
-		super._change_slider_label(_master_volume_slider, new.master_volume)
 		_master_volumen_check.set_pressed(new.master_muted)
 
 		_sfx_volume_slider.value = new.sfx_volume
-		super._change_slider_label(_sfx_volume_slider, new.sfx_volume)
 		_sfx_volume_check.set_pressed(new.sfx_muted)
 
 		_music_volume_slider.value = new.music_volume
-		super._change_slider_label(_music_volume_slider, new.music_volume)
 		_music_volume_check.set_pressed(new.music_muted)
 
 		# set the crt values
