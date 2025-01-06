@@ -45,6 +45,7 @@ var _energy: Game.EnergyType = Game.EnergyType.BLUE  ## Player energy type
 @onready var exhaust_anim: AnimatedSprite2D = $Exhaust  ## Exhaust animation
 @onready var shot_point: Marker2D = $ShotPoint  ## Shot spawn point
 @onready var shot_sound: AudioStreamPlayer2D = $ShotSound  ## Shot sound
+@onready var energy_change_sound: AudioStreamPlayer2D = $EnergyChangeSound  ## Energy change sound
 @onready var shot_out_effect: AnimatedSprite2D = $ShotOutEffect  ## Shot out effect
 @onready var ship_explosion: AnimatedSprite2D = $ShipExplosion  ## Ship explosion effect
 @onready var collision: CollisionPolygon2D = $Collision  ## Collision
@@ -126,6 +127,7 @@ func _shot_logic() -> void:
 		# reduce alpha to halve
 		ship_glow.modulate.a = 0.5
 		energy_type_changed.emit(_energy)
+		energy_change_sound.play()
 
 
 ## Make the player shot

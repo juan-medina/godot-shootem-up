@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dv34skp6agxhm"]
+[gd_scene load_steps=31 format=3 uid="uid://dv34skp6agxhm"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_qr6qb"]
 [ext_resource type="Texture2D" uid="uid://da4d8xtq0spig" path="res://resources/sprites/ship3/Exhaust/normal/exhaust1.png" id="2_58hbh"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://5fc771b3vyui" path="res://resources/sprites/explosion1/explosion1_9.png" id="23_mc4cs"]
 [ext_resource type="Texture2D" uid="uid://c2qdky15ohxeg" path="res://resources/sprites/explosion1/explosion1_10.png" id="24_3dt42"]
 [ext_resource type="Texture2D" uid="uid://b05pmf606day7" path="res://resources/sprites/explosion1/explosion1_11.png" id="25_xfbml"]
+[ext_resource type="AudioStream" uid="uid://c2vwsnrodd4dj" path="res://resources/sounds/energy_change.wav" id="27_23h08"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uni5j"]
 animations = [{
@@ -164,3 +165,7 @@ sprite_frames = SubResource("SpriteFrames_lnpvr")
 [node name="ShipExplosion" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_d1jhe")
+
+[node name="EnergyChangeSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("27_23h08")
+bus = &"SFX"
