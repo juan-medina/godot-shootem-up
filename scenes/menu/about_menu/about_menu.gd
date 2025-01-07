@@ -35,6 +35,9 @@ func _ready() -> void:
 	if not rich_text_label.meta_clicked.connect(_on_meta_clicked) == OK:
 		assert(false, "Failed to connect to meta_clicked signal")
 
+	# read from a file about text
+	_read_about()
+
 	# initial setup
 	_on_visibility_changed()
 
@@ -96,11 +99,13 @@ func _process(delta: float) -> void:
 						_state = ScrollState.SCROLLING
 			_scroll_by_code = false
 
+
 ## Called when we scroll
 func _on_scroll() -> void:
 	## If we are not scrolling by code is user scrolling, stop auto scroll
 	if not _scroll_by_code:
 		_state = ScrollState.STOPPED
+
 
 ## Called when a meta is clicked
 func _on_meta_clicked(meta: String) -> void:
@@ -109,3 +114,12 @@ func _on_meta_clicked(meta: String) -> void:
 			assert(false, "Failed to open url: " + meta)
 		await super._play_click_sound()
 	_state = ScrollState.STOPPED
+
+
+## Read the about text from a file
+func _read_about() -> void:
+	# open the file and read the bbcode
+	var about_file: FileAccess = FileAccess.open("res://resources/credits/about.bbcode", FileAccess.READ)
+	if about_file == null:
+		assert(false, "Failed to open about file")
+	rich_text_label.parse_bbcode(about_file.get_as_text())
