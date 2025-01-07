@@ -30,12 +30,12 @@ const _VERSION_INCREASE_MENU: String = "Build Version: Increase And Launch Main 
 const _UPDATE_CREDITS_AND_FEATURES_MENU: String = "Update Credits & Features"  ## Update and features credits menu text
 const _VERSION_KEY: String = "application/config/version"  ## Where the build version is stored
 
-const JSON_FILE_PATH: String = "res://resources/credits/credits.json"
-const FEATURES_JSON_FILE: String = "res://resources/credits/features.json"
-const BBCODE_TEMPLATE_FILE: String = "res://resources/credits/about_template.bbcode"
-const ABOUT_BBCODE_FILE: String = "res://resources/credits/about.bbcode"
-const HTML_TEMPLATE_FILE: String = "res://resources/credits/itchio_template.html"
-const HTML_OUTPUT_FILE: String = "res://resources/credits/itchio.html"
+const JSON_FILE_PATH: String = "res://resources/credits/credits.json"  ## The JSON file with the credits
+const FEATURES_JSON_FILE: String = "res://resources/credits/features.json"  ## The JSON file with the features
+const ABOUT_BBCODE_TEMPLATE_FILE: String = "res://resources/credits/about_template.bbcode"  ## The about BBCode template file
+const ABOUT_BBCODE_FILE: String = "res://resources/credits/about.bbcode"  ## The about BBCode file
+const ITCHIO_HTML_TEMPLATE_FILE: String = "res://resources/credits/itchio_template.html"  ## The itchio HTML template file
+const ITCHIO_HTML_OUTPUT_FILE: String = "res://resources/credits/itchio.html"  ## The itchio HTML output file
 
 var _shortcut: Shortcut = preload("res://addons/ci_tools/shortcut.tres")  ## The shortcut to use
 
@@ -128,7 +128,7 @@ func _generate_about_bbcode(credits_data: Dictionary) -> void:
 		bbcode = bbcode.substr(0, bbcode.length() - 1)
 
 	# Write the about BBCode file
-	_write_file(BBCODE_TEMPLATE_FILE, ABOUT_BBCODE_FILE, {"CREDITS": bbcode})
+	_write_file(ABOUT_BBCODE_TEMPLATE_FILE, ABOUT_BBCODE_FILE, {"CREDITS": bbcode})
 
 
 ## Generate the itchio HTML
@@ -163,7 +163,7 @@ func _generate_itchio_html(credits_data: Dictionary, features: Dictionary) -> vo
 	features_html += "</ul>"
 
 	# Write the HTML file
-	_write_file(HTML_TEMPLATE_FILE, HTML_OUTPUT_FILE, {"CREDITS": html, "FEATURES": features_html})
+	_write_file(ITCHIO_HTML_TEMPLATE_FILE, ITCHIO_HTML_OUTPUT_FILE, {"CREDITS": html, "FEATURES": features_html})
 
 
 ## Write a output file using a template file and the giving data
