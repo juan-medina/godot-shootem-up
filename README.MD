@@ -59,7 +59,7 @@ This will read the game version from the [project.godot](project.godot) file, re
 
 This will trigger a github [action](.github/workflows/release.yaml) that will add to the release a zip package with the game.
 
-Additionally this project includes an Godot [addon](addons/build_version/) that will launch the main scene and increase the build number.
+Additionally this project includes an Godot [addon](addons/ci_tools/) that will launch the main scene and increase the build number.
 
 You can use this either via the tool menu: ***Build Version: Increase And Launch Main Scene*** or the shortcut ***CTRL+F5***.
 

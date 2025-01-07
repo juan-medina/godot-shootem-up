@@ -57,7 +57,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/build_version_increase/plugin.cfg", "res://addons/crt_shader/plugin.cfg")
+enabled=PackedStringArray("res://addons/ci_tools/plugin.cfg", "res://addons/crt_shader/plugin.cfg")
 
 [gui]
 

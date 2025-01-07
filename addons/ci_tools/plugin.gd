@@ -28,7 +28,7 @@ extends EditorPlugin
 
 const _TOOL_MENU: String = "Build Version: Increase And Launch Main Scene (CTRL+F5)"  ## Tool menu text
 const _VERSION_KEY: String = "application/config/version"  ## Where the build version is stored
-var _shortcut: Shortcut = preload("res://addons/build_version_increase/shortcut.tres")  ## The shortcut to use
+var _shortcut: Shortcut = preload("res://addons/ci_tools/shortcut.tres")  ## The shortcut to use
 
 
 ## Plugin enabled
