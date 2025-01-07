@@ -36,6 +36,8 @@ const ABOUT_BBCODE_TEMPLATE_FILE: String = "res://resources/credits/about_templa
 const ABOUT_BBCODE_FILE: String = "res://resources/credits/about.bbcode"  ## The about BBCode file
 const ITCHIO_HTML_TEMPLATE_FILE: String = "res://resources/credits/itchio_template.html"  ## The itchio HTML template file
 const ITCHIO_HTML_OUTPUT_FILE: String = "res://resources/credits/itchio.html"  ## The itchio HTML output file
+const README_TEMPLATE_FILE: String = "res://resources/credits/README_template.md"  ## The README template file
+const README_OUTPUT_FILE: String = "res://README.md"  ## The README output file
 
 var _shortcut: Shortcut = preload("res://addons/ci_tools/shortcut.tres")  ## The shortcut to use
 
@@ -108,6 +110,9 @@ func _update_credits_and_features() -> void:
 	# Generate the itchio HTML
 	_generate_itchio_html(credits_data, features)
 
+	# Generate the README markdown
+	_generate_readme(credits_data, features)
+
 
 ## Generate the about BBCode
 func _generate_about_bbcode(credits_data: Dictionary) -> void:
@@ -165,6 +170,28 @@ func _generate_itchio_html(credits_data: Dictionary, features: Dictionary) -> vo
 	# Write the HTML file
 	_write_file(ITCHIO_HTML_TEMPLATE_FILE, ITCHIO_HTML_OUTPUT_FILE, {"CREDITS": html, "FEATURES": features_html})
 
+
+## Generate the README markdown
+func _generate_readme(credits_data: Dictionary, features: Dictionary) -> void:
+	# Generate markdown for credits
+	var credits_md: String = ""
+	for i in range(1, credits_data["credits"].size()):
+		var credit = credits_data["credits"][i]
+		credits_md += "- %s: [%s](%s) by [%s](%s).\n" % [credit["role"], credit["name"], credit["url"], credit["author"]["name"], credit["author"]["url"]]
+		if "details" in credit:
+			for detail in credit["details"]:
+				credits_md += "    - %s: %s.\n" % [detail["type"], detail["name"]]
+
+	# Generate markdown for features
+	var features_md: String = ""
+	for feature in features["features"]:
+		features_md += "- %s\n" % feature["text"]
+		if "details" in feature:
+			for detail in feature["details"]:
+				features_md += "    - %s\n" % detail["type"]
+
+	# Write the README file
+	_write_file(README_TEMPLATE_FILE, README_OUTPUT_FILE, {"CREDITS": credits_md, "FEATURES": features_md})
 
 ## Write a output file using a template file and the giving data
 func _write_file(template_path: String, output_path: String, replacements: Dictionary) -> void:

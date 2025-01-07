@@ -1,4 +1,4 @@
-# Shoot 'em up in Godot
+﻿# Shoot 'em up in Godot
 [![License: MIT](https://img.shields.io/badge/License-MIT-478CBF.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![Conduct](https://img.shields.io/badge/Conduct-Covenat%202.0-478CBF.svg?style=for-the-badge)](https://www.contributor-covenant.org/version/2/0/code_of_conduct/)
 [![Made with Godot](https://img.shields.io/badge/GODOT-4.3-478CBF?style=for-the-badge&logo=godot%20engine&logoColor=white)](https://godotengine.org)
@@ -17,38 +17,11 @@ If you need to open a bug or enhancement, please do it [here](https://github.com
 
 ## Features
 
-- Player spaceship with movement and shooting.
-- Player, enemies, and shots have an energy.
-- To destroy each other the energies need to be different.
-- Different enemy spaceships.
-- CRT effect for retro look.
-- Menu with options including:
-    - Borderless fullscreen or windowed mode.
-    - Music and sound effects volume.
-    - CRT effect configuration.
-- Game over window.
-- Pause and resume game.
-- Score and shield bar.
-- Sound effects and music.
-
+%%FEATURES%%
 
 ## Credits
 
-- Game music: [Abstraction - Music Loop Bundle](https://tallbeard.itch.io/music-loop-bundle) by [Abstraction](https://abstractionmusic.com).
-    - Menu: Box Jump.
-    - Level: Out of Time.
-- Background: [Glacial Mountains: Parallax Background](https://vnitti.itch.io/glacial-mountains-parallax-background) by [vnitti](https://vnitti.itch.io/).
-- Spaceships: [Free Enemy Spaceship 2D Sprites Pixel Art](https://free-game-assets.itch.io/free-enemy-spaceship-2d-sprites-pixel-art) by [Craftpix](https://craftpix.net/).
-- Shield Bar: [UI BARS](https://guilemus.itch.io/ui-bars) by [guilemus](https://guilemus.itch.io/).
-- Change energy sound: [Metal00.wav](https://freesound.org/people/jeremysykes/sounds/341254/) by [jeremysykes](https://freesound.org/people/jeremysykes/).
-- Player shot fire sound: [laser.wav](https://freesound.org/people/Shaun105/sounds/268168) by [Shaun105](https://freesound.org/people/Shaun105/).
-- Player shot hit sound: [Hit/Hurt](https://freesound.org/people/Prof.Mudkip/sounds/398957/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
-- Ship explosion sound: [8-Bit explosion](https://freesound.org/people/Prof.Mudkip/sounds/386862/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
-- Game Over sound: [8-bit Game Over](https://freesound.org/people/Euphrosyyn/sounds/442127/) by [Euphrosyyn](https://freesound.org/people/Euphrosyyn/).
-- Button press sound: [8-bit 2022 Poke Bright Select Button BBM](https://freesound.org/people/NovaSoundTechnology/sounds/653049/) by [NovaSoundTechnology](https://freesound.org/people/NovaSoundTechnology/).
-- Font: [Pixeloid](https://www.fontspace.com/pixeloid-font-f69232) by [GGBotNet](https://www.fontspace.com/ggbotnet).
-- CRT effect: [Godot CRT Shader](https://perons.itch.io/godot-crt-shader) by [Perons](https://perons.itch.io/).
-
+%%CREDITS%%
 
 ## CI
 To trigger a new release I use this powershell [script](create-release.ps1).
