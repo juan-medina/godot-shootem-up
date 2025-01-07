@@ -27,13 +27,15 @@ extends EditorPlugin
 ## increase the build number and launch the main scene.
 
 const _VERSION_INCREASE_MENU: String = "Build Version: Increase And Launch Main Scene (CTRL+F5)"  ## Version increase menu text
-const _UPDATE_CREDITS_MENU: String = "Update Credits"  ## Update credits menu text
+const _UPDATE_CREDITS_AND_FEATURES_MENU: String = "Update Credits & Features"  ## Update and features credits menu text
 const _VERSION_KEY: String = "application/config/version"  ## Where the build version is stored
 
-const _CREDITS_JSON_FILE: String = "res://resources/credits/credits.json"  ## The JSON file with the credits data
-
-const _BBCODE_TEMPLATE_FILE: String = "res://resources/credits/about_template.bbcode"  ## The template file for the about BBCode
-const _ABOUT_BBCODE_FILE: String = "res://resources/credits/about.bbcode"  ## The output file for the about BBCode
+const JSON_FILE_PATH: String = "res://resources/credits/credits.json"
+const FEATURES_JSON_FILE: String = "res://resources/credits/features.json"
+const BBCODE_TEMPLATE_FILE: String = "res://resources/credits/about_template.bbcode"
+const ABOUT_BBCODE_FILE: String = "res://resources/credits/about.bbcode"
+const HTML_TEMPLATE_FILE: String = "res://resources/credits/itchio_template.html"
+const HTML_OUTPUT_FILE: String = "res://resources/credits/itchio.html"
 
 var _shortcut: Shortcut = preload("res://addons/ci_tools/shortcut.tres")  ## The shortcut to use
 
@@ -42,14 +44,14 @@ var _shortcut: Shortcut = preload("res://addons/ci_tools/shortcut.tres")  ## The
 func _enter_tree() -> void:
 	# add our tool menus item to our functions
 	add_tool_menu_item(_VERSION_INCREASE_MENU, _increase_build_and_launch)
-	add_tool_menu_item(_UPDATE_CREDITS_MENU, _update_credits)
+	add_tool_menu_item(_UPDATE_CREDITS_AND_FEATURES_MENU, _update_credits_and_features)
 
 
 ## Plugin disabled
 func _exit_tree() -> void:
 	# remove our tool menu item
 	remove_tool_menu_item(_VERSION_INCREASE_MENU)
-	remove_tool_menu_item(_UPDATE_CREDITS_MENU)
+	remove_tool_menu_item(_UPDATE_CREDITS_AND_FEATURES_MENU)
 
 
 ## When we get any shortcut pressed
@@ -81,18 +83,30 @@ func _increase_build_and_launch() -> void:
 
 
 ## Update the credits menu item
-func _update_credits() -> void:
-	# Read JSON file
-	var json_file: FileAccess = FileAccess.open(_CREDITS_JSON_FILE, FileAccess.READ)
+func _update_credits_and_features() -> void:
+	# Read JSON file for credits
+	var json_file: FileAccess = FileAccess.open(JSON_FILE_PATH, FileAccess.READ)
 	if not json_file:
-		push_error("JSON file not found: %s" % _CREDITS_JSON_FILE)
+		push_error("JSON file not found: %s" % JSON_FILE_PATH)
 		return
 	var json_data: String = json_file.get_as_text()
 	json_file.close()
 	var credits_data: Dictionary = JSON.parse_string(json_data)
 
+	# Read JSON file for features
+	var features_file: FileAccess = FileAccess.open(FEATURES_JSON_FILE, FileAccess.READ)
+	if not features_file:
+		push_error("Features JSON file not found: %s" % FEATURES_JSON_FILE)
+		return
+	var features_data: String = features_file.get_as_text()
+	features_file.close()
+	var features: Dictionary = JSON.parse_string(features_data)
+
 	# Generate the about BBCode
 	_generate_about_bbcode(credits_data)
+
+	# Generate the itchio HTML
+	_generate_itchio_html(credits_data, features)
 
 
 ## Generate the about BBCode
@@ -113,8 +127,43 @@ func _generate_about_bbcode(credits_data: Dictionary) -> void:
 	if bbcode.ends_with("\n"):
 		bbcode = bbcode.substr(0, bbcode.length() - 1)
 
-	## Write the about BBCode file
-	_write_file(_BBCODE_TEMPLATE_FILE, _ABOUT_BBCODE_FILE, {"CREDITS": bbcode})
+	# Write the about BBCode file
+	_write_file(BBCODE_TEMPLATE_FILE, ABOUT_BBCODE_FILE, {"CREDITS": bbcode})
+
+
+## Generate the itchio HTML
+func _generate_itchio_html(credits_data: Dictionary, features: Dictionary) -> void:
+	# Generate HTML for credits
+	var html: String = "<ul>\n"
+	for credit in credits_data["credits"]:
+		html += "    <li>\n"
+		html += "        %s:\n" % credit["role"]
+		html += '        <a href="%s">%s</a>\n' % [credit["url"], credit["name"]]
+		if "author" in credit:
+			html += '        by <a href="%s">%s</a>\n' % [credit["author"]["url"], credit["author"]["name"]]
+		html += "        .\n"
+		if "details" in credit:
+			html += "        <ul>\n"
+			for detail in credit["details"]:
+				html += "            <li>%s: %s.</li>\n" % [detail["type"], detail["name"]]
+			html += "        </ul>\n"
+		html += "    </li>\n"
+	html += "</ul>"
+
+	# Generate HTML for features
+	var features_html: String = "<ul>\n"
+	for feature in features["features"]:
+		features_html += "    <li>%s" % feature["text"]
+		if "details" in feature:
+			features_html += "\n        <ul>\n"
+			for detail in feature["details"]:
+				features_html += "            <li>%s</li>\n" % detail["type"]
+			features_html += "        </ul>\n"
+		features_html += "    </li>\n"
+	features_html += "</ul>"
+
+	# Write the HTML file
+	_write_file(HTML_TEMPLATE_FILE, HTML_OUTPUT_FILE, {"CREDITS": html, "FEATURES": features_html})
 
 
 ## Write a output file using a template file and the giving data
