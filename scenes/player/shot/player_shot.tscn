@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dph036x240yuj" path="res://resources/sounds/hit.wav" id="7_kpi8j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hyc0"]
-size = Vector2(18, 16.5)
+size = Vector2(22, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f68ni"]
 animations = [{
@@ -42,7 +42,7 @@ region_enabled = true
 region_rect = Rect2(33, 25.1048, 18, 15.918)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.25)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_0hyc0")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

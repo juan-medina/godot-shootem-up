@@ -1,0 +1,342 @@
+[gd_scene load_steps=4 format=3 uid="uid://dajo41m6dgwe5"]
+
+[ext_resource type="Script" path="res://scenes/menu/controls_menu/controls_menu.gd" id="1_3s1kr"]
+[ext_resource type="Texture2D" uid="uid://c7v6nu52t80ly" path="res://resources/sprites/inputs/tilemap.png" id="2_vnjdh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2pfae"]
+bg_color = Color(0, 0, 0, 0)
+
+[node name="ControlsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3s1kr")
+
+[node name="Controls" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -210.0
+offset_top = 191.0
+offset_right = 210.0
+offset_bottom = 231.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0.632813, 0.632813, 0.632813, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -111.0
+offset_right = 185.0
+offset_bottom = 219.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VFlowContainer" type="VFlowContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -160.0
+offset_right = 180.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Movement" type="Label" parent="Panel/VFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Movement"
+horizontal_alignment = 1
+
+[node name="MovementRow" type="HFlowContainer" parent="Panel/VFlowContainer"]
+custom_minimum_size = Vector2(360, 70)
+layout_mode = 2
+
+[node name="Cursor" type="PanelContainer" parent="Panel/VFlowContainer/MovementRow"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="Left" type="Sprite2D" parent="Panel/VFlowContainer/MovementRow/Cursor"]
+position = Vector2(16, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(561, 68, 16, 16)
+
+[node name="Up" type="Sprite2D" parent="Panel/VFlowContainer/MovementRow/Cursor"]
+position = Vector2(48, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(510, 68, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="Down" type="Sprite2D" parent="Panel/VFlowContainer/MovementRow/Cursor"]
+position = Vector2(48, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(544, 68, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="Right" type="Sprite2D" parent="Panel/VFlowContainer/MovementRow/Cursor"]
+position = Vector2(80, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(527, 68, 16, 17)
+region_filter_clip_enabled = true
+
+[node name="Keys" type="PanelContainer" parent="Panel/VFlowContainer/MovementRow"]
+custom_minimum_size = Vector2(134, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="A" type="Sprite2D" parent="Panel/VFlowContainer/MovementRow/Keys"]
+position = Vector2(16, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(306, 51, 16, 16)
+
+[node name="W" type="Sprite2D" parent="Panel/VFlowContainer/MovementRow/Keys"]
+position = Vector2(48, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(306, 34, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="S" type="Sprite2D" parent="Panel/VFlowContainer/MovementRow/Keys"]
+position = Vector2(48, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(323, 51, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="D" type="Sprite2D" parent="Panel/VFlowContainer/MovementRow/Keys"]
+position = Vector2(80, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(340, 51, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="Dpad" type="PanelContainer" parent="Panel/VFlowContainer/MovementRow"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="DPad" type="Sprite2D" parent="Panel/VFlowContainer/MovementRow/Dpad"]
+position = Vector2(0, 32)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(0, 119, 16, 16)
+
+[node name="Stick" type="PanelContainer" parent="Panel/VFlowContainer/MovementRow"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="Stick" type="Sprite2D" parent="Panel/VFlowContainer/MovementRow/Stick"]
+position = Vector2(0, 32)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(0, 238, 16, 16)
+
+[node name="Fire" type="Label" parent="Panel/VFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Fire
+"
+horizontal_alignment = 1
+
+[node name="FireRow" type="HFlowContainer" parent="Panel/VFlowContainer"]
+custom_minimum_size = Vector2(360, 40)
+layout_mode = 2
+
+[node name="Space" type="PanelContainer" parent="Panel/VFlowContainer/FireRow"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="Left" type="Sprite2D" parent="Panel/VFlowContainer/FireRow/Space"]
+position = Vector2(16, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(527, 102, 16, 16)
+
+[node name="Center" type="Sprite2D" parent="Panel/VFlowContainer/FireRow/Space"]
+position = Vector2(48, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(544, 102, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="Right" type="Sprite2D" parent="Panel/VFlowContainer/FireRow/Space"]
+position = Vector2(80, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(561, 102, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="ButtonA" type="PanelContainer" parent="Panel/VFlowContainer/FireRow"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="ButtonA" type="Sprite2D" parent="Panel/VFlowContainer/FireRow/ButtonA"]
+position = Vector2(0, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(102, 153, 17, 16)
+
+[node name="Energy" type="Label" parent="Panel/VFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Change Energy"
+horizontal_alignment = 1
+
+[node name="EnergyRow" type="HFlowContainer" parent="Panel/VFlowContainer"]
+custom_minimum_size = Vector2(360, 40)
+layout_mode = 2
+
+[node name="Alt" type="PanelContainer" parent="Panel/VFlowContainer/EnergyRow"]
+custom_minimum_size = Vector2(56, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="Left" type="Sprite2D" parent="Panel/VFlowContainer/EnergyRow/Alt"]
+position = Vector2(16, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(289, 85, 16, 16)
+
+[node name="right" type="Sprite2D" parent="Panel/VFlowContainer/EnergyRow/Alt"]
+position = Vector2(48, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(306, 85, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="Ctrl" type="PanelContainer" parent="Panel/VFlowContainer/EnergyRow"]
+custom_minimum_size = Vector2(72, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="Left" type="Sprite2D" parent="Panel/VFlowContainer/EnergyRow/Ctrl"]
+position = Vector2(16, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(289, 102, 16, 16)
+
+[node name="Right" type="Sprite2D" parent="Panel/VFlowContainer/EnergyRow/Ctrl"]
+position = Vector2(48, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(306, 102, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="ButtonB" type="PanelContainer" parent="Panel/VFlowContainer/EnergyRow"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="ButtonB" type="Sprite2D" parent="Panel/VFlowContainer/EnergyRow/ButtonB"]
+position = Vector2(0, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(85, 153, 16, 16)
+
+[node name="Pause" type="Label" parent="Panel/VFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="PauseRow" type="HFlowContainer" parent="Panel/VFlowContainer"]
+custom_minimum_size = Vector2(360, 40)
+layout_mode = 2
+
+[node name="Escape" type="PanelContainer" parent="Panel/VFlowContainer/PauseRow"]
+custom_minimum_size = Vector2(56, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="Escape" type="Sprite2D" parent="Panel/VFlowContainer/PauseRow/Escape"]
+position = Vector2(16, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(289, 0, 16, 16)
+
+[node name="Start" type="PanelContainer" parent="Panel/VFlowContainer/PauseRow"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pfae")
+metadata/_edit_group_ = true
+
+[node name="Start" type="Sprite2D" parent="Panel/VFlowContainer/PauseRow/Start"]
+position = Vector2(0, 16)
+scale = Vector2(2, 2)
+texture = ExtResource("2_vnjdh")
+region_enabled = true
+region_rect = Rect2(85, 306, 16, 16)
+
+[node name="ContinueButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -90.0
+offset_right = 73.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Continue"
+metadata/focus_on_visible = true
+metadata/cancel_menu = true

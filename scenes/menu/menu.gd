@@ -28,6 +28,7 @@ extends Control
 @onready var main_menu: MainMenu = $MainMenu  ## Main menu
 @onready var about_menu: AboutMenu = $AboutMenu  ## About menu
 @onready var options_menu: OptionsMenu = $OptionsMenu  ## Options menu
+@onready var controls_menu: ControlsMenu = $ControlsMenu  ## Controls menu
 @onready var background: Background = $Background  ## Background
 @onready var music: AudioStreamPlayer2D = $Music  ## Music
 
@@ -42,13 +43,17 @@ func _ready() -> void:
 func _on_main_menu_button_click(button: Button) -> void:
 	match button:
 		main_menu.play_button:
-			_play_game()
+			_controls_menu()
 		main_menu.exit_button:
 			_exit()
 		main_menu.about_button:
 			_about()
 		main_menu.options_button:
 			_options()
+
+
+func _controls_menu() -> void:
+	controls_menu.visible = true
 
 
 ## Call to Play the game
@@ -114,3 +119,8 @@ func _on_options_menu_button_click(button: Button) -> void:
 func _apply_options() -> void:
 	# save the options
 	GlobalConfig.current_values = options_menu.values
+
+
+func _on_controls_menu_button_click(button: Button) -> void:
+	if button == controls_menu.continue_button:
+		_play_game()

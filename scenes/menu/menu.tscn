@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyj6c2hadv5jj"]
+[gd_scene load_steps=9 format=3 uid="uid://cyj6c2hadv5jj"]
 
 [ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_qw6yr"]
 [ext_resource type="PackedScene" uid="uid://cy8jkae75pwng" path="res://scenes/menu/version/version.tscn" id="2_r1hd6"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://c57j2yuwdwu86" path="res://resources/music/menu.ogg" id="5_lhpay"]
 [ext_resource type="PackedScene" uid="uid://ouxn606x0jj6" path="res://scenes/menu/about_menu/about_menu.tscn" id="6_hdt8b"]
 [ext_resource type="PackedScene" uid="uid://bycj1vp3wj1pe" path="res://scenes/menu/options_menu/options_menu.tscn" id="7_67e2e"]
+[ext_resource type="PackedScene" uid="uid://dajo41m6dgwe5" path="res://scenes/menu/controls_menu/controls_menu.tscn" id="8_urn58"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -63,6 +64,11 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="ControlsMenu" parent="." instance=ExtResource("8_urn58")]
+visible = false
+layout_mode = 1
+
 [connection signal="button_click" from="MainMenu" to="." method="_on_main_menu_button_click"]
 [connection signal="button_click" from="AboutMenu" to="." method="_on_about_menu_button_click"]
 [connection signal="button_click" from="OptionsMenu" to="." method="_on_options_menu_button_click"]
+[connection signal="button_click" from="ControlsMenu" to="." method="_on_controls_menu_button_click"]

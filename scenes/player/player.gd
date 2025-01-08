@@ -28,7 +28,7 @@ signal shields_changed(current_shields: int)  ## Signal when the player's shield
 signal energy_type_changed(energy_type: Game.EnergyType)  ## Signal when the player's energy type change
 
 @export var speed: float = 400  ## How fast the player moves
-@export var fire_rate: float = 0.30  ## How fast the player fires
+@export var fire_rate: float = 0.20  ## How fast the player fires
 @export var max_shield: int = 3  ## Max shield units
 @export var hit_duration: float = 1.0  ## How long the hit effect will last
 
