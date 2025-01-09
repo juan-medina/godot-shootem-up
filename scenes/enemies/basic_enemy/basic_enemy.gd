@@ -32,19 +32,19 @@ signal destroyed(points: int)  ## Emitted when the enemy is destroyed with the a
 @export var points: int = 150  ## Points that will add
 @export var hit_duration: float = 1.0  ## How long the hit effect will last
 
-var turbo: bool = false:  ## Indicates if is accelerating, visually the exhaust will be faster
-	set(value):
-		turbo = value
-		# an enemy has an exhaust with two animations depending on turbo
-		exhaust.play("turbo" if turbo else "normal")
-
-var energy: Game.EnergyType = Game.EnergyType.BLUE:  ## Energy type of the enemy
+@export var energy: Game.EnergyType = Game.EnergyType.BLUE:  ## Energy type of the enemy
 	set(value):
 		_energy = value
 		# set the color of the sprite glow depending on the energy type
 		sprite_glow.modulate = Game.ENERGY_TYPE_COLOR[_energy]
 		# reduce alpha
 		sprite_glow.modulate.a = 0.75
+
+var turbo: bool = false:  ## Indicates if is accelerating, visually the exhaust will be faster
+	set(value):
+		turbo = value
+		# an enemy has an exhaust with two animations depending on turbo
+		exhaust.play("turbo" if turbo else "normal")
 
 var _direction: Vector2 = Vector2.LEFT  ## In which direction the enemy is moving, default left
 var _on_screen: bool = false  ## Indicates if the enemy is on the screen
