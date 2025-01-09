@@ -30,46 +30,10 @@ const ENERGY_TYPE_COLOR: Dictionary = {
 	EnergyType.BLUE: Color(0, 1, 1, 1), EnergyType.GREEN: Color(0, 1, 0, 1), EnergyType.DEPLETED: Color(1, 0, 0, 1.0)
 }
 
-@export var spawn_default_timer: float = 0.5  ## how often the enemies will spawn
-
-@onready var enemies_spawn_timer: Timer = $EnemiesSpawn  ## Timer to spawn enemies
 @onready var ui: UI = $CanvasLayer/UI  ## the in-game UI
 @onready var music: AudioStreamPlayer2D = $Music  ## the game music
 @onready var game_over_sound: AudioStreamPlayer2D = $GameOver  ## sound for game over
-@onready var enemy1: PackedScene = preload("res://scenes/enemies/basic_enemy/basic_enemy.tscn")  ## the basic enemy
-@onready var enemy2: PackedScene = preload("res://scenes/enemies/kamikaze/kamikaze.tscn")  ## the kamikaze enemy
 @onready var menu_scene: PackedScene = load("res://scenes/menu/menu.tscn")  ## the menu scene
-
-
-## Called when the game is added
-func _ready() -> void:
-	## start the timer to spawn enemies
-	enemies_spawn_timer.start(spawn_default_timer)
-
-
-## Called when we need to spawn an enemy
-func _on_enemies_spawn_timeout() -> void:
-	# spawn a random enemy, 70% basic, 30% kamikaze
-	var enemy_instance: BasicEnemy = enemy1.instantiate() if randf() < 0.7 else enemy2.instantiate()
-
-	# spawn the enemy at a random position, 70% on the viewport height and outside of the viewport width
-	var max_viewport: Vector2 = get_viewport_rect().size
-	var y_range: float = (max_viewport.y / 2) * 0.7
-	var spawn_position: Vector2 = Vector2(max_viewport.x + 50, max_viewport.y / 2 + randf_range(-y_range, y_range))
-	enemy_instance.global_position = spawn_position
-
-	# connect the enemy destroyed signal
-	if not enemy_instance.destroyed.connect(_on_enemy_died) == OK:
-		assert(false, "Failed to connect to enemy destroyed signal")
-
-	# add the enemy to the scene
-	add_child(enemy_instance)
-
-	# start the timer to spawn the next enemy, with a random delay
-	enemies_spawn_timer.start(spawn_default_timer + randf_range(0, 0.5))
-
-	# set the energy type of the enemy, 50% blue, 50% green
-	enemy_instance.energy = EnergyType.BLUE if randf() < 0.5 else EnergyType.GREEN
 
 
 ## Called when an enemy is destroyed
