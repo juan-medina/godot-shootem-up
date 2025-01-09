@@ -18,9 +18,10 @@ If you need to open a bug or enhancement, please do it [here](https://github.com
 ## Features
 
 - Player spaceship with movement and shooting.
-- Player, enemies, and shots have an energy.
+- Player, enemies will have an energy type.
 - To destroy each other the energies need to be different.
 - Different enemy spaceships.
+- Enemies waves.
 - CRT effect for retro look.
 - Menu with options including:
     - Borderless fullscreen or windowed mode.
@@ -40,7 +41,6 @@ If you need to open a bug or enhancement, please do it [here](https://github.com
 - Background: [Glacial Mountains: Parallax Background](https://vnitti.itch.io/glacial-mountains-parallax-background) by [vnitti](https://vnitti.itch.io/).
 - Spaceships: [Free Enemy Spaceship 2D Sprites Pixel Art](https://free-game-assets.itch.io/free-enemy-spaceship-2d-sprites-pixel-art) by [Craftpix](https://craftpix.net/).
 - Shield Bar: [UI BARS](https://guilemus.itch.io/ui-bars) by [guilemus](https://guilemus.itch.io/).
-- Controls Icons: [Input Prompts Pixel 16×](https://kenney.nl/assets/input-prompts-pixel-16) by [Kenney](https://kenney.nl/).
 - Change energy sound: [Metal00.wav](https://freesound.org/people/jeremysykes/sounds/341254/) by [jeremysykes](https://freesound.org/people/jeremysykes/).
 - Player shot fire sound: [laser.wav](https://freesound.org/people/Shaun105/sounds/268168) by [Shaun105](https://freesound.org/people/Shaun105/).
 - Player shot hit sound: [Hit/Hurt](https://freesound.org/people/Prof.Mudkip/sounds/398957/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).

@@ -4,13 +4,16 @@
 			"text": "Player spaceship with movement and shooting."
 		},
 		{
-			"text": "Player, enemies, and shots have an energy."
+			"text": "Player, enemies will have an energy type."
 		},
 		{
 			"text": "To destroy each other the energies need to be different."
 		},
 		{
 			"text": "Different enemy spaceships."
+		},
+		{
+			"text": "Enemies waves."
 		},
 		{
 			"text": "CRT effect for retro look."

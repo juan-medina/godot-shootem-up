@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://buku48xfsvg5i"]
+[gd_scene load_steps=11 format=3 uid="uid://buku48xfsvg5i"]
 
 [ext_resource type="PackedScene" uid="uid://bbcex7rkvps8o" path="res://scenes/enemies/wave/wave_01.tscn" id="1_5xi56"]
 [ext_resource type="PackedScene" uid="uid://cp82a78cmkh1s" path="res://scenes/enemies/wave/wave_02.tscn" id="2_rl5je"]
+[ext_resource type="PackedScene" uid="uid://iemb5ly217k6" path="res://scenes/enemies/wave/wave_03.tscn" id="3_0a2jd"]
+[ext_resource type="PackedScene" uid="uid://cvf8m0a25uv05" path="res://scenes/enemies/wave/wave_04.tscn" id="4_8wctp"]
+[ext_resource type="PackedScene" uid="uid://c6mgdhkhloebf" path="res://scenes/enemies/wave/wave_05.tscn" id="5_3hyp3"]
+[ext_resource type="PackedScene" uid="uid://cb8mt46k2o60y" path="res://scenes/enemies/wave/wave_06.tscn" id="6_teb7y"]
+[ext_resource type="PackedScene" uid="uid://ce268vqy8lpgw" path="res://scenes/enemies/wave/wave_07.tscn" id="7_hgktj"]
+[ext_resource type="PackedScene" uid="uid://kptpucgam817" path="res://scenes/enemies/wave/wave_08.tscn" id="8_wvyjn"]
+[ext_resource type="PackedScene" uid="uid://brmwjfksq6eri" path="res://scenes/enemies/wave/wave_09.tscn" id="9_tcfr0"]
+[ext_resource type="PackedScene" uid="uid://x4eri1fyvam0" path="res://scenes/enemies/wave/wave_10.tscn" id="10_lcb0d"]
 
 [node name="Level" type="Node2D"]
 
@@ -9,3 +17,27 @@
 
 [node name="Wave02" parent="." instance=ExtResource("2_rl5je")]
 position = Vector2(1150, 0)
+
+[node name="Wave03" parent="." instance=ExtResource("3_0a2jd")]
+position = Vector2(2500, 0)
+
+[node name="Wave04" parent="." instance=ExtResource("4_8wctp")]
+position = Vector2(4000, 0)
+
+[node name="Wave05" parent="." instance=ExtResource("5_3hyp3")]
+position = Vector2(5500, 0)
+
+[node name="Wave06" parent="." instance=ExtResource("6_teb7y")]
+position = Vector2(6700, 0)
+
+[node name="Wave07" parent="." instance=ExtResource("7_hgktj")]
+position = Vector2(8300, 0)
+
+[node name="Wave08" parent="." instance=ExtResource("8_wvyjn")]
+position = Vector2(9800, 0)
+
+[node name="Wave09" parent="." instance=ExtResource("9_tcfr0")]
+position = Vector2(11500, 0)
+
+[node name="Wave10" parent="." instance=ExtResource("10_lcb0d")]
+position = Vector2(13200, 0)

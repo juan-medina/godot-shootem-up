@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6mgdhkhloebf"]
+
+[ext_resource type="Script" path="res://scenes/enemies/wave/wave.gd" id="1_sk1lk"]
+[ext_resource type="PackedScene" uid="uid://bd2x2osm3t6k0" path="res://scenes/enemies/kamikaze/kamikaze.tscn" id="2_ddk36"]
+[ext_resource type="PackedScene" uid="uid://dqejknaljhhmi" path="res://scenes/enemies/basic_enemy/basic_enemy.tscn" id="3_40w43"]
+
+[node name="Wave05" type="Node2D"]
+script = ExtResource("1_sk1lk")
+
+[node name="Group01" type="Node2D" parent="."]
+position = Vector2(0, 50)
+
+[node name="Kamikaze01" parent="Group01" instance=ExtResource("2_ddk36")]
+position = Vector2(230, 50)
+
+[node name="Kamikaze02" parent="Group01" instance=ExtResource("2_ddk36")]
+position = Vector2(230, 110)
+
+[node name="Kamikaze03" parent="Group01" instance=ExtResource("2_ddk36")]
+position = Vector2(230, 170)
+energy = 1
+
+[node name="Kamikaze04" parent="Group01" instance=ExtResource("2_ddk36")]
+position = Vector2(230, 230)
+energy = 1
+
+[node name="Group02" type="Node2D" parent="."]
+position = Vector2(654, 398)
+
+[node name="Kamikaze01" parent="Group02" instance=ExtResource("2_ddk36")]
+position = Vector2(230, 50)
+
+[node name="Kamikaze02" parent="Group02" instance=ExtResource("2_ddk36")]
+position = Vector2(230, 110)
+
+[node name="Kamikaze03" parent="Group02" instance=ExtResource("2_ddk36")]
+position = Vector2(230, 170)
+energy = 1
+
+[node name="Kamikaze04" parent="Group02" instance=ExtResource("2_ddk36")]
+position = Vector2(230, 230)
+energy = 1
+
+[node name="Group03" type="Node2D" parent="."]
+position = Vector2(371, 529)
+metadata/_edit_group_ = true
+
+[node name="BasicEnemy01" parent="Group03" instance=ExtResource("3_40w43")]
+position = Vector2(-8, -64)
+energy = 1
+
+[node name="BasicEnemy02" parent="Group03" instance=ExtResource("3_40w43")]
+position = Vector2(-66, 0)
+
+[node name="BasicEnemy03" parent="Group03" instance=ExtResource("3_40w43")]
+position = Vector2(-8, 66)
+energy = 1
+
+[node name="Group04" type="Node2D" parent="."]
+position = Vector2(800, 209)
+metadata/_edit_group_ = true
+
+[node name="BasicEnemy01" parent="Group04" instance=ExtResource("3_40w43")]
+position = Vector2(-8, -64)
+
+[node name="BasicEnemy02" parent="Group04" instance=ExtResource("3_40w43")]
+position = Vector2(-66, 0)
+energy = 1
+
+[node name="BasicEnemy03" parent="Group04" instance=ExtResource("3_40w43")]
+position = Vector2(-8, 66)

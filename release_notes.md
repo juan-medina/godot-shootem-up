@@ -1,7 +1,7 @@
 ## Release Notes
 
 ### New Features
-- **Energy**: Now the player, enemies, and shots have an energy. To destroy each other the energies need to be different.
+- **Waves**: Now we have enemies waves.
 
 ### Bug Fixes
 

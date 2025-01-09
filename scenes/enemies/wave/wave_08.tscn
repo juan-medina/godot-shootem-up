@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://kptpucgam817"]
+
+[ext_resource type="Script" path="res://scenes/enemies/wave/wave.gd" id="1_xsjir"]
+[ext_resource type="PackedScene" uid="uid://dqejknaljhhmi" path="res://scenes/enemies/basic_enemy/basic_enemy.tscn" id="2_tb5f1"]
+[ext_resource type="PackedScene" uid="uid://bd2x2osm3t6k0" path="res://scenes/enemies/kamikaze/kamikaze.tscn" id="3_mnk2w"]
+
+[node name="Wave08" type="Node2D"]
+script = ExtResource("1_xsjir")
+
+[node name="Group01" type="Node2D" parent="."]
+position = Vector2(-372, 124)
+metadata/_edit_group_ = true
+
+[node name="BasicEnemy7" parent="Group01" instance=ExtResource("2_tb5f1")]
+position = Vector2(750, 175)
+
+[node name="BasicEnemy8" parent="Group01" instance=ExtResource("2_tb5f1")]
+position = Vector2(750, 551)
+
+[node name="BasicEnemy9" parent="Group01" instance=ExtResource("2_tb5f1")]
+position = Vector2(650, 251)
+
+[node name="BasicEnemy10" parent="Group01" instance=ExtResource("2_tb5f1")]
+position = Vector2(650, 505)
+
+[node name="BasicEnemy11" parent="Group01" instance=ExtResource("2_tb5f1")]
+position = Vector2(550, 321)
+
+[node name="BasicEnemy12" parent="Group01" instance=ExtResource("2_tb5f1")]
+position = Vector2(550, 472)
+
+[node name="BasicEnemy13" parent="Group01" instance=ExtResource("2_tb5f1")]
+position = Vector2(480, 394)
+
+[node name="Group02" type="Node2D" parent="."]
+position = Vector2(340, -114)
+metadata/_edit_group_ = true
+
+[node name="BasicEnemy7" parent="Group02" instance=ExtResource("2_tb5f1")]
+position = Vector2(750, 175)
+
+[node name="BasicEnemy8" parent="Group02" instance=ExtResource("2_tb5f1")]
+position = Vector2(750, 551)
+
+[node name="BasicEnemy9" parent="Group02" instance=ExtResource("2_tb5f1")]
+position = Vector2(650, 251)
+
+[node name="BasicEnemy10" parent="Group02" instance=ExtResource("2_tb5f1")]
+position = Vector2(650, 505)
+
+[node name="BasicEnemy11" parent="Group02" instance=ExtResource("2_tb5f1")]
+position = Vector2(550, 321)
+
+[node name="BasicEnemy12" parent="Group02" instance=ExtResource("2_tb5f1")]
+position = Vector2(550, 472)
+
+[node name="BasicEnemy13" parent="Group02" instance=ExtResource("2_tb5f1")]
+position = Vector2(480, 394)
+
+[node name="Group08" type="Node2D" parent="."]
+position = Vector2(245, 44)
+metadata/_edit_group_ = true
+
+[node name="Kamikaze01" parent="Group08" instance=ExtResource("3_mnk2w")]
+position = Vector2(99, 62)
+
+[node name="Kamikaze02" parent="Group08" instance=ExtResource("3_mnk2w")]
+position = Vector2(258, 135)
+energy = 1
+
+[node name="Group04" type="Node2D" parent="."]
+position = Vector2(605, 421)
+metadata/_edit_group_ = true
+
+[node name="Kamikaze02" parent="Group04" instance=ExtResource("3_mnk2w")]
+position = Vector2(258, 135)
+energy = 1
+
+[node name="Kamikaze03" parent="Group04" instance=ExtResource("3_mnk2w")]
+position = Vector2(102, 192)
