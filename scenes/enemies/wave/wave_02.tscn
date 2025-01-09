@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp82a78cmkh1s"]
+
+[ext_resource type="Script" path="res://scenes/enemies/wave/wave.gd" id="1_8xitj"]
+[ext_resource type="PackedScene" uid="uid://dqejknaljhhmi" path="res://scenes/enemies/basic_enemy/basic_enemy.tscn" id="2_bs8uh"]
+
+[node name="Wave02" type="Node2D"]
+script = ExtResource("1_8xitj")
+
+[node name="BasicEnemy" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(1120, 40)
+
+[node name="BasicEnemy2" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(1120, 665)
+
+[node name="BasicEnemy3" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(1000, 75)
+
+[node name="BasicEnemy4" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(1000, 632)
+
+[node name="BasicEnemy5" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(860, 124)
+
+[node name="BasicEnemy6" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(860, 594)
+
+[node name="BasicEnemy7" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(750, 175)
+
+[node name="BasicEnemy8" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(750, 551)
+
+[node name="BasicEnemy9" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(650, 251)
+
+[node name="BasicEnemy10" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(650, 505)
+
+[node name="BasicEnemy11" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(550, 321)
+
+[node name="BasicEnemy12" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(550, 472)
+
+[node name="BasicEnemy13" parent="." instance=ExtResource("2_bs8uh")]
+position = Vector2(480, 394)

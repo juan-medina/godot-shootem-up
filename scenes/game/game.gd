@@ -36,6 +36,15 @@ const ENERGY_TYPE_COLOR: Dictionary = {
 @onready var menu_scene: PackedScene = load("res://scenes/menu/menu.tscn")  ## the menu scene
 
 
+## When the game is added to the scene
+func _ready() -> void:
+	## get all the waves and connect the enemy_die signal
+	var waves: Array[Node] = find_children("*", "Wave")
+	for wave: Wave in waves:
+		if wave.enemy_die.connect(_on_enemy_died) != OK:
+			assert(false, "Error connecting enemy_die signal")
+
+
 ## Called when an enemy is destroyed
 func _on_enemy_died(points: int) -> void:
 	# update the points in the UI

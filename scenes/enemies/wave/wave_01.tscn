@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbcex7rkvps8o"]
+
+[ext_resource type="Script" path="res://scenes/enemies/wave/wave.gd" id="1_7rx4d"]
+[ext_resource type="PackedScene" uid="uid://dqejknaljhhmi" path="res://scenes/enemies/basic_enemy/basic_enemy.tscn" id="2_12bb4"]
+
+[node name="Wave01" type="Node2D"]
+script = ExtResource("1_7rx4d")
+
+[node name="Group01" type="Node2D" parent="."]
+position = Vector2(182, 214)
+metadata/_edit_group_ = true
+
+[node name="BasicEnemy01" parent="Group01" instance=ExtResource("2_12bb4")]
+position = Vector2(-8, -64)
+energy = 1
+
+[node name="BasicEnemy02" parent="Group01" instance=ExtResource("2_12bb4")]
+position = Vector2(-66, 1)
+energy = 1
+
+[node name="BasicEnemy03" parent="Group01" instance=ExtResource("2_12bb4")]
+position = Vector2(-8, 66)
+energy = 1
+
+[node name="Group02" type="Node2D" parent="."]
+position = Vector2(654, 570)
+metadata/_edit_group_ = true
+
+[node name="BasicEnemy01" parent="Group02" instance=ExtResource("2_12bb4")]
+position = Vector2(-8, -64)
+energy = 1
+
+[node name="BasicEnemy02" parent="Group02" instance=ExtResource("2_12bb4")]
+position = Vector2(-66, 1)
+energy = 1
+
+[node name="BasicEnemy03" parent="Group02" instance=ExtResource("2_12bb4")]
+position = Vector2(-8, 66)
+energy = 1
+
+[node name="Group03" type="Node2D" parent="."]
+position = Vector2(1055, 236)
+metadata/_edit_group_ = true
+
+[node name="BasicEnemy01" parent="Group03" instance=ExtResource("2_12bb4")]
+position = Vector2(-8, -64)
+energy = 1
+
+[node name="BasicEnemy02" parent="Group03" instance=ExtResource("2_12bb4")]
+position = Vector2(-66, 1)
+energy = 1
+
+[node name="BasicEnemy03" parent="Group03" instance=ExtResource("2_12bb4")]
+position = Vector2(-8, 66)
+energy = 1

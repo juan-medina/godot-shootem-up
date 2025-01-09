@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://brp3t3tcb7lc0"]
+[gd_scene load_steps=8 format=3 uid="uid://brp3t3tcb7lc0"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_kn14q"]
 [ext_resource type="PackedScene" uid="uid://be6ewehio5siv" path="res://scenes/background/background.tscn" id="2_wai1s"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dhkdhvs3htbj" path="res://resources/music/level.ogg" id="4_ueojc"]
 [ext_resource type="PackedScene" uid="uid://beg1iuhl8ave5" path="res://scenes/ui/ui.tscn" id="5_rjl8s"]
 [ext_resource type="AudioStream" uid="uid://clixxw3rgap1u" path="res://resources/sounds/game_over.wav" id="6_fm1b2"]
+[ext_resource type="PackedScene" uid="uid://buku48xfsvg5i" path="res://scenes/level/level.tscn" id="7_0u6hv"]
 
 [node name="Game" type="Node2D"]
 process_mode = 1
@@ -34,6 +35,9 @@ follow_viewport_enabled = true
 [node name="GameOver" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_fm1b2")
 bus = &"Music"
+
+[node name="Level" parent="." instance=ExtResource("7_0u6hv")]
+position = Vector2(1800, 0)
 
 [connection signal="energy_type_changed" from="Player" to="." method="_on_player_energy_type_changed"]
 [connection signal="shields_changed" from="Player" to="." method="_on_player_shields_changed"]

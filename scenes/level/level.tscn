@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://buku48xfsvg5i"]
+
+[ext_resource type="PackedScene" uid="uid://bbcex7rkvps8o" path="res://scenes/enemies/wave/wave_01.tscn" id="1_5xi56"]
+[ext_resource type="PackedScene" uid="uid://cp82a78cmkh1s" path="res://scenes/enemies/wave/wave_02.tscn" id="2_rl5je"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Wave01" parent="." instance=ExtResource("1_5xi56")]
+
+[node name="Wave02" parent="." instance=ExtResource("2_rl5je")]
+position = Vector2(1150, 0)

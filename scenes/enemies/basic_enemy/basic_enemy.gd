@@ -35,6 +35,8 @@ signal destroyed(points: int)  ## Emitted when the enemy is destroyed with the a
 @export var energy: Game.EnergyType = Game.EnergyType.BLUE:  ## Energy type of the enemy
 	set(value):
 		_energy = value
+		if not is_instance_valid(sprite_glow):
+			return
 		# set the color of the sprite glow depending on the energy type
 		sprite_glow.modulate = Game.ENERGY_TYPE_COLOR[_energy]
 		# reduce alpha
@@ -67,6 +69,7 @@ var _energy: Game.EnergyType = Game.EnergyType.BLUE  ## Energy type of the enemy
 func _ready() -> void:
 	exhaust.play("normal")
 	points_label.text = str(points)
+	energy = _energy
 
 
 ## Called every physics iteration, delta is the elapsed time since the previous call, this is FPS independent
