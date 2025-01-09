@@ -28,6 +28,7 @@ extends EditorPlugin
 
 const _VERSION_INCREASE_MENU: String = "Build Version: Increase And Launch Main Scene (CTRL+F5)"  ## Version increase menu text
 const _UPDATE_CREDITS_AND_FEATURES_MENU: String = "Update Credits & Features"  ## Update and features credits menu text
+const _CREATE_RELEASE_MENU: String = "Create Release (Github & itch.io)"  ## Create release menu text
 const _VERSION_KEY: String = "application/config/version"  ## Where the build version is stored
 
 const JSON_FILE_PATH: String = "res://resources/credits/credits.json"  ## The JSON file with the credits
@@ -47,6 +48,7 @@ func _enter_tree() -> void:
 	# add our tool menus item to our functions
 	add_tool_menu_item(_VERSION_INCREASE_MENU, _increase_build_and_launch)
 	add_tool_menu_item(_UPDATE_CREDITS_AND_FEATURES_MENU, _update_credits_and_features)
+	add_tool_menu_item(_CREATE_RELEASE_MENU, _create_release)
 
 
 ## Plugin disabled
@@ -54,6 +56,7 @@ func _exit_tree() -> void:
 	# remove our tool menu item
 	remove_tool_menu_item(_VERSION_INCREASE_MENU)
 	remove_tool_menu_item(_UPDATE_CREDITS_AND_FEATURES_MENU)
+	remove_tool_menu_item(_CREATE_RELEASE_MENU)
 
 
 ## When we get any shortcut pressed
@@ -177,7 +180,9 @@ func _generate_readme(credits_data: Dictionary, features: Dictionary) -> void:
 	var credits_md: String = ""
 	for i in range(1, credits_data["credits"].size()):
 		var credit = credits_data["credits"][i]
-		credits_md += "- %s: [%s](%s) by [%s](%s).\n" % [credit["role"], credit["name"], credit["url"], credit["author"]["name"], credit["author"]["url"]]
+		credits_md += (
+			"- %s: [%s](%s) by [%s](%s).\n" % [credit["role"], credit["name"], credit["url"], credit["author"]["name"], credit["author"]["url"]]
+		)
 		if "details" in credit:
 			for detail in credit["details"]:
 				credits_md += "    - %s: %s.\n" % [detail["type"], detail["name"]]
@@ -192,6 +197,7 @@ func _generate_readme(credits_data: Dictionary, features: Dictionary) -> void:
 
 	# Write the README file
 	_write_file(README_TEMPLATE_FILE, README_OUTPUT_FILE, {"CREDITS": credits_md, "FEATURES": features_md})
+
 
 ## Write a output file using a template file and the giving data
 func _write_file(template_path: String, output_path: String, replacements: Dictionary) -> void:
@@ -212,3 +218,34 @@ func _write_file(template_path: String, output_path: String, replacements: Dicti
 	var output_file: FileAccess = FileAccess.open(output_path, FileAccess.WRITE)
 	output_file.store_string(template_text)
 	output_file.close()
+
+
+## Create a release and publish to github
+func _create_release() -> void:
+	# get the current version: major.minor.patch.build
+	var version_string: String = ProjectSettings.get_setting(_VERSION_KEY)
+
+	# output from commands
+	var output: Array[String]
+
+	# check if github client is installed
+	if not OS.execute("gh", ["--version"]) == 0:
+		push_error("Github CLI is not installed, please install it.")
+		return
+
+	## launch: git tag -a $version -m 'Release $version'
+	if not OS.execute("git", ["tag", "-a", version_string, "-m", "Release %s" % version_string], output) == 0:
+		push_error("Failed to create git tag. %s" % output)
+		return
+
+	## launch: git push --tags
+	if not OS.execute("git", ["push", "--tags"], output) == 0:
+		push_error("Failed to push tags. %s" % output)
+		return
+
+	## launch: gh release create $version -F release_notes.md -t $version
+	if not OS.execute("gh", ["release", "create", version_string, "-F", "release_notes.md", "-t", version_string], output) == 0:
+		push_error("Failed to create release. %s" % output)
+		return
+
+	push_warning("Release %s created successfully." % version_string)

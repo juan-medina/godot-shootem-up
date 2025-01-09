@@ -24,19 +24,25 @@ If you need to open a bug or enhancement, please do it [here](https://github.com
 %%CREDITS%%
 
 ## CI
-To trigger a new release I use this powershell [script](create-release.ps1).
+This project includes an Godot [addon](addons/ci_tools/) that deliver several functionalities:
 
-```powershell
-.\create-release.ps1
-```
+### Build Version: Increase And Launch Main Scene
 
-This will read the game version from the [project.godot](project.godot) file, requires [Github CLI](https://cli.github.com/), and then push a new release to github and itch.io.
+This will read the game version from the [project.godot](project.godot) file, increase the build version, and then launch the main scene. It default bind to ***CTRL+F5***.
 
-This will trigger a github [action](.github/workflows/release.yaml) that will add to the release a zip package with the game.
+### Update Credits & Features
 
-Additionally this project includes an Godot [addon](addons/ci_tools/) that will launch the main scene and increase the build number.
+This will read the [credits.json](resources/credits/credits.json) and [features.json](resources/credits/features.json) and then using to:
 
-You can use this either via the tool menu: ***Build Version: Increase And Launch Main Scene*** or the shortcut ***CTRL+F5***.
+ - Update the [README.md](README.md) file with the content of the template [README_template.MD](resources/credits/README_template.MD).
+ - Update the [about.bbcode](resources/credits/about.bbcode) file with the content of the [about_template.bbcode](resources/credits/about_template.bbcode) file, this is use in the about menu in the game.
+- Update the [itchio.html](resources/credits/itchio.html) file with the content of the [itchio_template.html](resources/credits/itchio_template.html) file, this is use in the itch.io page.
+
+In this way, you can update the credits and features in one place and then update all the files that use it.
+
+### Create Release (Github & itch.io)
+
+This will read the game version from the [project.godot](project.godot) file, and then push a new release to github that as well will create a release in itch.io via [this action](.github/workflows/release.yaml), this tool requires [Github CLI](https://cli.github.com/) to be installed.
 
 ## LICENSE
 ```
