@@ -1,7 +1,7 @@
 ## Release Notes
 
 ### New Features
-- **High Score**: Adding high score.
+- **1st complete release**: This is the first complete release.
 
 ### Bug Fixes
 
