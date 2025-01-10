@@ -22,6 +22,7 @@ If you need to open a bug or enhancement, please do it [here](https://github.com
 - To destroy each other the energies need to be different.
 - Different enemy spaceships.
 - Enemies waves.
+- Boss fight.
 - CRT effect for retro look.
 - Menu with options including:
     - Borderless fullscreen or windowed mode.
@@ -43,7 +44,8 @@ If you need to open a bug or enhancement, please do it [here](https://github.com
 - Shield Bar: [UI BARS](https://guilemus.itch.io/ui-bars) by [guilemus](https://guilemus.itch.io/).
 - Change energy sound: [Metal00.wav](https://freesound.org/people/jeremysykes/sounds/341254/) by [jeremysykes](https://freesound.org/people/jeremysykes/).
 - Player shot fire sound: [laser.wav](https://freesound.org/people/Shaun105/sounds/268168) by [Shaun105](https://freesound.org/people/Shaun105/).
-- Player shot hit sound: [Hit/Hurt](https://freesound.org/people/Prof.Mudkip/sounds/398957/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
+- Enemy Fire sound: [projectile.wav](https://freesound.org/people/jeckkech/sounds/391660/) by [jeckkech](https://freesound.org/people/jeckkech/).
+- Shot hit sound: [Hit/Hurt](https://freesound.org/people/Prof.Mudkip/sounds/398957/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
 - Ship explosion sound: [8-Bit explosion](https://freesound.org/people/Prof.Mudkip/sounds/386862/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
 - Game Over sound: [8-bit Game Over](https://freesound.org/people/Euphrosyyn/sounds/442127/) by [Euphrosyyn](https://freesound.org/people/Euphrosyyn/).
 - Button press sound: [8-bit 2022 Poke Bright Select Button BBM](https://freesound.org/people/NovaSoundTechnology/sounds/653049/) by [NovaSoundTechnology](https://freesound.org/people/NovaSoundTechnology/).

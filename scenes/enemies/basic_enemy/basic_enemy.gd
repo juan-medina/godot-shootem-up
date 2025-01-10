@@ -31,6 +31,7 @@ signal destroyed(points: int)  ## Emitted when the enemy is destroyed with the a
 @export var speed: float = 250  ## Speed of the enemy
 @export var points: int = 150  ## Points that will add
 @export var hit_duration: float = 1.0  ## How long the hit effect will last
+@export var damage_on_player_hit: int = 1  ## Damage to this enemy when the player hits it
 
 @export var energy: Game.EnergyType = Game.EnergyType.BLUE:  ## Energy type of the enemy
 	set(value):
@@ -104,10 +105,10 @@ func _on_body_entered(body: Node2D) -> void:
 
 	# cast to player, damage the player and do damage to this enemy
 	var player_body: Player = body as Player
-	_damage(max_life)
+	_damage(damage_on_player_hit)
 
 	# we damage the player only if the energy type of the player is different to the enemy
-	if player._energy != _energy:
+	if player_body._energy != _energy:
 		player_body.damage(damage)
 
 

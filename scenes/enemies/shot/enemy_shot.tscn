@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://d22rbjijo5b61" path="res://resources/sprites/shot5/shot5_exp2.png" id="4_0i870"]
 [ext_resource type="Texture2D" uid="uid://c5svs62jmbfc6" path="res://resources/sprites/shot5/shot5_exp3.png" id="5_64ox4"]
 [ext_resource type="Texture2D" uid="uid://bhcs72562m2pu" path="res://resources/sprites/shot5/shot5_exp4.png" id="6_scbr3"]
-[ext_resource type="AudioStream" uid="uid://dph036x240yuj" path="res://resources/sounds/hit.wav" id="6_yi07w"]
 [ext_resource type="Texture2D" uid="uid://b0nj3x201x0ut" path="res://resources/sprites/shot5/shot5_exp5.png" id="7_li3uy"]
 [ext_resource type="Texture2D" uid="uid://cp5sk00ring0m" path="res://resources/sprites/shot5/shot5_exp6.png" id="8_ogyor"]
 [ext_resource type="Texture2D" uid="uid://x0utjd3hkrmh" path="res://resources/sprites/shot5/shot5_exp7.png" id="9_w0d7a"]
 [ext_resource type="Texture2D" uid="uid://coqufx5pqn3me" path="res://resources/sprites/shot5/shot5_exp8.png" id="10_vru3t"]
+[ext_resource type="AudioStream" uid="uid://6yvosi1ngdfw" path="res://resources/sounds/explosion.wav" id="11_y6mot"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yits4"]
 size = Vector2(30, 6)
@@ -71,7 +71,8 @@ frame_progress = 1.0
 flip_h = true
 
 [node name="ShotHit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_yi07w")
+stream = ExtResource("11_y6mot")
 bus = &"SFX"
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

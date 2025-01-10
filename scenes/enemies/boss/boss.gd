@@ -44,7 +44,6 @@ var _time_passed_for_shot: float = 0.0  ## Time passed since the boss shot
 @onready var ship: Sprite2D = $Sprite2D  ## boss ship
 @onready var ship_size: Vector2 = ship.region_rect.size * scale * 2  ## Boss ship size
 @onready var shot_point: Marker2D = $ShotPoint  ## Shot spawn point
-@onready var shot_out_effect: AnimatedSprite2D = $ShotOutEffect  ## Shot out effect
 @onready var shot_sound: AudioStreamPlayer2D = $ShotSound  ## Shot sound
 @onready var shot_scene: PackedScene = preload("res://scenes/enemies/shot/enemy_shot.tscn")
 
@@ -98,17 +97,17 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 
 ## Make the boss shot
 func _shot() -> void:
+	if not is_instance_valid(player):
+		return
+
+	if player.current_shields <= 0:
+		return
+
 	# play the shot sound
 	shot_sound.play()
 
 	# spawn the shot from the spawn point
 	var shot_instance: EnemyShot = shot_scene.instantiate()
 	get_parent().add_child(shot_instance)
-	shot_instance.init(shot_point, _energy)
-
-	# play the shot out effect
-	shot_out_effect.modulate = Game.ENERGY_TYPE_COLOR[_energy]
-	shot_out_effect.visible = true
-	shot_out_effect.play()
-	await shot_out_effect.animation_finished
-	shot_out_effect.visible = false
+	var direction: Vector2 = (player.global_position - shot_point.global_position).normalized()
+	shot_instance.init(shot_point, _energy, direction)

@@ -48,12 +48,15 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 ## Initialize the shot when from a spawn point and an energy type
-func init(from: Node2D, energy: Game.EnergyType) -> void:
+func init(from: Node2D, energy: Game.EnergyType, shot_direction: Vector2) -> void:
 	global_position = from.global_position
 	_energy = energy
 	sprite.modulate = Game.ENERGY_TYPE_COLOR[_energy]
+	direction = shot_direction
+	rotation = direction.angle()
+	sprite.flip_h = false
 
-
+## Destroy the shot
 func destroy() -> void:
 	# disable the collision shape, in the next physics iteration, so no more collisions
 	collision_shape.set_deferred("disabled", true)
@@ -71,3 +74,12 @@ func destroy() -> void:
 	# wait for the explosion animation to finish and delete the shot
 	await shot_explosion.animation_finished
 	queue_free()
+
+## Called when the shot enters in a body
+func _on_body_entered(body:Node2D) -> void:
+	var player_body: Player = body as Player
+	# we damage the player only if the energy type of the player is different to the enemy
+	if player_body._energy != _energy:
+		player_body.damage(damage)
+	# destroy the shot
+	destroy()

@@ -1,7 +1,7 @@
 ## Release Notes
 
 ### New Features
-- **Waves**: Now we have enemies waves.
+- **Boss**: Now we have a boss to fight at the end of the level.
 
 ### Bug Fixes
 

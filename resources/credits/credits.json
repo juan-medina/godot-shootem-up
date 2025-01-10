@@ -1,127 +1,136 @@
 {
-  "credits": [
-	{
-	  "role": "Developed by",
-	  "name": "Juan Medina",
-	  "url": "https://juan-medina.com"
-	},
-	{
-	  "role": "Game music",
-	  "name": "Abstraction - Music Loop Bundle",
-	  "url": "https://tallbeard.itch.io/music-loop-bundle",
-	  "author": {
-		"name": "Abstraction",
-		"url": "https://abstractionmusic.com"
-	  },
-	  "details": [
+	"credits": [
 		{
-		  "type": "Menu",
-		  "name": "Box Jump"
+			"role": "Developed by",
+			"name": "Juan Medina",
+			"url": "https://juan-medina.com"
 		},
 		{
-		  "type": "Level",
-		  "name": "Out of Time"
+			"role": "Game music",
+			"name": "Abstraction - Music Loop Bundle",
+			"url": "https://tallbeard.itch.io/music-loop-bundle",
+			"author": {
+				"name": "Abstraction",
+				"url": "https://abstractionmusic.com"
+			},
+			"details": [
+				{
+					"type": "Menu",
+					"name": "Box Jump"
+				},
+				{
+					"type": "Level",
+					"name": "Out of Time"
+				}
+			]
+		},
+		{
+			"role": "Background",
+			"name": "Glacial Mountains: Parallax Background",
+			"url": "https://vnitti.itch.io/glacial-mountains-parallax-background",
+			"author": {
+				"name": "vnitti",
+				"url": "https://vnitti.itch.io/"
+			}
+		},
+		{
+			"role": "Spaceships",
+			"name": "Free Enemy Spaceship 2D Sprites Pixel Art",
+			"url": "https://free-game-assets.itch.io/free-enemy-spaceship-2d-sprites-pixel-art",
+			"author": {
+				"name": "Craftpix",
+				"url": "https://craftpix.net/"
+			}
+		},
+		{
+			"role": "Shield Bar",
+			"name": "UI BARS",
+			"url": "https://guilemus.itch.io/ui-bars",
+			"author": {
+				"name": "guilemus",
+				"url": "https://guilemus.itch.io/"
+			}
+		},
+		{
+			"role": "Change energy sound",
+			"name": "Metal00.wav",
+			"url": "https://freesound.org/people/jeremysykes/sounds/341254/",
+			"author": {
+				"name": "jeremysykes",
+				"url": "https://freesound.org/people/jeremysykes/"
+			}
+		},
+		{
+			"role": "Player shot fire sound",
+			"name": "laser.wav",
+			"url": "https://freesound.org/people/Shaun105/sounds/268168",
+			"author": {
+				"name": "Shaun105",
+				"url": "https://freesound.org/people/Shaun105/"
+			}
+		},
+		{
+			"role": "Enemy Fire sound",
+			"name": "projectile.wav",
+			"url": "https://freesound.org/people/jeckkech/sounds/391660/",
+			"author": {
+				"name": "jeckkech",
+				"url": "https://freesound.org/people/jeckkech/"
+			}
+		},
+		{
+			"role": "Shot hit sound",
+			"name": "Hit/Hurt",
+			"url": "https://freesound.org/people/Prof.Mudkip/sounds/398957/",
+			"author": {
+				"name": "Prof.Mudkip",
+				"url": "https://freesound.org/people/Prof.Mudkip/"
+			}
+		},
+		{
+			"role": "Ship explosion sound",
+			"name": "8-Bit explosion",
+			"url": "https://freesound.org/people/Prof.Mudkip/sounds/386862/",
+			"author": {
+				"name": "Prof.Mudkip",
+				"url": "https://freesound.org/people/Prof.Mudkip/"
+			}
+		},
+		{
+			"role": "Game Over sound",
+			"name": "8-bit Game Over",
+			"url": "https://freesound.org/people/Euphrosyyn/sounds/442127/",
+			"author": {
+				"name": "Euphrosyyn",
+				"url": "https://freesound.org/people/Euphrosyyn/"
+			}
+		},
+		{
+			"role": "Button press sound",
+			"name": "8-bit 2022 Poke Bright Select Button BBM",
+			"url": "https://freesound.org/people/NovaSoundTechnology/sounds/653049/",
+			"author": {
+				"name": "NovaSoundTechnology",
+				"url": "https://freesound.org/people/NovaSoundTechnology/"
+			}
+		},
+		{
+			"role": "Font",
+			"name": "Pixeloid",
+			"url": "https://www.fontspace.com/pixeloid-font-f69232",
+			"author": {
+				"name": "GGBotNet",
+				"url": "https://www.fontspace.com/ggbotnet"
+			}
+		},
+		{
+			"role": "CRT effect",
+			"name": "Godot CRT Shader",
+			"url": "https://perons.itch.io/godot-crt-shader",
+			"author": {
+				"name": "Perons",
+				"url": "https://perons.itch.io/"
+			}
 		}
-	  ]
-	},
-	{
-	  "role": "Background",
-	  "name": "Glacial Mountains: Parallax Background",
-	  "url": "https://vnitti.itch.io/glacial-mountains-parallax-background",
-	  "author": {
-		"name": "vnitti",
-		"url": "https://vnitti.itch.io/"
-	  }
-	},
-	{
-	  "role": "Spaceships",
-	  "name": "Free Enemy Spaceship 2D Sprites Pixel Art",
-	  "url": "https://free-game-assets.itch.io/free-enemy-spaceship-2d-sprites-pixel-art",
-	  "author": {
-		"name": "Craftpix",
-		"url": "https://craftpix.net/"
-	  }
-	},
-	{
-	  "role": "Shield Bar",
-	  "name": "UI BARS",
-	  "url": "https://guilemus.itch.io/ui-bars",
-	  "author": {
-		"name": "guilemus",
-		"url": "https://guilemus.itch.io/"
-	  }
-	},
-	{
-	  "role": "Change energy sound",
-	  "name": "Metal00.wav",
-	  "url": "https://freesound.org/people/jeremysykes/sounds/341254/",
-	  "author": {
-		"name": "jeremysykes",
-		"url": "https://freesound.org/people/jeremysykes/"
-	  }
-	},
-	{
-	  "role": "Player shot fire sound",
-	  "name": "laser.wav",
-	  "url": "https://freesound.org/people/Shaun105/sounds/268168",
-	  "author": {
-		"name": "Shaun105",
-		"url": "https://freesound.org/people/Shaun105/"
-	  }
-	},
-	{
-	  "role": "Player shot hit sound",
-	  "name": "Hit/Hurt",
-	  "url": "https://freesound.org/people/Prof.Mudkip/sounds/398957/",
-	  "author": {
-		"name": "Prof.Mudkip",
-		"url": "https://freesound.org/people/Prof.Mudkip/"
-	  }
-	},
-	{
-	  "role": "Ship explosion sound",
-	  "name": "8-Bit explosion",
-	  "url": "https://freesound.org/people/Prof.Mudkip/sounds/386862/",
-	  "author": {
-		"name": "Prof.Mudkip",
-		"url": "https://freesound.org/people/Prof.Mudkip/"
-	  }
-	},
-	{
-	  "role": "Game Over sound",
-	  "name": "8-bit Game Over",
-	  "url": "https://freesound.org/people/Euphrosyyn/sounds/442127/",
-	  "author": {
-		"name": "Euphrosyyn",
-		"url": "https://freesound.org/people/Euphrosyyn/"
-	  }
-	},
-	{
-	  "role": "Button press sound",
-	  "name": "8-bit 2022 Poke Bright Select Button BBM",
-	  "url": "https://freesound.org/people/NovaSoundTechnology/sounds/653049/",
-	  "author": {
-		"name": "NovaSoundTechnology",
-		"url": "https://freesound.org/people/NovaSoundTechnology/"
-	  }
-	},
-	{
-	  "role": "Font",
-	  "name": "Pixeloid",
-	  "url": "https://www.fontspace.com/pixeloid-font-f69232",
-	  "author": {
-		"name": "GGBotNet",
-		"url": "https://www.fontspace.com/ggbotnet"
-	  }
-	},
-	{
-	  "role": "CRT effect",
-	  "name": "Godot CRT Shader",
-	  "url": "https://perons.itch.io/godot-crt-shader",
-	  "author": {
-		"name": "Perons",
-		"url": "https://perons.itch.io/"
-	  }
-	}
-  ]
+	]
 }

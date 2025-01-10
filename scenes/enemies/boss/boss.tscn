@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cfa2ae4bf8ux3"]
+[gd_scene load_steps=29 format=3 uid="uid://cfa2ae4bf8ux3"]
 
 [ext_resource type="Script" path="res://scenes/enemies/boss/boss.gd" id="1_kht7p"]
 [ext_resource type="Texture2D" uid="uid://p5oebydinrkh" path="res://resources/sprites/ship6/exhaust/turbo/exhaust1.png" id="2_u1sku"]
@@ -24,12 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://b05pmf606day7" path="res://resources/sprites/explosion1/explosion1_11.png" id="22_ryekx"]
 [ext_resource type="AudioStream" uid="uid://6yvosi1ngdfw" path="res://resources/sounds/explosion.wav" id="23_ebl2l"]
 [ext_resource type="FontFile" uid="uid://byqkqg20ffjvu" path="res://resources/fonts/PixeloidMono-d94EV.ttf" id="24_tp5wd"]
-[ext_resource type="AudioStream" uid="uid://cjng2ueyt1igr" path="res://resources/sounds/laser.wav" id="25_y0evl"]
-[ext_resource type="Texture2D" uid="uid://vrhurhs22qn6" path="res://resources/sprites/shot5/shot5_1.png" id="26_l73te"]
-[ext_resource type="Texture2D" uid="uid://ott8dkouelj2" path="res://resources/sprites/shot5/shot5_2.png" id="27_tdiew"]
-[ext_resource type="Texture2D" uid="uid://pcosnlub4bk8" path="res://resources/sprites/shot5/shot5_3.png" id="28_k2xyy"]
-[ext_resource type="Texture2D" uid="uid://csytx8ivp7e5e" path="res://resources/sprites/shot5/shot5_4.png" id="29_ta2s2"]
-[ext_resource type="Texture2D" uid="uid://cy3gn5tfpxmkh" path="res://resources/sprites/shot5/shot5_5.png" id="30_d1sll"]
+[ext_resource type="AudioStream" uid="uid://cd7qawvsprgy3" path="res://resources/sounds/boss_shot.wav" id="25_f3uaq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ke7te"]
 animations = [{
@@ -115,35 +110,13 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ctdd1"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("26_l73te")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_tdiew")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_k2xyy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_ta2s2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_d1sll")
-}],
-"loop": false,
-"name": &"default",
-"speed": 15.0
-}]
-
 [node name="Boss" type="Area2D"]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_kht7p")
-max_life = 30
+max_life = 15
 points = 8500
+damage_on_player_hit = 0
 
 [node name="Exhaust" type="AnimatedSprite2D" parent="."]
 position = Vector2(68, 0)
@@ -199,16 +172,9 @@ vertical_alignment = 1
 position = Vector2(-64, 0)
 
 [node name="ShotSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("25_y0evl")
+stream = ExtResource("25_f3uaq")
+volume_db = 15.0
 bus = &"SFX"
-
-[node name="ShotOutEffect" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(-102, -1)
-sprite_frames = SubResource("SpriteFrames_ctdd1")
-frame = 4
-frame_progress = 1.0
-flip_h = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
