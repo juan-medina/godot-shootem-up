@@ -148,8 +148,7 @@ func _generate_itchio_html(credits_data: Dictionary, features: Dictionary) -> vo
 		html += "        %s:\n" % credit["role"]
 		html += '        <a href="%s">%s</a>\n' % [credit["url"], credit["name"]]
 		if "author" in credit:
-			html += '        by <a href="%s">%s</a>\n' % [credit["author"]["url"], credit["author"]["name"]]
-		html += "        .\n"
+			html += '        by <a href="%s">%s</a>.\n' % [credit["author"]["url"], credit["author"]["name"]]
 		if "details" in credit:
 			html += "        <ul>\n"
 			for detail in credit["details"]:
