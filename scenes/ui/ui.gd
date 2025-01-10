@@ -32,8 +32,7 @@ signal back_to_menu  ## Signal when the player clicks cancel on the game over UI
 var points: int = 0:  ## How many points the player has
 	set(value):
 		# Update the points
-		points = value
-		points_label.text = str(points)
+		points_label.text = str(value)
 
 var shields: int = 0:  ## How many shields the player has
 	set(value):
@@ -102,14 +101,19 @@ func _on_pause_button_click(button: Button) -> void:
 	if button == pause_ui.exit_button:
 		back_to_menu.emit()
 
+
 ## Show the game win UI
-func game_win() -> void:
+func game_win(high_score: int, score: int) -> void:
 	# make the game over UI visible
 	if not pause_ui.visible:
+		game_win_ui.high_score = high_score
+		game_win_ui.score = score
 		game_win_ui.visible = true
+		game_win_ui.blink = score >= high_score
+
 
 ## Called when a button is click in the game win UI
-func _on_game_win_button_click(button:Button) -> void:
+func _on_game_win_button_click(button: Button) -> void:
 	match button:
 		game_win_ui.restart_button:
 			level_restart.emit()

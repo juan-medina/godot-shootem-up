@@ -232,6 +232,8 @@ func _create_release() -> void:
 		push_error("Github CLI is not installed, please install it.")
 		return
 
+	print("Creating release: %s..." % version_string)
+
 	## launch: git tag -a $version -m 'Release $version'
 	if not OS.execute("git", ["tag", "-a", version_string, "-m", "Release %s" % version_string], output) == 0:
 		push_error("Failed to create git tag. %s" % output)
@@ -247,4 +249,4 @@ func _create_release() -> void:
 		push_error("Failed to create release. %s" % output)
 		return
 
-	push_warning("Release %s created successfully." % version_string)
+	print("Release %s created successfully." % version_string)

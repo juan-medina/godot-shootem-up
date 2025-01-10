@@ -114,7 +114,8 @@ func _on_body_entered(body: Node2D) -> void:
 
 ## Called when the enemy goes off screen
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	# delete the enemy
+	# delete the enemy, notify that is destroyed, 0 points since the player didn't destroy it
+	destroyed.emit(0)
 	queue_free()
 
 

@@ -30,9 +30,11 @@ If you need to open a bug or enhancement, please do it [here](https://github.com
     - CRT effect configuration.
 - Game Over window.
 - Game Win window.
+- High Score.
 - Pause and resume game.
 - Score and shield bar.
 - Sound effects and music.
+- Windows, Mac and Linux version.
 
 
 ## Credits
@@ -49,6 +51,7 @@ If you need to open a bug or enhancement, please do it [here](https://github.com
 - Shot hit sound: [Hit/Hurt](https://freesound.org/people/Prof.Mudkip/sounds/398957/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
 - Ship explosion sound: [8-Bit explosion](https://freesound.org/people/Prof.Mudkip/sounds/386862/) by [Prof.Mudkip](https://freesound.org/people/Prof.Mudkip/).
 - Game Over sound: [8-bit Game Over](https://freesound.org/people/Euphrosyyn/sounds/442127/) by [Euphrosyyn](https://freesound.org/people/Euphrosyyn/).
+- Game Win sound: [WinSquare.wav](https://freesound.org/people/Fupicat/sounds/527650/) by [Fupicat](https://freesound.org/people/Fupicat/).
 - Button press sound: [8-bit 2022 Poke Bright Select Button BBM](https://freesound.org/people/NovaSoundTechnology/sounds/653049/) by [NovaSoundTechnology](https://freesound.org/people/NovaSoundTechnology/).
 - Font: [Pixeloid](https://www.fontspace.com/pixeloid-font-f69232) by [GGBotNet](https://www.fontspace.com/ggbotnet).
 - CRT effect: [Godot CRT Shader](https://perons.itch.io/godot-crt-shader) by [Perons](https://perons.itch.io/).
@@ -73,7 +76,9 @@ In this way, you can update the credits and features in one place and then updat
 
 ### Create Release (Github & itch.io)
 
-This will read the game version from the [project.godot](project.godot) file, and then push a new release to github that as well will create a release in itch.io via [this action](.github/workflows/release.yaml), this tool requires [Github CLI](https://cli.github.com/) to be installed.
+This will read the game version from the [project.godot](project.godot) file, and then push a new release to github include the details of the [release_notes.md](release_notes.md) file, this tool requires [Github CLI](https://cli.github.com/) to be installed.
+
+On Github a Windows, Linux, and MacOS builds will be attached to the release and a then release then in itch.io via [this action](.github/workflows/release.yaml)
 
 ## LICENSE
 ```

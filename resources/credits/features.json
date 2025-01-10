@@ -42,6 +42,9 @@
 			"text": "Game Win window."
 		},
 		{
+			"text": "High Score."
+		},
+		{
 			"text": "Pause and resume game."
 		},
 		{
@@ -49,6 +52,9 @@
 		},
 		{
 			"text": "Sound effects and music."
+		},
+		{
+			"text": "Windows, Mac and Linux version."
 		}
 	]
 }

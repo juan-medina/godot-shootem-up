@@ -106,6 +106,15 @@
 			}
 		},
 		{
+			"role": "Game Win sound",
+			"name": "WinSquare.wav",
+			"url": "https://freesound.org/people/Fupicat/sounds/527650/",
+			"author": {
+				"name": "Fupicat",
+				"url": "https://freesound.org/people/Fupicat/"
+			}
+		},
+		{
 			"role": "Button press sound",
 			"name": "8-bit 2022 Poke Bright Select Button BBM",
 			"url": "https://freesound.org/people/NovaSoundTechnology/sounds/653049/",

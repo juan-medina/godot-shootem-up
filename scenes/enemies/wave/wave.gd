@@ -44,7 +44,7 @@ func _ready() -> void:
 func _on_enemy_died(points: int) -> void:
 	# emit the enemy_die signal
 	enemy_die.emit(points)
-	# reduce the total enemies and if there are no more enemies, wait 5 seconds and free the wave
+	# reduce the total enemies and if there are no more enemies, wait 3 seconds and free the wave
 	_total_enemies -= 1
 	if _total_enemies == 0:
 		wave_destroyed.emit()

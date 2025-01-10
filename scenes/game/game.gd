@@ -31,6 +31,7 @@ const ENERGY_TYPE_COLOR: Dictionary = {
 }
 
 var _total_waves: int = 0  ## total waves in the level
+var _points: int = 0  ## points in the game
 
 @onready var ui: UI = $CanvasLayer/UI  ## the in-game UI
 @onready var music: AudioStreamPlayer2D = $Music  ## the game music
@@ -64,7 +65,8 @@ func _ready() -> void:
 ## Called when an enemy is destroyed
 func _on_enemy_died(points: int) -> void:
 	# update the points in the UI
-	ui.points += points
+	_points += points
+	ui.points = _points
 
 
 ## Called when the player's shields have changed
@@ -126,4 +128,18 @@ func game_win() -> void:
 	player.won = true
 	music.stop()
 	game_win_sound.play()
-	ui.game_win()
+
+	# get the high score from the scores file
+
+	var config: ConfigFile = ConfigFile.new()
+	if not config.load("user://score.cfg") == OK:
+		pass
+
+	var high_score: int = config.get_value("score", "high_score", 0)
+	if _points > high_score:
+		high_score = _points
+		config.set_value("score", "high_score", high_score)
+		if not config.save("user://score.cfg") == OK:
+			pass
+
+	ui.game_win(high_score, _points)

@@ -24,5 +24,24 @@ extends SubMenu
 ##
 ## This is the UI when the player wins the game
 
+var high_score: int = 0:
+	set(value):
+		# Update the high score
+		high_score_label.text = "High Score: %d" % value
+
+var score: int = 0:
+	set(value):
+		# Update the score
+		score_label.text = "Score: %d" % value
+
+var blink: bool = false:
+	set(value):
+		var shader_material: ShaderMaterial = hit_material if value else null
+		score_label.material = shader_material
+		high_score_label.material = shader_material
+
 @onready var restart_button: Button = $Panel/Restart  ## Restart button
 @onready var exit_button: Button = $Panel/Exit  ## Exit button
+@onready var high_score_label: Label = $Panel/HighScore  ## High score label
+@onready var score_label: Label = $Panel/Score  ## Score label
+@onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")  ## Hit material

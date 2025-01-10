@@ -42,7 +42,9 @@ In this way, you can update the credits and features in one place and then updat
 
 ### Create Release (Github & itch.io)
 
-This will read the game version from the [project.godot](project.godot) file, and then push a new release to github that as well will create a release in itch.io via [this action](.github/workflows/release.yaml), this tool requires [Github CLI](https://cli.github.com/) to be installed.
+This will read the game version from the [project.godot](project.godot) file, and then push a new release to github include the details of the [release_notes.md](release_notes.md) file, this tool requires [Github CLI](https://cli.github.com/) to be installed.
+
+On Github a Windows, Linux, and MacOS builds will be attached to the release and a then release then in itch.io via [this action](.github/workflows/release.yaml)
 
 ## LICENSE
 ```
