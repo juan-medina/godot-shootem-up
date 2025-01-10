@@ -1,7 +1,7 @@
 ## Release Notes
 
 ### New Features
-- **Boss**: Now we have a boss to fight at the end of the level.
+- **Game Win**: We have now a game win screen that will show up when the player wins the game.
 
 ### Bug Fixes
 
