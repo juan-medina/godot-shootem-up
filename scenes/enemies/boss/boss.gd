@@ -35,12 +35,18 @@ enum BossState {
 @export var change_energy_time: float = 2.0  ## Time to change energy
 @export var wait_to_move: float = 1.5  ## Time to wait before moving
 @export var vertical_speed: float = 100  ## Speed of the boss when moving up or down
+@export var wait_between_shots: float = 0.5  ## Time to wait between shots
 
 var _state: BossState = BossState.IDLE  ## The boss state, idle by default
-var _time_passed: float = 0.0  ## Time passed since the boss started
+var _time_passed_for_move: float = 0.0  ## Time passed since the boss started
+var _time_passed_for_shot: float = 0.0  ## Time passed since the boss shot
 
 @onready var ship: Sprite2D = $Sprite2D  ## boss ship
 @onready var ship_size: Vector2 = ship.region_rect.size * scale * 2  ## Boss ship size
+@onready var shot_point: Marker2D = $ShotPoint  ## Shot spawn point
+@onready var shot_out_effect: AnimatedSprite2D = $ShotOutEffect  ## Shot out effect
+@onready var shot_sound: AudioStreamPlayer2D = $ShotSound  ## Shot sound
+@onready var shot_scene: PackedScene = preload("res://scenes/enemies/shot/enemy_shot.tscn")
 
 
 ## Called every physics iteration, delta is the elapsed time since the previous call, this is FPS independent
@@ -58,13 +64,19 @@ func _physics_process(delta: float) -> void:
 			turbo = true
 
 		# Switch energy between green and blue every change_energy_time
-		_time_passed += delta
-		if _time_passed >= change_energy_time:
-			_time_passed = 0.0
+		_time_passed_for_move += delta
+		if _time_passed_for_move >= change_energy_time:
+			_time_passed_for_move = 0.0
 			if energy == Game.EnergyType.BLUE:
 				energy = Game.EnergyType.GREEN
 			else:
 				energy = Game.EnergyType.BLUE
+
+		# Switch if it has passed the wait_between_shots time
+		_time_passed_for_shot += delta
+		if _time_passed_for_shot >= wait_between_shots:
+			_time_passed_for_shot = 0.0
+			_shot()
 
 	# the basic enemy will calculate the movement
 	super._physics_process(delta)
@@ -81,4 +93,22 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	speed = vertical_speed
 	_state = BossState.UP
 	_direction = Vector2.UP
-	_time_passed = 0.0
+	_time_passed_for_move = 0.0
+
+
+## Make the boss shot
+func _shot() -> void:
+	# play the shot sound
+	shot_sound.play()
+
+	# spawn the shot from the spawn point
+	var shot_instance: EnemyShot = shot_scene.instantiate()
+	get_parent().add_child(shot_instance)
+	shot_instance.init(shot_point, _energy)
+
+	# play the shot out effect
+	shot_out_effect.modulate = Game.ENERGY_TYPE_COLOR[_energy]
+	shot_out_effect.visible = true
+	shot_out_effect.play()
+	await shot_out_effect.animation_finished
+	shot_out_effect.visible = false
