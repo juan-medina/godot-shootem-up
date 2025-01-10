@@ -34,12 +34,20 @@ const ENERGY_TYPE_COLOR: Dictionary = {
 @onready var music: AudioStreamPlayer2D = $Music  ## the game music
 @onready var game_over_sound: AudioStreamPlayer2D = $GameOver  ## sound for game over
 @onready var menu_scene: PackedScene = load("res://scenes/menu/menu.tscn")  ## the menu scene
+@onready var level_scene: PackedScene = preload("res://scenes/level/level.tscn")  ## the level scene
+@onready var test_level_scene: PackedScene = preload("res://scenes/level/test_level.tscn")  ## the test level scene
 
 
 ## When the game is added to the scene
 func _ready() -> void:
+	# instantiate the level scene
+	var scene_to_create: PackedScene = test_level_scene if GlobalConfig.current_values.test_level else level_scene
+	var level: Node2D = scene_to_create.instantiate()
+	add_child(level)
+	level.position.x += 1500
+
 	## get all the waves and connect the enemy_die signal
-	var waves: Array[Node] = find_children("*", "Wave")
+	var waves: Array[Node] = level.find_children("*", "Wave")
 	for wave: Wave in waves:
 		if wave.enemy_die.connect(_on_enemy_died) != OK:
 			assert(false, "Error connecting enemy_die signal")

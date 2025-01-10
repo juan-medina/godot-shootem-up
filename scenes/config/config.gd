@@ -49,6 +49,7 @@ class ConfiguredValues:
 	var crt_corners: bool = true  ## Is the crt corners enabled
 	var scanlines: bool = true  ## Is the scanlines enabled
 	var color_bleed: bool = true  ## Is the color bleed enabled
+	var test_level: bool = false  ## Is the test level enabled
 
 
 ## The configured values
@@ -99,6 +100,9 @@ func _read_config() -> void:
 	# Read the crt config
 	_read_crt_config(config)
 
+	# Read the debug config
+	_read_debug_config(config)
+
 
 ## Read the display config
 func _read_display_config(config: ConfigFile) -> void:
@@ -138,6 +142,9 @@ func save() -> void:
 
 	# save the crt config
 	_crt_config_save(config)
+
+	# save the debug config
+	_save_debug_config(config)
 
 	# save the config
 	if not config.save("user://config.cfg") == OK:
@@ -302,3 +309,13 @@ func _crt_config_change(new: ConfiguredValues) -> void:
 	_configured_values.color_bleed = new.color_bleed
 
 	EffectsGlobal.crt(_configured_values.crt_corners, _configured_values.scanlines, _configured_values.color_bleed)
+
+
+## Called for reading the debug config
+func _read_debug_config(config: ConfigFile) -> void:
+	_configured_values.test_level = config.get_value("debug", "test_level", _configured_values.test_level)
+
+
+## Called for saving the debug config
+func _save_debug_config(config: ConfigFile) -> void:
+	config.set_value("debug", "test_level", _configured_values.test_level)

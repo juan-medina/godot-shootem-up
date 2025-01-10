@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://buku48xfsvg5i"]
+[gd_scene load_steps=12 format=3 uid="uid://buku48xfsvg5i"]
 
 [ext_resource type="PackedScene" uid="uid://bbcex7rkvps8o" path="res://scenes/enemies/wave/wave_01.tscn" id="1_5xi56"]
 [ext_resource type="PackedScene" uid="uid://cp82a78cmkh1s" path="res://scenes/enemies/wave/wave_02.tscn" id="2_rl5je"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://kptpucgam817" path="res://scenes/enemies/wave/wave_08.tscn" id="8_wvyjn"]
 [ext_resource type="PackedScene" uid="uid://brmwjfksq6eri" path="res://scenes/enemies/wave/wave_09.tscn" id="9_tcfr0"]
 [ext_resource type="PackedScene" uid="uid://x4eri1fyvam0" path="res://scenes/enemies/wave/wave_10.tscn" id="10_lcb0d"]
+[ext_resource type="PackedScene" uid="uid://bhag2a8rqksv4" path="res://scenes/enemies/wave/boss_wave.tscn" id="11_t0mgj"]
 
 [node name="Level" type="Node2D"]
 
@@ -41,3 +42,6 @@ position = Vector2(11500, 0)
 
 [node name="Wave10" parent="." instance=ExtResource("10_lcb0d")]
 position = Vector2(13200, 0)
+
+[node name="BossWave" parent="." instance=ExtResource("11_t0mgj")]
+position = Vector2(15400, 0)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch62u5n6dxf2a"]
+
+[ext_resource type="PackedScene" uid="uid://bhag2a8rqksv4" path="res://scenes/enemies/wave/boss_wave.tscn" id="1_crjkc"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="BossWave" parent="." instance=ExtResource("1_crjkc")]

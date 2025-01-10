@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhag2a8rqksv4"]
+
+[ext_resource type="Script" path="res://scenes/enemies/wave/wave.gd" id="1_ajjt6"]
+[ext_resource type="PackedScene" uid="uid://cfa2ae4bf8ux3" path="res://scenes/enemies/boss/boss.tscn" id="2_i8lrt"]
+
+[node name="BossWave" type="Node2D"]
+script = ExtResource("1_ajjt6")
+
+[node name="Boss" parent="." instance=ExtResource("2_i8lrt")]
+position = Vector2(82, 352)

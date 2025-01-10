@@ -1,0 +1,172 @@
+[gd_scene load_steps=28 format=3 uid="uid://cfa2ae4bf8ux3"]
+
+[ext_resource type="Script" path="res://scenes/enemies/boss/boss.gd" id="1_kht7p"]
+[ext_resource type="Texture2D" uid="uid://p5oebydinrkh" path="res://resources/sprites/ship6/Exhaust/turbo/exhaust1.png" id="2_u1sku"]
+[ext_resource type="Texture2D" uid="uid://shnqejsofoaw" path="res://resources/sprites/ship6/Exhaust/turbo/exhaust2.png" id="3_536sc"]
+[ext_resource type="Texture2D" uid="uid://b8hff4mp3wpwp" path="res://resources/sprites/ship6/Exhaust/turbo/exhaust3.png" id="4_unks2"]
+[ext_resource type="Texture2D" uid="uid://dym7ku6lt40xu" path="res://resources/sprites/ship6/Exhaust/turbo/exhaust4.png" id="5_stlc2"]
+[ext_resource type="Texture2D" uid="uid://ba54ba5luqv6e" path="res://resources/sprites/ship6/Exhaust/normal/exhaust1.png" id="6_74vix"]
+[ext_resource type="Texture2D" uid="uid://cox353pyauafl" path="res://resources/sprites/ship6/Exhaust/normal/exhaust2.png" id="7_kr0np"]
+[ext_resource type="Texture2D" uid="uid://c0v5yqs44tsfi" path="res://resources/sprites/ship6/Exhaust/normal/exhaust3.png" id="8_2ly83"]
+[ext_resource type="Texture2D" uid="uid://hxuwvhu036ly" path="res://resources/sprites/ship6/Exhaust/normal/exhaust4.png" id="9_cklyv"]
+[ext_resource type="Texture2D" uid="uid://ci64kv386gih2" path="res://resources/sprites/ship6/ship6_glow.png" id="10_udnur"]
+[ext_resource type="Texture2D" uid="uid://bmegd7dqn0hj2" path="res://resources/sprites/ship6/ship6.png" id="11_voqgn"]
+[ext_resource type="Texture2D" uid="uid://cn372l18cxfb" path="res://resources/sprites/explosion1/explosion1_1.png" id="12_t2fow"]
+[ext_resource type="Texture2D" uid="uid://dxhswjoy7myvy" path="res://resources/sprites/explosion1/explosion1_2.png" id="13_0hnln"]
+[ext_resource type="Texture2D" uid="uid://bkrhmt6booja1" path="res://resources/sprites/explosion1/explosion1_3.png" id="14_u70ld"]
+[ext_resource type="Texture2D" uid="uid://lu67myprnl4l" path="res://resources/sprites/explosion1/explosion1_4.png" id="15_tiwcg"]
+[ext_resource type="Texture2D" uid="uid://cb015fnl2wom6" path="res://resources/sprites/explosion1/explosion1_5.png" id="16_rdow5"]
+[ext_resource type="Texture2D" uid="uid://dfq7kieti72gs" path="res://resources/sprites/explosion1/explosion1_6.png" id="17_gs4hj"]
+[ext_resource type="Texture2D" uid="uid://bwb6h7s7642xp" path="res://resources/sprites/explosion1/explosion1_7.png" id="18_7rncd"]
+[ext_resource type="Texture2D" uid="uid://deg30cf4ohfog" path="res://resources/sprites/explosion1/explosion1_8.png" id="19_jniy6"]
+[ext_resource type="Texture2D" uid="uid://5fc771b3vyui" path="res://resources/sprites/explosion1/explosion1_9.png" id="20_nxwil"]
+[ext_resource type="Texture2D" uid="uid://c2qdky15ohxeg" path="res://resources/sprites/explosion1/explosion1_10.png" id="21_eiscs"]
+[ext_resource type="Texture2D" uid="uid://b05pmf606day7" path="res://resources/sprites/explosion1/explosion1_11.png" id="22_ryekx"]
+[ext_resource type="AudioStream" uid="uid://6yvosi1ngdfw" path="res://resources/sounds/explosion.wav" id="23_ebl2l"]
+[ext_resource type="FontFile" uid="uid://byqkqg20ffjvu" path="res://resources/fonts/PixeloidMono-d94EV.ttf" id="24_tp5wd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ke7te"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u1sku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_536sc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_unks2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_stlc2")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_74vix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kr0np")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2ly83")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_cklyv")
+}],
+"loop": true,
+"name": &"turbo",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bf25"]
+size = Vector2(117, 76)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qxpvf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_t2fow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_0hnln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u70ld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_tiwcg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_rdow5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_gs4hj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_7rncd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_jniy6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_nxwil")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_eiscs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ryekx")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Boss" type="Area2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_kht7p")
+max_life = 30
+points = 8500
+
+[node name="Exhaust" type="AnimatedSprite2D" parent="."]
+position = Vector2(68, 0)
+sprite_frames = SubResource("SpriteFrames_ke7te")
+animation = &"normal"
+flip_h = true
+
+[node name="SpriteGlow" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("10_udnur")
+flip_h = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("11_voqgn")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_0bf25")
+
+[node name="ShipExplosion" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_qxpvf")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("23_ebl2l")
+bus = &"SFX"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(150, 0)
+
+[node name="Points" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("24_tp5wd")
+theme_override_font_sizes/font_size = 16
+text = "150
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

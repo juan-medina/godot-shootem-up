@@ -41,7 +41,10 @@ func _ready() -> void:
 
 ## Called when an enemy is destroyed
 func _on_enemy_died(points: int) -> void:
+	# emit the enemy_die signal
 	enemy_die.emit(points)
+	# reduce the total enemies and if there are no more enemies, wait 5 seconds and free the wave
 	_total_enemies -= 1
 	if _total_enemies == 0:
+		await get_tree().create_timer(5.0).timeout
 		queue_free()

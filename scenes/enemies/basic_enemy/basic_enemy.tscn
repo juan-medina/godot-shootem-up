@@ -127,7 +127,6 @@ texture = ExtResource("10_tssh7")
 flip_h = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-use_parent_material = true
 texture = ExtResource("10_hlbfy")
 flip_h = true
 

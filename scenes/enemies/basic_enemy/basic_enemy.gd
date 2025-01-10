@@ -41,6 +41,8 @@ signal destroyed(points: int)  ## Emitted when the enemy is destroyed with the a
 		sprite_glow.modulate = Game.ENERGY_TYPE_COLOR[_energy]
 		# reduce alpha
 		sprite_glow.modulate.a = 0.75
+	get:
+		return _energy
 
 var turbo: bool = false:  ## Indicates if is accelerating, visually the exhaust will be faster
 	set(value):
@@ -135,9 +137,9 @@ func _damage(amount: int) -> void:
 ## Add a hit effect to the enemy
 func _add_hit_effect() -> void:
 	# we use a hit material that do a red blink effect, wait for the hit duration and remove the effect
-	self.material = hit_material
+	sprite.material = hit_material
 	await get_tree().create_timer(hit_duration).timeout
-	self.material = null
+	sprite.material = null
 
 
 ## Called when the enemy is destroyed
