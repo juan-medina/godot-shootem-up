@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Shoot'em up"
 config/description="This is just an example of creating a Shoot 'em up in Godot 4"
-config/version="0.8.1.1433"
+config/version="0.9.0.1450"
 run/main_scene="res://scenes/splash/splash.tscn"
 run/disable_stderr=true
 run/print_header=false

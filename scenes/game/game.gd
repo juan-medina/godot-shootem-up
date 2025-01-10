@@ -30,12 +30,16 @@ const ENERGY_TYPE_COLOR: Dictionary = {
 	EnergyType.BLUE: Color(0, 1, 1, 1), EnergyType.GREEN: Color(0, 1, 0, 1), EnergyType.DEPLETED: Color(1, 0, 0, 1.0)
 }
 
+var _total_waves: int = 0  ## total waves in the level
+
 @onready var ui: UI = $CanvasLayer/UI  ## the in-game UI
 @onready var music: AudioStreamPlayer2D = $Music  ## the game music
 @onready var game_over_sound: AudioStreamPlayer2D = $GameOver  ## sound for game over
+@onready var game_win_sound: AudioStreamPlayer2D = $GameWin  ## sound for game win
 @onready var menu_scene: PackedScene = load("res://scenes/menu/menu.tscn")  ## the menu scene
 @onready var level_scene: PackedScene = preload("res://scenes/level/level.tscn")  ## the level scene
 @onready var test_level_scene: PackedScene = preload("res://scenes/level/test_level.tscn")  ## the test level scene
+@onready var player: Player = $Player  ## the player
 
 
 ## When the game is added to the scene
@@ -49,8 +53,12 @@ func _ready() -> void:
 	## get all the waves and connect the enemy_die signal
 	var waves: Array[Node] = level.find_children("*", "Wave")
 	for wave: Wave in waves:
+		_total_waves += 1
 		if wave.enemy_die.connect(_on_enemy_died) != OK:
 			assert(false, "Error connecting enemy_die signal")
+
+		if wave.wave_destroyed.connect(_on_wave_destroyed) != OK:
+			assert(false, "Error connecting wave_destroyed signal")
 
 
 ## Called when an enemy is destroyed
@@ -102,3 +110,20 @@ func _go_to_menu() -> void:
 func _on_player_energy_type_changed(energy_type: Game.EnergyType) -> void:
 	# update the shields energy type in the UI
 	ui.shields_energy = energy_type
+
+
+## Called when a wave is destroyed
+func _on_wave_destroyed() -> void:
+	# reduce the total waves and if there are no more waves, wait 5 seconds and go to the menu
+	_total_waves -= 1
+	if _total_waves == 0:
+		game_win()
+
+
+## Called when the player win the game
+func game_win() -> void:
+	# stop the music, play the game win sound and show the game win screen
+	player.won = true
+	music.stop()
+	game_win_sound.play()
+	ui.game_win()

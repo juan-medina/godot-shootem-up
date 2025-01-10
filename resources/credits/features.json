@@ -36,7 +36,10 @@
 			]
 		},
 		{
-			"text": "Game over window."
+			"text": "Game Over window."
+		},
+		{
+			"text": "Game Win window."
 		},
 		{
 			"text": "Pause and resume game."

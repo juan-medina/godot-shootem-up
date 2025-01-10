@@ -28,7 +28,8 @@ If you need to open a bug or enhancement, please do it [here](https://github.com
     - Borderless fullscreen or windowed mode.
     - Music and sound effects volume.
     - CRT effect configuration.
-- Game over window.
+- Game Over window.
+- Game Win window.
 - Pause and resume game.
 - Score and shield bar.
 - Sound effects and music.

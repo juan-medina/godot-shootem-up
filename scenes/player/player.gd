@@ -37,6 +37,7 @@ var previous_direction: Vector2 = Vector2.ZERO  ## Previous direction the player
 var previous_exhaust: String = "normal"  ## The previous exhaust animation
 var shot_on_cd: bool = false  ## Indicates if the player shot is on cooldown
 var dead: bool = false  ## Indicates if the player is dead
+var won: bool = false  ## Indicates if the player has won
 
 var _energy: Game.EnergyType = Game.EnergyType.BLUE  ## Player energy type
 
@@ -64,7 +65,7 @@ func _ready() -> void:
 ## Called every physics iteration, delta is the elapsed time since the previous call, this is FPS independent
 func _physics_process(_delta: float) -> void:
 	# if the player is not dead, do the move and shot logic
-	if not dead:
+	if not dead and not won:
 		_move_logic()
 		_shot_logic()
 
@@ -150,6 +151,8 @@ func _shot() -> void:
 
 ## Damage the player
 func damage(amount: int) -> void:
+	if won:
+		return
 	# add hit effect to the player
 	_add_hit_effect()
 

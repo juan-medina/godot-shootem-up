@@ -18,35 +18,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-class_name Wave
-extends Node2D
-## Wave Node2D
+class_name GameWin
+extends SubMenu
+## Game Win UI
 ##
-## This is the basic enemy wave
+## This is the UI when the player wins the game
 
-signal enemy_die(points: int)  ## Emitted when an enemy is destroyed with the amount of points to add
-signal wave_destroyed  ## Emitted when the wave is destroyed
-
-var _total_enemies: int = 0  ## Total enemies in the wave
-
-
-## when this wave is add to the scene
-func _ready() -> void:
-	# get all the children that are BasicEnemy
-	var children: Array[Node] = find_children("*", "BasicEnemy")
-	for enemy: BasicEnemy in children:
-		_total_enemies += 1
-		if enemy.destroyed.connect(_on_enemy_died) != OK:
-			assert(false, "Error connecting destroyed signal")
-
-
-## Called when an enemy is destroyed
-func _on_enemy_died(points: int) -> void:
-	# emit the enemy_die signal
-	enemy_die.emit(points)
-	# reduce the total enemies and if there are no more enemies, wait 5 seconds and free the wave
-	_total_enemies -= 1
-	if _total_enemies == 0:
-		wave_destroyed.emit()
-		await get_tree().create_timer(3.0).timeout
-		queue_free()
+@onready var restart_button: Button = $Panel/Restart  ## Restart button
+@onready var exit_button: Button = $Panel/Exit  ## Exit button

@@ -53,6 +53,7 @@ var shields_energy: Game.EnergyType = Game.EnergyType.BLUE:  ## The energy type 
 @onready var shields_sprites: Array[Sprite2D] = [$ShieldBar/Shield1, $ShieldBar/Shield2, $ShieldBar/Shield3]  ## Shields sprites
 @onready var game_over_ui: GameOver = $GameOver  ## Game over UI
 @onready var pause_ui: Pause = $Pause  ## Pause UI
+@onready var game_win_ui: GameWin = $GameWin  ## Game win UI
 @onready var points_label: Label = $Points  ## Points label
 @onready var hit_material: ShaderMaterial = preload("res://resources/materials/hit.tres")  ## Hit material
 
@@ -100,3 +101,17 @@ func _on_pause_button_click(button: Button) -> void:
 
 	if button == pause_ui.exit_button:
 		back_to_menu.emit()
+
+## Show the game win UI
+func game_win() -> void:
+	# make the game over UI visible
+	if not pause_ui.visible:
+		game_win_ui.visible = true
+
+## Called when a button is click in the game win UI
+func _on_game_win_button_click(button:Button) -> void:
+	match button:
+		game_win_ui.restart_button:
+			level_restart.emit()
+		game_win_ui.exit_button:
+			back_to_menu.emit()

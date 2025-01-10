@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://beg1iuhl8ave5"]
+[gd_scene load_steps=9 format=3 uid="uid://beg1iuhl8ave5"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_a3gfh"]
 [ext_resource type="FontFile" uid="uid://byqkqg20ffjvu" path="res://resources/fonts/PixeloidMono-d94EV.ttf" id="1_cd55t"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bqvgn1ys2uume" path="res://resources/sprites/shield/shield.png" id="5_oaivt"]
 [ext_resource type="PackedScene" uid="uid://dmb0xakcacd5c" path="res://scenes/ui/game_over/game_over.tscn" id="6_rsuai"]
 [ext_resource type="PackedScene" uid="uid://ccy43tjhsc3tx" path="res://scenes/ui/pause/pause.tscn" id="6_wrva2"]
+[ext_resource type="PackedScene" uid="uid://crcay73gaft4j" path="res://scenes/ui/game_win/game_win.tscn" id="7_injqy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2de44"]
 font = ExtResource("1_cd55t")
@@ -72,5 +73,10 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="GameWin" parent="." instance=ExtResource("7_injqy")]
+visible = false
+layout_mode = 1
+
 [connection signal="button_click" from="GameOver" to="." method="_on_game_over_button_click"]
 [connection signal="button_click" from="Pause" to="." method="_on_pause_button_click"]
+[connection signal="button_click" from="GameWin" to="." method="_on_game_win_button_click"]
